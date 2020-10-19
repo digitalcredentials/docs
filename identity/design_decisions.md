@@ -1,0 +1,84 @@
+# Identity Design Decisions
+
+(WIP -- needs review)
+
+DCC uses [Verifiable Credential Data Model](https://w3c.github.io/vc-data-model/), which provides a flexible framework for issuer and learner identification via URIs, enabling the use of traditional identity schemes as well as new emerging decentralized or self-sovereign identity schemes, such as those compliant with the [Decentralized Identifier (DID) Data Model](https://w3c.github.io/did-core/). 
+
+DCC is especially interested in interoperability and portability enabled by DIDs. The DID core standard enables intereoperability across DID methods, including those that are bootstrapped from existing trust sources, such as a well known web domain.
+
+While DCC doesn't mandate use of a specific DID method, we have made choices in our initial implementations/pilots, which are described below. 
+
+## Issuer Identity
+
+The issuer identity registry is the authoritative source for membership. This is the place to consult to discover, e.g. Univerity of Toronto is a DCC member, and uses a specific set of dids associated with their credentials.
+
+For an individual issuer's signing keys, we've chosen to start with the [did:web method](https://w3c-ccg.github.io/did-method-web/). This is largely a matter of trust and convenience in our early implementations; our members have long-standing web domains and established processes for pushing updates. So, for example the University of Toronto would host a DID document per the did:web method, and be responsible for maintaining updates to their key materials.
+
+Again, issuers are free to use different DID methods, but must factor in the trustworthiness of the method they choose. (TODO: link to threat model)
+
+## Learner Identity
+
+The DCC wallet will allow learners to select an identity method that complies with the Verifiable Credential data model, which is simply a URI. That allows learners to choose a web address, solid profile, or a DID method of their choice such as uport ethereum DIDs. 
+
+The DCC wallet will provide a flexible identity plugin layer enabling different implementations. By default, and as a fallback implementation, the wallet includes the [sidetree DID method](https://identity.foundation/sidetree/spec/) --  specifically  [the long form variant](https://identity.foundation/sidetree/spec/#long-form-did-uris). Other methods will be added in the future. In our choices of built-in identity methods, we use the following criteria:
+
+- Inexpensive
+- Portable; self-sovereign (decentralizeD)
+- Standards-compliant, has multiple implementations
+
+For these reasons, the sidetree long-form DID method is a compelling first choice. The long-form enables the DID to be created fully off-chain and controlled by the user, but also allows it to be upgraded to a sidetree DID with other lifecycle management options (e.g. key rotation).
+
+## Issuer Registry
+
+The issuer registry stores identifiers (Decentralized Identifiers) for member institutions. It functions as a web-of-trust endorsement among the members of the consortium on each others' root of trust identifiers. 
+
+In this (initial) implementation:
+- verifiers interact with it as a simple inclusion check in the DCC registry, consisting of DCC members
+- members have the option of which entities to store in the registry -- it could be 1 per institution, or multiple (i.e. one for the registrar, one for a department, etc)
+- each issuer (root-of-trust entity) takes responsibility for manages their keys, key management policy, relationships with other issuing entities, capabilities, etc
+- DCC will provide recommendations, best practices, and open source libraries to help implement
+- The registry can be represented as a VC of issuer DIDs (or roots of trust) -- TODO: discuss
+
+
+Notes on the longer-term implementation considerations are below.
+
+### Backup notes (keep?)
+
+This exists as a lightweight quality control measure as we develop the long-term approach. It manifests during verification and functions like the twitter "blue-check" mark that identity verification has occured. The concern we had with other decentralized solutions is that there is little trust in the identity and quality. Tying the issuer identifier to well-known web domains is one part, but not the complete picture -- i.e. it still would be easy to socially engineer trust in a credential that _looks_ like the name of a well-known issuer.
+
+
+## Next Steps and Additional Considerations
+
+### DID methods
+
+These are our design choices for the initial pilots, and are subject to revision over time as we evaluate robustness and capabilities of different DID methods. 
+
+Associated with our design chocies, we are developing threat models for implementors/vendors to factor into their solutions and workflows.
+
+Future versions will provide clearer guidance for management of multiple issuer DIDs. This concern is as follows (per university):
+- A registrar will have a DID (or set of DIDs) for diplomas and transcripts
+- Other credential issuers throughout the university will have different DIDs for a variety of use cases, such as: online courses, course completion, competency- or skill-based credentials
+
+Specifically, a registrar may not want credentials issued for an individual course to have the same weight has official university transcripts or diplomas. This effort will be related to improvements on the Issuer Registry, discussed below.
+
+### Issuer registry
+
+A generalized issuer registry should address the following:
+- Clarify scope: is it affirming quality or association? 
+- Clarify how it can be used along with well-known accreditation orgs, while not dictating functioning as part of accreditation orgs
+- It should enable inspection of a root of trust chain / capabilities?
+
+## Other approaches we considered
+
+### did:web for learners
+
+Using did:web for learners could be an appealing option if the issuer (or some service provider) is able to guarantee ongoing availability of the service to learners, but it introduces an ongoing dependency on the issuer. If there were clearer guidance on how to transfer DIDs cross-ledgers, this might be increasingly compelling as a way to bootstrap learner DIDs. Ultimately, we decided this introduced too much dependency on the issuer, which was counter to the decentralized design goal.
+
+### did:key or other purely generative methods
+Methods like did:key require no ledger or persisted DID document -- the DID document is generated on the fly by a DID resolver, which knows how to convert the id to a did document. Such approaches are interesting for some short-lived use cases, but are not intended to be used for longer-lived claims, as in our use cases.
+
+### DNS-based DIDs
+
+The [DNS-based DID approach](https://tools.ietf.org/html/draft-mayrhofer-did-dns-01) is similar to did:web in that it takes advantage of already well-known domain names, and is similarly an effective way to bootstrap a DID for an already-trusted entity. It could be considered to have a slight security advantage over did:web, in that the threat model doesn't need to include the web server (serving the DID document). However, the management usability was seen as prohibitive.
+
+
