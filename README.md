@@ -1,7 +1,5 @@
 # docs
 
-# docs
-
 ## About DCC
 
 The [Digital Credentials Consortium](https://digitalcredentials.mit.edu/) was founded by leading universities with expertise in the design of verifiable digital credentials. Together, we are designing an infrastructure for digital credentials of academic achievement.
