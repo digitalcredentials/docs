@@ -52,6 +52,10 @@ Details:
 
 The wallet generates the `did`.
 
+ISSUES (TODO -- update above):
+- DEEP_LINK will also need to accept a parameter for a url at which to request an oauth access token, and the wallet app would need to use the access/refresh tokens provided back there to authenticate subsequent request(s)
+- Issuer needs to enable PKCE on their end.
+
 ## Build Credential Request
 
 Note: Wallet uses `sign-and-verify` library to create and sign the VP in the following steps.
