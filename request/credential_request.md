@@ -76,7 +76,7 @@ This is the flow:
 2. Verify the subject's `did`
     - Use `sign-and-verify` library/service
     - Endpoint: `/verify/presentations`
-    - Details below
+    - [See detailed information](https://github.com/digitalcredentials/sign-and-verify/blob/master/README.md#credential-requests-and-did-verification)
 3. If verified, extract (and store) the subject's DID
 4. Lookup/construct credential
     - Use session state to lookup which credential we want to issue to the subject, and construct credential
