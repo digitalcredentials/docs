@@ -67,6 +67,9 @@ Note: Wallet uses `sign-and-verify` library to create and sign the VP in the fol
 - Signs the VP
 - On click, sends signed VP to `request_url`
 
+[See detailed information about the credential request contract](https://github.com/digitalcredentials/sign-and-verify/blob/master/README.md#requesting-credentials)
+
+
 ## Build and Sign Credential
 
 This details the final step of the of the Credential Request ceremony. (see "Issuer Credential Request Endpoint" in the diagram above)
