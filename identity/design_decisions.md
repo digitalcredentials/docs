@@ -27,7 +27,7 @@ The DCC wallet will provide a flexible identity plugin layer enabling different 
 - Standards-compliant, has multiple implementations
 
 
-The wallet will provide an initial implementation of did:key for pilots only, but this is not intended for use with longer-lived claims -- as our use cases require. More details coming.
+The wallet will provide an initial implementation of [did:key](https://w3c-ccg.github.io/did-method-key/) for pilots only, but this is not intended for use with longer-lived claims -- as our use cases require. More details coming.
 
 
 ## Issuer Registry
@@ -74,11 +74,11 @@ A generalized issuer registry should address the following:
 
 ### did:web for learners
 
-Using did:web for learners could be an appealing option if the issuer (or some service provider) is able to guarantee ongoing availability of the service to learners, but it introduces an ongoing dependency on the issuer. If there were clearer guidance on how to transfer DIDs cross-ledgers, this might be increasingly compelling as a way to bootstrap learner DIDs. Ultimately, we decided this introduced too much dependency on the issuer, which was counter to the decentralized design goal.
+Using [did:web](https://w3c-ccg.github.io/did-method-web/) for learners could be an appealing option if the issuer (or some service provider) is able to guarantee ongoing availability of the service to learners, but it introduces an ongoing dependency on the issuer. If there were clearer guidance on how to transfer DIDs cross-ledgers, this might be increasingly compelling as a way to bootstrap learner DIDs. Ultimately, we decided this introduced too much dependency on the issuer, which was counter to the decentralized design goal.
 
 ### did:sidetree
 
-The sidetree did method was appealing in that it has a long-form variant (generative, similar to did:key) that can then be upgraded to an on-chain sidetree DID, supporting lifecycle management options such as key rotation. At the time we investigated, this method wasn't sufficiently stable (in spec or library support for the shortform version). We will revisit in the future.
+The [sidetree did method](https://identity.foundation/sidetree/spec/) was appealing in that it has a long-form variant (generative, similar to did:key) that can then be upgraded to an on-chain sidetree DID, supporting lifecycle management options such as key rotation. At the time we investigated, this method wasn't sufficiently stable (in spec or library support for the shortform version). We will revisit in the future.
 
 ### DNS-based DIDs
 
