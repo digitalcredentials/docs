@@ -20,13 +20,15 @@ Again, issuers are free to use different DID methods, but must factor in the tru
 
 The DCC wallet will allow learners to select an identity method that complies with the Verifiable Credential data model, which is simply a URI. That allows learners to choose a web address, solid profile, or a DID method of their choice such as uport ethereum DIDs. 
 
-The DCC wallet will provide a flexible identity plugin layer enabling different implementations. By default, and as a fallback implementation, the wallet includes the [sidetree DID method](https://identity.foundation/sidetree/spec/) --  specifically  [the long form variant](https://identity.foundation/sidetree/spec/#long-form-did-uris). Other methods will be added in the future. In our choices of built-in identity methods, we use the following criteria:
+The DCC wallet will provide a flexible identity plugin layer enabling different implementations. In our choices of built-in identity methods, we use the following criteria:
 
 - Inexpensive
 - Portable; self-sovereign (decentralizeD)
 - Standards-compliant, has multiple implementations
 
-For these reasons, the sidetree long-form DID method is a compelling first choice. The long-form enables the DID to be created fully off-chain and controlled by the user, but also allows it to be upgraded to a sidetree DID with other lifecycle management options (e.g. key rotation).
+
+The wallet will provide an initial implementation of did:key for pilots only, but this is not intended for use with longer-lived claims -- as our use cases require. More details coming.
+
 
 ## Issuer Registry
 
@@ -74,11 +76,11 @@ A generalized issuer registry should address the following:
 
 Using did:web for learners could be an appealing option if the issuer (or some service provider) is able to guarantee ongoing availability of the service to learners, but it introduces an ongoing dependency on the issuer. If there were clearer guidance on how to transfer DIDs cross-ledgers, this might be increasingly compelling as a way to bootstrap learner DIDs. Ultimately, we decided this introduced too much dependency on the issuer, which was counter to the decentralized design goal.
 
-### did:key or other purely generative methods
-Methods like did:key require no ledger or persisted DID document -- the DID document is generated on the fly by a DID resolver, which knows how to convert the id to a did document. Such approaches are interesting for some short-lived use cases, but are not intended to be used for longer-lived claims, as in our use cases.
+### did:sidetree
+
+The sidetree did method was appealing in that it has a long-form variant (generative, similar to did:key) that can then be upgraded to an on-chain sidetree DID, supporting lifecycle management options such as key rotation. At the time we investigated, this method wasn't sufficiently stable (in spec or library support for the shortform version). We will revisit in the future.
 
 ### DNS-based DIDs
 
 The [DNS-based DID approach](https://tools.ietf.org/html/draft-mayrhofer-did-dns-01) is similar to did:web in that it takes advantage of already well-known domain names, and is similarly an effective way to bootstrap a DID for an already-trusted entity. It could be considered to have a slight security advantage over did:web, in that the threat model doesn't need to include the web server (serving the DID document). However, the management usability was seen as prohibitive.
-
 
