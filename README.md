@@ -49,6 +49,6 @@ DCC uses the [Verifiable Credentials Data Model](https://w3c.github.io/vc-data-m
 - [docs](https://github.com/digitalcredentials/docs): (this repo) contains project documentation, broader architectural docs, etc
 - [sign-and-verify](https://github.com/digitalcredentials/sign-and-verify): library to sign/issue and verify DCC credentials. 
 - [credgen](https://github.com/digitalcredentials/credgen): command line tool to generate credential templates
-- [cred-wallet](https://github.com/digitalcredentials/wallet): repository for DCC react native mobile app to manage and store credentials 
+- [cred-wallet](https://github.com/digitalcredentials/cred-wallet): repository for DCC react native mobile app to manage and store credentials 
 - [designer](https://github.com/digitalcredentials/designer): web ui to design credential templates -- intended for developers
 
