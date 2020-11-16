@@ -36,9 +36,15 @@ Additional factors/consideration:
     - decision: demo, possibly longer term 
        - possible problem: no rotation properties
        - but may be able to use longer term with reissuance
-    - Dmitri has implemented; can do raw javascript
+    - Implementations exist; can do raw javascript
         - later on, can link to native
-- did:web (*incubate*)
+- sidetree (*incubate*)
+    - long form
+    - still considering
+    - problems:
+        - long form didn't work
+        - spec process
+- did:web (*incubate; use-case specific*)
     - need to design structure (dcc vs per uni)
     - concerns: 
         - requirements for issuers
@@ -48,12 +54,6 @@ Additional factors/consideration:
         - DCC host vs university host
 - did:peer
     - decision: not suitable for cred subject
-- sidetree 
-    - long form
-    - still considering
-    - problems:
-        - long form didn't work
-        - spec process
 - DID method based on keys.pub
     - about
         - evolution of keybase
