@@ -27,7 +27,7 @@ The DCC wallet will provide a flexible identity plugin layer enabling different 
 - Standards-compliant, has multiple implementations
 
 
-The wallet will provide an initial implementation of [did:key](https://w3c-ccg.github.io/did-method-key/) for pilots only, but this is not intended for use with longer-lived claims -- as our use cases require. More details coming.
+The wallet will provide an initial implementation of [did:key](https://w3c-ccg.github.io/did-method-key/) for pilots, with the additional issuer requirement to allow reissuance in case of loss. More details coming.
 
 
 ## Issuer Registry
