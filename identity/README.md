@@ -6,6 +6,8 @@ For more context, see [identity design decisions](design_decisions.md).
 
 ### Verified Issuance
 
+[Issuer registry MVP design](issuer_registry.md)
+
 Setting up an issuer to create DCC credentials involves:
 - [Creating an issuer signing key](issuer_key_generation.md)
 - Onboarding the issuer into the issuer registry (coming soon)
