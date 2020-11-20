@@ -6,15 +6,15 @@ DCC is especially interested in interoperability and portability enabled by DIDs
 
 While DCC doesn't mandate use of a specific DID method, we have made choices in our initial implementations/pilots, which are described below. 
 
-## Issuer Identity
+## Issuer Identifiers
 
-The issuer identity registry is the authoritative source for membership. This is the place to consult to discover, e.g. Univerity of Toronto is a DCC member, and uses a specific set of dids associated with their credentials.
+The [issuer identity registry](issuer_registry.md) is the authoritative source for membership. This is the place to consult to discover, e.g. Univerity of Toronto is a DCC member, and uses a specific set of dids associated with their credentials.
 
 For an individual issuer's did method, we've chosen to start with the [did:web method](https://w3c-ccg.github.io/did-method-web/). This is largely a matter of trust and convenience in our early implementations; our members have long-standing web domains and established processes for pushing updates. So, for example the University of Toronto would host a DID document per the did:web method, and be responsible for maintaining updates to their key materials.
 
 Again, issuers are free to use different DID methods, but must factor in the trustworthiness of the method they choose. (TODO: link to threat model)
 
-## Learner Identity
+## Learner Identifiers
 
 The DCC wallet will allow learners to select an identity method that complies with the Verifiable Credential data model, which is simply a URI. That allows learners to choose a web address, solid profile, or a DID method of their choice (such as uport ethereum DIDs). 
 
