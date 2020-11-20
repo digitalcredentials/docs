@@ -1,6 +1,6 @@
 # Associating a signing key with a demo issuer identity
 
-The [did:web decentralized identifier (DID) method](https://w3c-ccg.github.io/did-method-web/) provides a simple way to start experimenting with the DCC standard. This method allows bootstrapping trust using a web domain’s existing reputation.
+The [did:web decentralized identifier (DID) method](https://w3c-ccg.github.io/did-method-web/) provides a simple way to start experimenting with VC/DID standards. This method allows bootstrapping trust using a web domain’s existing reputation.
 
 Many aspects of the DCC open standard works with any DID method, but verifiers/relying parties may not accept all DID methods. You should be very careful to consider the threat model of the method you choose.
 
@@ -14,8 +14,6 @@ The following is an example of the DID document you will create. Note the follow
 - Note that `publicKey.id` is `did:web:<domain>`#`kid`
 - `publicKeyJwk` contains the key generated in the previous step, omitting `d`
 - By default, we've granted our key authentation, assertion, capability delegation, and capability invocation abilities.
-
-TODO: the syntax in the last bullet is a WIP with the DID WG; add a link.
 
 ```
 {
@@ -35,16 +33,16 @@ TODO: the syntax in the last bullet is a WIP with the DID WG; add a link.
     }
   ],
   "authentication": [
-    "did:web:digitalcredentials.github.io#96K4BSIWAkhcclKssb8yTWMQSz4QzPWBy-JsAFlwoIs"
+    "#96K4BSIWAkhcclKssb8yTWMQSz4QzPWBy-JsAFlwoIs"
   ],
   "assertionMethod": [
-    "did:web:digitalcredentials.github.io#96K4BSIWAkhcclKssb8yTWMQSz4QzPWBy-JsAFlwoIs"
+    "#96K4BSIWAkhcclKssb8yTWMQSz4QzPWBy-JsAFlwoIs"
   ],
   "capabilityDelegation": [
-    "did:web:digitalcredentials.github.io#96K4BSIWAkhcclKssb8yTWMQSz4QzPWBy-JsAFlwoIs"
+    "#96K4BSIWAkhcclKssb8yTWMQSz4QzPWBy-JsAFlwoIs"
   ],
   "capabilityInvocation": [
-    "did:web:digitalcredentials.github.io#96K4BSIWAkhcclKssb8yTWMQSz4QzPWBy-JsAFlwoIs"
+    "#96K4BSIWAkhcclKssb8yTWMQSz4QzPWBy-JsAFlwoIs"
   ]
 }
 ```
@@ -57,4 +55,3 @@ Per the did:web method, add/update the DID document `<domain>/.well-known/did.js
 
 You can see an example of the [DCC samples DID document](https://digitalcredentials.github.io/samples/.well-known/did.json).
 
-Feel free to create a PR to add your key to the samples repo DID doc.
