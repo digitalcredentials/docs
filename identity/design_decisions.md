@@ -30,25 +30,6 @@ The DCC wallet will provide a flexible identity plugin layer enabling different 
 The wallet will provide an initial implementation of [did:key](https://w3c-ccg.github.io/did-method-key/) for pilots, with the additional issuer requirement to allow reissuance in case of loss. More details coming.
 
 
-## Issuer Registry
-
-The issuer registry stores identifiers (Decentralized Identifiers) for member institutions. It functions as a web-of-trust endorsement among the members of the consortium on each others' root of trust identifiers. 
-
-In this (initial) implementation:
-- verifiers interact with it as a simple inclusion check in the DCC registry, consisting of DCC members
-- members have the option of which entities to store in the registry -- it could be 1 per institution, or multiple (i.e. one for the registrar, one for a department, etc)
-- each issuer (root-of-trust entity) takes responsibility for manages their keys, key management policy, relationships with other issuing entities, capabilities, etc
-- DCC will provide recommendations, best practices, and open source libraries to help implement
-- The registry can be represented as a VC of issuer DIDs (or roots of trust) -- TODO: discuss
-
-
-Notes on the longer-term implementation considerations are below.
-
-### Backup notes (keep?)
-
-This exists as a lightweight quality control measure as we develop the long-term approach. It manifests during verification and functions like the twitter "blue-check" mark that identity verification has occured. The concern we had with other decentralized solutions is that there is little trust in the identity and quality. Tying the issuer identifier to well-known web domains is one part, but not the complete picture -- i.e. it still would be easy to socially engineer trust in a credential that _looks_ like the name of a well-known issuer.
-
-
 ## Next Steps and Additional Considerations
 
 ### DID methods
@@ -61,14 +42,8 @@ Future versions will provide clearer guidance for management of multiple issuer 
 - A registrar will have a DID (or set of DIDs) for diplomas and transcripts
 - Other credential issuers throughout the university will have different DIDs for a variety of use cases, such as: online courses, course completion, competency- or skill-based credentials
 
-Specifically, a registrar may not want credentials issued for an individual course to have the same weight has official university transcripts or diplomas. This effort will be related to improvements on the Issuer Registry, discussed below.
+Specifically, a registrar may not want credentials issued for an individual course to have the same weight has official university transcripts or diplomas. This effort will be related to improvements on the Issuer Registry.
 
-### Issuer registry
-
-A generalized issuer registry should address the following:
-- Clarify scope: is it affirming quality or association? 
-- Clarify how it can be used along with well-known accreditation orgs, while not dictating functioning as part of accreditation orgs
-- It should enable inspection of a root of trust chain / capabilities?
 
 ## Other approaches we considered
 
