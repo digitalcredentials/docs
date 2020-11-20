@@ -22,8 +22,8 @@ DCC uses the [Verifiable Credentials Data Model](https://w3c.github.io/vc-data-m
 
 ### Identity
 
-- [Design decisions](identity/design_decisions.md)
-- [Learner identity](identity/learner_id.md)
+- [Identity design decisions](identity/design_decisions.md)
+- [Issuer registry](identity/issuer_registry.md)
 
 ### Credential Issuing and State Management
 
