@@ -58,7 +58,7 @@ Future versions will provide clearer guidance for management of multiple issuer 
 Specifically, a registrar may not want credentials issued for an individual course to have the same weight has official university transcripts or diplomas. This effort will be related to improvements on the Issuer Registry.
 
 
-## Other DID Mmthods we considered 
+## Other DID Methods we considered 
 
 - did:key (*now*)
     - decision: demo, possibly longer term 
