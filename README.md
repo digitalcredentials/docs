@@ -44,6 +44,11 @@ DCC uses the [Verifiable Credentials Data Model](https://w3c.github.io/vc-data-m
 
 - [cred-wallet](https://github.com/digitalcredentials/cred-wallet): mobile wallet that manages learner's credentials and identifiers
 
+### Design, requirements, threat model
+
+- [system requirements](system/requirements.md)
+- [threat model](system/threat_model.md)
+
 ## Repositories
 
 - [docs](https://github.com/digitalcredentials/docs): (this repo) contains project documentation, broader architectural docs, etc
