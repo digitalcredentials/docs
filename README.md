@@ -1,5 +1,19 @@
 # docs
 
+## Table of Contents
+
+- [About DCC](#about-dcc)
+- [Overview of Components](#overview-of-components)
+  * [Credentials](#credentials)
+  * [Identity](#identity)
+  * [Credential Issuing and State Management](#credential-issuing-and-state-management)
+  * [Verifying](#verifying)
+  * [Wallet and Storage](#wallet-and-storage)
+- [Design, requirements, threat model](#design--requirements--threat-model)
+- [Repositories](#repositories)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 ## About DCC
 
 The [Digital Credentials Consortium](https://digitalcredentials.mit.edu/) was founded by leading universities with expertise in the design of verifiable digital credentials. Together, we are designing an infrastructure for digital credentials of academic achievement.
