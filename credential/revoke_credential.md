@@ -5,7 +5,9 @@
 1. For MVP / Phase 1, we implement the bit vector / [Revocation List 2020](https://w3c-ccg.github.io/vc-status-rl-2020/) mechanism, for revocation.
 2. We state that the revocationListIndex MUST be present in a valid DCC credential.
 
-## Design Discussion
+## Past Design Discussion
+
+All Approaches Considered
 
 - Bit vector revocation list (selected)
   - About
