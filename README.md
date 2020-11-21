@@ -31,7 +31,7 @@ Issuing credentials and maintaining state involves:
 
 - [Credential request flow](request/credential_request.md)
   - [Issuing a credential to the learner](credential/issue_credential.md)
-- Revoke a credential (coming soon)
+- [Revoke a credential](credential/revoke_credential.md)
 
 ### Verifying
 
