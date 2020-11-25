@@ -15,10 +15,10 @@ For an individual issuer's did method, we've chosen to start with the [did:web m
 Again, issuers are free to use different DID methods, but must factor in the trustworthiness of the method they choose. (TODO: link to threat model)
 
 ## Learner Identifiers
-
+ 
 The DCC wallet will allow learners to select an identity method that complies with the Verifiable Credential data model, which is simply a URI. That allows learners to choose a web address, [solid](https://solidproject.org) profile, or a [DID method of their choice](https://www.w3.org/TR/did-spec-registries/) such as uport ethereum DIDs.
 
-The DCC wallet will provide a flexible identity plugin layer enabling different implementations. In our choices of built-in identity methods, we use the following criteria:
+The DCC wallet will provide a flexible identity plugin layer enabling different implementations. In our choices of built-in identity methods, we are using the  criteria below. For a more extensive analysis of assessing DID methods, see the [DID Rubric](https://w3c.github.io/did-rubric/) document.
 
 - Inexpensive
 - Portable; self-sovereign (decentralized)
