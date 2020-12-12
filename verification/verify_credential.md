@@ -28,9 +28,9 @@ Another helpful way of thinking about the verification process is to divide it i
 1. Is it a well-formed VC (according to the VC Data Model spec), are all the required fields present, etc.
 2. Check the 'expiration' and 'not before this date' fields.
 3. Verify signature. This involves:
-     a. Cryptographic signature verification (indicates the credential has not been tampered with)
-     b. Resolving the issuer DID (it needs to be resolvable)
-     c. Check to make sure that the keys the VC was signed by are actually authorized for the purposes of signing. 
+    - a. Cryptographic signature verification (indicates the credential has not been tampered with)
+    - b. Resolving the issuer DID (it needs to be resolvable)
+    - c. Check to make sure that the keys the VC was signed by are actually authorized for the purposes of signing. 
 
 #### App-specific / Business Logic Validation
 
