@@ -37,7 +37,7 @@ After successful authentication, the user is redirected (via `redirect_uri` or i
 For the DCC mobile app client, `redirect_url` looks like:
 
 ```
-dcc:request?                         // mobile app deep link
+dccrequest:request?                         // mobile app deep link
     request_url=<request_url>        // credential request url, encoded
     &challenge=<challenge>           // challege for signing
 ```
