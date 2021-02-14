@@ -3,7 +3,7 @@
 The 3 steps in the credential request flow, from the recipient's perspective, are:
 
 1. Initiate Request
-2. Build Credential Request
+2. Submit Credential Request
 3. Receive Credential
 
 ## 1. Initiate Request
@@ -45,7 +45,7 @@ dccrequest:request?                  // DCC: mobile app deep link
     &challenge=<challenge>           // DCC: challege for signing
 ```
 
-## 2. Build Credential Request
+## 2. Submit Credential Request
 
 ![](cred_request_cropped.jpg)
 
