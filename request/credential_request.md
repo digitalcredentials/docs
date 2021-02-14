@@ -1,6 +1,6 @@
 # Credential Request Flow
 
-This is a representative e2e demonstration of how an issuer can integrate DCC credential requests into their systems. This demonstrates initiating the exchange with a link that uses oauth 2.0, but this can be adapted to other flows.
+This is a representative e2e demonstration of how an issuer can integrate DCC credential requests into their systems. DCC's current implementations  use oauth 2.0, but this can be adapted to other flows.
 
 ## DEEP_LINK
 
@@ -24,8 +24,6 @@ Clicking the link opens the DCC wallet app
 ## Authenticate with Issuer
 
 The wallet will follow the issuer's authentication instructions provided in DEEP_LINK
-
-Note: Issuer needs to enable PKCE on their end.
 
 ## Build Credential Request
 
