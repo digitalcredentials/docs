@@ -2,8 +2,6 @@
 
 This is a representative e2e demonstration of how an issuer can integrate DCC credential requests into their systems. This demonstrates initiating the exchange with a link that uses oauth 2.0, but this can be adapted to other flows.
 
-![](cred_request_cropped.jpg)
-
 ## DEEP_LINK
 
 `DEEP_LINK` contains information needed by the issuer and the DCC client app:
@@ -31,6 +29,8 @@ Note: Issuer needs to enable PKCE on their end.
 
 ## Build Credential Request
 
+![](cred_request_cropped.jpg)
+
 After authentication, the user is asked to approve the request of a credential. The following information is used for the request:
 
 - `request_url` (from `DEEP_LINK`) is the issuer's credential request endpoint the DCC client app will hit
@@ -52,7 +52,7 @@ The wallet uses `sign-and-verify` library to create and sign the VP in the follo
 [See detailed information about the credential request contract](https://github.com/digitalcredentials/sign-and-verify/blob/master/README.md#requesting-credentials)
 
 
-## Build and Sign Credential
+## Build and Sign Credential (Performed by Issuer)
 
 This details the final step of the of the Credential Request ceremony. (see "Issuer Credential Request Endpoint" in the diagram above)
 
