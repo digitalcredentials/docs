@@ -69,7 +69,7 @@ The wallet uses `sign-and-verify` library to create and sign the VP in the follo
 - Signs the VP
 - On click, sends signed VP to `request_url`
 
-[See detailed information about the credential request contract](https://github.com/digitalcredentials/sign-and-verify/blob/master/README.md#requesting-credentials)
+[See detailed information about the credential request contract](https://github.com/digitalcredentials/sign-and-verify/blob/master/README.md#overview-of-credential-request-flow)
 
 ## 3. Receive credential
 
@@ -82,7 +82,7 @@ On the issuer side, the steps are:
 2. Verify the subject's `did`
     - Use `sign-and-verify` library/service
     - Endpoint: `/verify/presentations`
-    - [See detailed information](https://github.com/digitalcredentials/sign-and-verify/blob/master/README.md#credential-requests-and-did-verification)
+    - [See detailed information](https://github.com/digitalcredentials/sign-and-verify/blob/master/README.md#did-proof-of-control-verification)
 3. If verified, extract (and store) the subject's DID
 4. Lookup/construct credential
     - Use session state to lookup which credential we want to issue to the subject, and construct credential
