@@ -2,7 +2,7 @@
 
 This is a representative e2e demonstration of how an issuer can integrate DCC credential requests into their systems. This demonstrates initiating the exchange with a link that uses oauth 2.0, but this can be adapted to other flows.
 
-![](cred_request_cropped.png)
+![](cred_request_cropped.jpg)
 
 ## DEEP_LINK
 
