@@ -33,7 +33,7 @@ dccrequest:request?                  // DCC: mobile app deep link
     &challenge=<challenge>           // DCC: challege for signing
 ```
 
-Clicking the link opens the DCC wallet app. The wallet will follow the issuer's authentication instructions provided in DEEP_LINK
+Clicking the link opens the DCC wallet app. The wallet will follow the issuer's authentication instructions provided in `DEEP_LINK`
 
 ### 1b. QR scan for authenticated recipient
 
