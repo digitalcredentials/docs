@@ -10,14 +10,7 @@ The 3 steps in the credential request flow, from the recipient's perspective, ar
 
 The goals of step 1 are to ensure the recipient is authenticated, and to navigate the recipient to the "request" page of the DCC wallet app.
 
-The authentication method can be adapted to the issuer's requirements. Currently there are 2 methods used in DCC deployments:
-1a. (Unauthenticated users) Deep link into DCC wallet app that prompts first for authentication
-    - Link can be emailed to eligible recipients or exposed as a QR code
-    - DCC's current implementations use oauth 2.0, but this can be adapted to other flows.
-1b. (Authenticated users) QR scan to request 
-
-
-### 1a. Deep link
+The deep link into DCC wallet app first prompts the user to authenticate. The link can be emailed to eligible recipients or exposed as a QR code. DCC's current implementations use oauth 2.0, but this can be adapted to other flows.
 
 TODO: Assumption: wallet app registers redirect uri with provider (if multiple providers, mobile app can select based on client id)
 
@@ -36,16 +29,6 @@ dccrequest:request?                  // DCC: mobile app deep link
 ```
 
 Clicking the link opens the DCC wallet app. The wallet will follow the issuer's authentication instructions provided in `DEEP_LINK`
-
-### 1b. QR scan for authenticated recipient
-
-Alteratively, if the recipient is already viewing an authenticated, the flow can be kicked off directly by a QR scan:
-
-```
-dccrequest:request?                  // DCC: mobile app deep link
-    request_url=<request_url>        // DCC: credential request url
-    &challenge=<challenge>           // DCC: challege for signing
-```
 
 ## 2. Submit Credential Request
 
