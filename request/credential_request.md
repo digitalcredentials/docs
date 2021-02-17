@@ -29,6 +29,7 @@ dccrequest:request?                  // DCC: mobile app deep link
     &response_type=code              // oauth response type
     &state=<state>                   // oauth state: DCC client state; not used for mobile scenarios
     &scope=<scope>                   // if needed by issuer
+    &authorization_code=<authorization_code>  // TODO: discuss ttl, how to handle if authorization fails
     &request_url=<request_url>       // DCC: credential request url
     &challenge=<challenge>           // DCC: challege for signing
 ```
