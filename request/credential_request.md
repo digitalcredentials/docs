@@ -19,7 +19,9 @@ The authentication method can be adapted to the issuer's requirements. Currently
 
 ### 1a. Deep link
 
-`DEEP_LINK` contains information needed by the issuer and the DCC client app:
+TODO: Assumption: wallet app registers redirect uri with provider (if multiple providers, mobile app can select based on client id)
+
+`DEEP_LINK` contains information needed by the issuer and the DCC wallet app:
 
 ```
 dccrequest:request?                  // DCC: mobile app deep link
@@ -27,7 +29,6 @@ dccrequest:request?                  // DCC: mobile app deep link
     &token_url=<token_url>           // oauth token url
     &client_id=<client_id>           // oauth client id: provided by issuer
     &response_type=code              // oauth response type
-    &state=<state>                   // oauth state: DCC client state; not used for mobile scenarios
     &scope=<scope>                   // if needed by issuer
     &authorization_code=<authorization_code>  // TODO: discuss ttl, how to handle if authorization fails
     &request_url=<request_url>       // DCC: credential request url
