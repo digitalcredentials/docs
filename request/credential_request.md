@@ -12,22 +12,23 @@ The goals of step 1 are to ensure the recipient is authenticated, and to navigat
 
 The deep link into DCC wallet app first prompts the user to authenticate. The link can be emailed to eligible recipients or exposed as a QR code. DCC's current implementations use oauth 2.0, but this can be adapted to other flows.
 
-TODO: Assumption: wallet app registers redirect uri with provider (if multiple providers, mobile app can select based on client id)
-
-`DEEP_LINK` contains information needed by the issuer and the DCC wallet app:
+`DEEP_LINK` contains information needed by the issuer and the DCC wallet app. Clicking on it opens the DCC wallet app with information it needs to kick off the authentication and request a credential.
 
 ```
-dccrequest:request?                  // DCC: mobile app deep link
-    authorize_url=<authorize_url>    // oauth authorize url
-    &token_url=<token_url>           // oauth token url
-    &client_id=<client_id>           // oauth client id: provided by issuer
-    &response_type=code              // oauth response type
-    &scope=<scope>                   // if needed by issuer
+dccrequest://request?                // DCC: mobile app deep link
+    &auth_type=<auth_type>           // authentication protocol type (e.g. code, saml)
+    &issuer=<issuer>                 // Key of the auth configuration
     &request_url=<request_url>       // DCC: credential request url
-    &challenge=<challenge>           // DCC: challege for signing
+    &challenge=<challenge>           // DCC: challenge for signing
 ```
 
-Clicking the link opens the DCC wallet app. The wallet will follow the issuer's authentication instructions provided in `DEEP_LINK`
+The issuer parameter is used to determine the [OpenID Connect Provider Config](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); i.e. information such as:
+
+- authorize_url
+- token_url
+- client_id
+
+Clicking the link opens the DCC wallet app.]
 
 ## 2. Submit Credential Request
 
