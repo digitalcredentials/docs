@@ -23,7 +23,6 @@ dccrequest:request?                  // DCC: mobile app deep link
     &client_id=<client_id>           // oauth client id: provided by issuer
     &response_type=code              // oauth response type
     &scope=<scope>                   // if needed by issuer
-    &authorization_code=<authorization_code>  // TODO: discuss ttl, how to handle if authorization fails
     &request_url=<request_url>       // DCC: credential request url
     &challenge=<challenge>           // DCC: challege for signing
 ```
