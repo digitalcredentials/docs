@@ -30,7 +30,7 @@ The issuer parameter is used to determine the [OpenID Connect Provider Config](h
 - token_url
 - client_id
 
-Clicking the link opens the DCC wallet app.]
+Clicking the link opens the DCC wallet app.
 
 ## 2. Submit Credential Request
 
