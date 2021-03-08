@@ -14,6 +14,8 @@ The deep link into DCC wallet app first prompts the user to authenticate. The li
 
 `DEEP_LINK` contains information needed by the issuer and the DCC wallet app. Clicking on it opens the DCC wallet app with information it needs to kick off the authentication and request a credential.
 
+> TO DISCUSS: request_url and challenge do not have to be in the initial deep link. Moving that to after auth response could cause the initial link provided to users be generic
+
 ```
 dccrequest://request?                // DCC: mobile app deep link
     &auth_type=<auth_type>           // authentication protocol type (e.g. code, saml)
