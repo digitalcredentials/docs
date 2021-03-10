@@ -17,11 +17,11 @@ The deep link into DCC wallet app first prompts the user to authenticate. The li
 > TO DISCUSS: request_url and challenge do not have to be in the initial deep link. Moving that to after auth response could cause the initial link provided to users be generic
 
 ```
-dccrequest://request?                // DCC: mobile app deep link
-    &auth_type=<auth_type>           // authentication protocol type (e.g. code, saml)
-    &issuer=<issuer>                 // Key of the auth configuration
-    &request_url=<request_url>       // DCC: credential request url
-    &challenge=<challenge>           // DCC: challenge for signing
+dccrequest://request?                  // DCC: mobile app deep link
+    &auth_type=<auth_type>             // authentication protocol type (e.g. code, saml)
+    &issuer=<issuer>                   // Key of the auth configuration
+    &vc_request_url=<vc_request_url>   // DCC: verifiable credential request url
+    &challenge=<challenge>             // DCC: challenge for signing
 ```
 
 The issuer parameter is used to determine the [OpenID Connect Provider Config](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); i.e. information such as:
