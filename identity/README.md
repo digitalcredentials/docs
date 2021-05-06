@@ -1,12 +1,12 @@
 # Identity management
 
 For design context, see:
-- [Identity design decisions](design_decision_ids.md).
+- [Identity design decisions](design_decision_id.md).
 - [Issuer registry MVP design](issuer_registry.md)
 
 ## Issuer Instructions
 
-- [Creating an issuer signing key](issuer_key_generation.md)
+- [Issuer Key and DID Document Generation](issuer_key_generation.md)
 - [Setting up an issuer issuing identity](issuer_demo_id.md)
 
 ### Verified Issuance

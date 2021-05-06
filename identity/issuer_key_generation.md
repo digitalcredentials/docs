@@ -1,4 +1,4 @@
-# Issuer Key Generation
+# Issuer Key and DID Document Generation
 
 We currently recommend and support only ED25519 issuing keys. You can generate an ED25519 key in any manner you choose. The following steps describe a way to generate issuing keys as part of pre-configured DID documents, which can be used with the DCC sign-and-verify libraries.
 

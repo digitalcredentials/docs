@@ -36,8 +36,15 @@ DCC uses the [Verifiable Credentials Data Model](https://w3c.github.io/vc-data-m
 
 ### Identity
 
-- [Identity design decisions](identity/design_decisions.md)
-- [Issuer registry](identity/issuer_registry.md)
+- [Identity design decisions](identity/design_decisions_id.md)
+- [Issuer registry MVP design](identity/issuer_registry.md)
+- [Issuer Key and DID Document Generation](identity/issuer_key_generation.md)
+- [Setting up an issuer issuing identity](identity/issuer_demo_id.md)
+
+### Verified Issuance
+
+Onboard the issuer into the [issuer registry](issuer_registry.md)
+
 
 ### Credential Issuing and State Management
 
