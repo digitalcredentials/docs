@@ -4,17 +4,17 @@
 
 We believe that for the DCC MVP/Pilot project, selecting the [Status List 2021 bitstring strategy](https://w3c-ccg.github.io/vc-status-list-2021) strikes the right balance of implementation simplicity (leveraging [an existing library](https://github.com/digitalbazaar/vc-status-list)), reasonable server-side storage constraints, cache-ability and herd privacy, for the given use case.
 
-### First Iteration - Randomly Named Block with Sequential Index Assignment
+### First Iteration - Randomly Named List with Sequential Index Assignment
 
 #### Status Config
 
-The issuer service will create a `config.json` file in a dedicated credential status folder (`CRED_STATUS_FOLDER_DISK`) on startup, and will use it to keep track of the number of credentials issued (`credentialsIssued`), as well as the unique ID of the latest status block (`latestBlock`).
+The issuer service will create a `config.json` file in a dedicated credential status folder (`CRED_STATUS_FOLDER_DISK`) on startup, and will use it to keep track of the number of credentials issued (`credentialsIssued`), as well as the unique ID of the latest status list (`latestList`).
 The first time an issuer service is started, it will check to see if the `config.json` file exists. If not, it will generate a new one. For example:
 
 ```json
 {
   "credentialsIssued": 0,
-  "latestBlock": "QHDR12CD2J"
+  "latestList": "QHDR12CD2J"
 }
 ```
 
@@ -82,17 +82,17 @@ Here are the most important properties to note:
 To aid the revocation process, the Issuer service should keep a private `log.json` file in `CRED_STATUS_FOLDER_DISK` tracking issued VCs. For each VC, the log will note:
 
 * The credential `id`, and any other relevant metadata (timestamp, subject id/email, action (e.g., `revoked`), which key it was issued with, etc)
-* The `statusListCredential` url (or simply the status block ID) that was used
+* The `statusListCredential` url (or simply the status list ID) that was used
 * The `statusListIndex` for that credential
 
 That way, when a particular VC needs to be revoked, the issuer log will contain the filename and the index position for that credential, so that its bit can be flipped.
 
 #### Issuance
 
-1. Use the [Status List 2021 library](https://github.com/digitalbazaar/vc-status-list) with the default bitstring block size of 16KB (131k entries).
+1. Use the [Status List 2021 library](https://github.com/digitalbazaar/vc-status-list) with the default bitstring list size of 16KB (131k entries).
 2. Store the (zlib-compressed, per the spec) status list in the `credentialSubject.encodedList` path of a `StatusList2021Credential` on disk (so that it can be served as a static file by the issuer app). Use a random string as the filename (for example, `QHDR12CD2J`, so that it can be served at a URL (`CRED_STATUS_FOLDER_URL`) like `https://example.edu/status/QHDR12CD2J`).
 3. The issuer app will keep track of the number of credentials issued, internally. Whenever a new VC is issued, that count will be incremented, and used as the position of the status index.
-4. Once the number of credentials issued count exceeds 131k entries, a new status block is generated (with a new random file name), and the count is reset.
+4. Once the number of credentials issued count exceeds 131k entries, a new status list is generated (with a new random file name), and the count is reset.
 5. The issuer adds an entry to `log.json` with the `issued` action.
 
 #### Verification
@@ -111,22 +111,22 @@ That way, when a particular VC needs to be revoked, the issuer log will contain 
 #### Limitations/Risks
 
 1. Status list is centralized at the issuer server; issuer can track verifier requests. However, see the section on Cache Expiration below, for mitigation.
-2. For a given bitstring URL, an attacker can estimate the number of credentials that were revoked (just by counting the revoked bits), which could give them an approximate percentage of VC revocation rates (for that block). (This can be mitigated by initializing the bitstring with noise, see below.)
-3. Because the indexes are sequential, an attacker that sees multiple VCs can estimate the number of total VCs issued _for that block_. See the [German Tank Problem](https://en.wikipedia.org/wiki/German_tank_problem) for details. Note that because the status list is randomly named, the attacker does not necessarily know how many other status list blocks exist (and therefore, what the total number of VCs issued is).
+2. For a given bitstring URL, an attacker can estimate the number of credentials that were revoked (just by counting the revoked bits), which could give them an approximate percentage of VC revocation rates (for that list). (This can be mitigated by initializing the bitstring with noise, see below.)
+3. Because the indexes are sequential, an attacker that sees multiple VCs can estimate the number of total VCs issued _for that list_. See the [German Tank Problem](https://en.wikipedia.org/wiki/German_tank_problem) for details. Note that because the status list is randomly named, the attacker does not necessarily know how many other status lists exist (and therefore, what the total number of VCs issued is).
 
-### Second Iteration - Randomly Named Block with Random Index Assignment
+### Second Iteration - Randomly Named List with Random Index Assignment
 
-To mitigate risk 3 mentioned above (the ability of an attacker to estimate the number of VCs issued for a given block), a second iteration can be done.
+To mitigate risk 3 mentioned above (the ability of an attacker to estimate the number of VCs issued for a given list), a second iteration can be done.
 
 Instead of assigning list indexes sequentially, the issuer will generate the list index randomly. Because of the random assignment, the issuer will need a _second_ bitstring, this one private, to keep track of which indexes have already been assigned.
 
 This approach doubles the server-side storage requirements (for 131k entries, now 32KB is required, versus the 16KB in the first iteration). However, note that there is no additional bandwidth or storage burden on the verifier / relying party.
 
-### Block Initialization Using Noise/Chaff
+### List Initialization Using Noise/Chaff
 
-To mitigate risk 2 (ability of an attacker to estimate the percentage of the VCs revoked for a given block), an additional step can be taken.
+To mitigate risk 2 (ability of an attacker to estimate the percentage of the VCs revoked for a given list), an additional step can be taken.
 
-When a status bitstring block is provisioned by the issuer, a percentage of it (say, 20-30%) can be initialized with random noise (so, 30% of the bits can be randomly flipped to 1, at the outset). To keep track of which index positions have been chaffed in this manner, they can be recorded in the second, private bitstring from the Second Iteration above.
+When a status bitstring list is provisioned by the issuer, a percentage of it (say, 20-30%) can be initialized with random noise (so, 30% of the bits can be randomly flipped to 1, at the outset). To keep track of which index positions have been chaffed in this manner, they can be recorded in the second, private bitstring from the Second Iteration above.
 
 Note that this does increase the issuer-side storage requirement by the same percentage (ie, by 20-30% from the previous example).
 
