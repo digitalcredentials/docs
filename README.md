@@ -43,7 +43,7 @@ DCC uses the [Verifiable Credentials Data Model](https://w3c.github.io/vc-data-m
 
 ### Verified Issuance
 
-Onboard the issuer into the [issuer registry](issuer_registry.md)
+Onboard the issuer into the [issuer registry](identity/issuer_registry.md)
 
 
 ### Credential Issuing and State Management
