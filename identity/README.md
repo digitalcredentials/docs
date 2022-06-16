@@ -1,7 +1,7 @@
 # Identity management
 
 For design context, see:
-- [Identity design decisions](design_decision_id.md).
+- [Identity design decisions](design_decisions_id.md).
 - [Issuer registry MVP design](issuer_registry.md)
 
 ## Issuer Instructions
