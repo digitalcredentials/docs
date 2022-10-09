@@ -5,6 +5,15 @@ A quick guide for JFF partners, who would like to integrate with either of the:
 - [DCC Issuer (sign-and-verify)](#integratinng-with-the-dcc-issuer-sign-and-verify)
 - [DCC Learner Credential Wallet (LCW)](#integrating-with-the-learner-credential-wallet)
 
+## Table of Contents
+
+- [DCC JFF Plugfest 2 Integration Guide](#dcc-jff-plugfest-2-integration-guide)
+  * [JFF Plugfest 2](#jff-plugfest-2)
+  * [Integrating with the DCC Issuer (sign-and-verify)](#integrating-with-the-dcc-issuer--sign-and-verify-)
+  * [Integrating with the Learner Credential Wallet](#integrating-with-the-learner-credential-wallet)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 ## JFF Plugfest 2
 
 More details about the second round of the JFF Plugfest:
@@ -17,7 +26,7 @@ More details about the second round of the JFF Plugfest:
 
 To enable easier integration with JFF partner wallets, the DCC sign-and-verify issuer will be registered with the [chapi.io playground](playground.chapi.io):
 
-Open the [playground](playground.chapi.io), and:
+To import a DCC signed JFF Open Badge into your wallet, open the [playground](playground.chapi.io), and:
 
 1. From the options screen:
 
