@@ -19,11 +19,18 @@ To enable easier integration with JFF partner wallets, the DCC sign-and-verify i
 
 Open the [playground](playground.chapi.io), and:
 
-1. From the options screen, choose DCC as the issuer, and also enable DIDAuth:
+1. From the options screen:
+
+- choose DCC as the issuer
+- enable DIDAuth
 
 ![](choose_DCC_in_chapi.jpg)
 
-2. Request your credential.  The playground will guide you through the process of choosing your wallet and importing the credential.
+2. Click the 'JFF' Open Badge button to select it as the credential type.
+
+![](choose_OB_in_chapi.jpg)
+
+3. Click 'Authenticate and Generate VC' to request your credential.  The playground will guide you through the process of choosing your wallet and importing the credential.
 
 ![](request_credential.jpg)
 
@@ -34,13 +41,13 @@ but hardcodes the verification method directly into the endpoint so it doesn't h
 
 ## Integrating with the Learner Credential Wallet
 
-For JFF 2, the LCW will be invoked with a deep link.
+For JFF 2, the Learner Credential Wallet (LCW) will be invoked with a deep link.
 
-Make sure the end user understands that they must click the link from a web browser on their phone, and that they must already have the LCW installed.
+Make sure the end user understands that they must click the link from a web browser on their phone, and that they must already have the wallet installed.
 
-[Install Wallet from here - Apple and Android](https://lcw.app) 
+[Install the DCC LCW from here - Apple and Android](https://lcw.app) 
 
-Construct a deeplink as follows and make that deeplink available to end users on a web page (although you could email it too).  
+Construct a deeplink as follows and make that deeplink available to end users on a web page (you could also email it).  
 
 The deep link must start with 'dccrequest://request?' || 'org.dcconsortium://request?'
 
