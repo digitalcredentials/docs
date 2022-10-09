@@ -44,17 +44,20 @@ but hardcodes the verification method directly into the endpoint so it doesn't h
 
 ## Integrating with the Learner Credential Wallet
 
-For JFF 2, the Learner Credential Wallet (LCW) will be invoked with a deep link.
+For JFF 2, the Learner Credential Wallet (LCW) will be invoked with a deep link like this example:
+
+`org.dcconsortium://request?auth_type=bearer&issuer=jff&challenge=90u09j04&vc_request_url=http://issuer.myserver.org/exchange/8989844`
 
 Make sure the end user understands that they must click the link from a web browser on their phone, and that they must already have the wallet installed.
 
 [Install the DCC LCW from here - Apple and Android](https://lcw.app) 
 
-Construct a deeplink as follows and make that deeplink available to end users on a web page (you could also email it).  
+The deep link must start with either:
 
-The deep link must start with 'dccrequest://request?' || 'org.dcconsortium://request?'
+- 'dccrequest://request?'
+- 'org.dcconsortium://request?'
 
-Include these four request parameters, with the values as specified:
+and must include these four request parameters, with the values as specified:
 
 - <b><i>auth_type=bearer</i></b>
 
@@ -68,11 +71,8 @@ The wallet will add the challenge value to a DID Auth Verifiable Presentation th
 
 This is your endpoint from which the wallet will request the credential.  This is called /exchange/{exchangeId} in the VC-API spec.  So, an example might be: https://myissuer.org/exchange/8989844, but it is of course entirely up to you how your url is named since the wallet simply takes it as-is and invokes it, passing in a DID Auth with the wallet holder’s DID, and with the challenge described below.  Note that the 'exchangeId' can be anything you like, but is intended to identify the specific instance of the credential being requested.
 
-An example of a full deep link:
 
-`org.dcconsortium://request?auth_type=bearer&issuer=jff&challenge=90u09jm2fa04&vc_request_url=http://issuer.myserver.org/exchange/8989844`
-
-TODO: would be great to make this a working deep link that opens the LCW which then hits the instance of sign-and-verify that we now have running for the JFF Plugfest (Plugfest 1), returning a signed credential.
+TODO: would be great to make the example above a working deep link that opens the LCW which then hits the instance of sign-and-verify that we now have running for the JFF Plugfest (Plugfest 1), returning a signed credential.
 
 When invoked with this deeplink, the wallet will send a standard DID Auth VP to’ vc_request_url’ containing:
 
@@ -99,6 +99,6 @@ Here is an example DID Auth (taken from https://w3c-ccg.github.io/vp-request-spe
 }
 ```
 
-The wallet then expects to receive in return the Verifiable Credential for the holder, with the submitted holder DID includes as the subjectId in the VC.
+The wallet then expects to receive in return the Verifiable Credential for the holder, with the submitted holder DID included as the subjectId in the returned VC.
 
 And that’s it!
