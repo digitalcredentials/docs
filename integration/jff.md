@@ -48,9 +48,11 @@ For JFF 2, the Learner Credential Wallet (LCW) will be invoked with a deep link 
 
 `org.dcconsortium://request?auth_type=bearer&issuer=jff&challenge=90u09j04&vc_request_url=http://issuer.myserver.org/exchange/8989844`
 
-Make sure the end user understands that they must click the link from a web browser on their phone, and that they must already have the wallet installed.
+Make sure the end user understands that they must click the deep link while on their phone, from either a web page or an email, and that they must already have the DCC wallet installed.
 
 [Install the DCC LCW from here - Apple and Android](https://lcw.app) 
+
+### Deep Link
 
 The deep link must start with either:
 
@@ -100,5 +102,9 @@ Here is an example DID Auth (taken from https://w3c-ccg.github.io/vp-request-spe
 ```
 
 The wallet then expects to receive in return the Verifiable Credential for the holder, with the submitted holder DID included as the subjectId in the returned VC.
+
+The entire flow is shown here:
+
+[add diagram showing flow]
 
 And that’s it!
