@@ -1,20 +1,14 @@
 # DCC JFF Plugfest 2 Integration Guide
 
-A quick guide for JFF partners, who would like to integrate with either of the:
-
-- [DCC Issuer (sign-and-verify)](#integratinng-with-the-dcc-issuer-sign-and-verify)
-- [DCC Learner Credential Wallet (LCW)](#integrating-with-the-learner-credential-wallet)
+A quick guide for JFF partners, who would like to integrate with either the [DCC Issuer (sign-and-verify)](https://github.com/digitalcredentials/sign-and-verify) or the [DCC Learner Credential Wallet (LCW)](https://github.com/digitalcredentials/learner-credential-wallet)
 
 ## Table of Contents
 
-- [DCC JFF Plugfest 2 Integration Guide](#dcc-jff-plugfest-2-integration-guide)
-  * [JFF Plugfest 2](#jff-plugfest-2)
+  * [JFF Plugfest 2 Overview](#jff-plugfest-2-overview)
   * [Integrating with the DCC Issuer (sign-and-verify)](#integrating-with-the-dcc-issuer--sign-and-verify-)
   * [Integrating with the Learner Credential Wallet](#integrating-with-the-learner-credential-wallet)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
-## JFF Plugfest 2
+## JFF Plugfest 2 Overview
 
 More details about the second round of the JFF Plugfest:
 
