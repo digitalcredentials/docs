@@ -18,13 +18,13 @@ More details about the second round of the JFF Plugfest:
 
 [sign-and-verify](https://github.com/digitalcredentials/sign-and-verify) is a NodeJS server for issuing verifiable credentials, implementing a subset of the [VC-API specificaiton](https://w3c-ccg.github.io/vc-api).
 
-To enable easier integration with JFF partner wallets, the DCC sign-and-verify issuer will be registered with the [chapi.io playground](playground.chapi.io):
+To enable easier integration with JFF partner wallets, the DCC sign-and-verify issuer will be registered with the [chapi.io playground](playground.chapi.io)
 
 To import a DCC signed JFF Open Badge into your wallet, open the [playground](playground.chapi.io), and:
 
 1. From the options screen:
 
-- choose DCC as the issuer
+- choose DCC as the issuer (coming soon)
 - enable DIDAuth
 
 ![](choose_DCC_in_chapi.jpg)
@@ -37,7 +37,7 @@ To import a DCC signed JFF Open Badge into your wallet, open the [playground](pl
 
 ![](request_credential.jpg)
 
-TODO:  link to CHAPI docs that explain how wallets interact with playground
+Coming soon:  link to CHAPI docs that explain how wallets interact with the playground.
 
 ## Integrating with the Learner Credential Wallet
 
@@ -74,7 +74,6 @@ The wallet will add the challenge value to a DID Auth Verifiable Presentation th
 
 This is your endpoint from which the wallet will request the credential.  This is called /exchange/{exchangeId} in the VC-API spec.  So, an example might be: https://myissuer.org/exchange/8989844, but it is of course entirely up to you how your url is named since the wallet simply takes it as-is and invokes it, passing in a DID Auth with the wallet holder’s DID, and with the challenge described below.  Note that the 'exchangeId' can be anything you like, but is intended to identify the specific instance of the credential being requested.
 
-TODO: would be great to make the example above a working deep link that opens the LCW which then hits the instance of sign-and-verify that we now have running for the JFF Plugfest (Plugfest 1), returning a signed credential.
 
 When invoked with this deeplink, the wallet will send a standard DID Auth VP to’ vc_request_url’ containing:
 
@@ -102,9 +101,5 @@ Here is an example DID Auth (taken from https://w3c-ccg.github.io/vp-request-spe
 ```
 
 The wallet then expects to receive in return the Verifiable Credential for the holder, with the submitted holder DID included as the subjectId in the returned VC.
-
-The entire flow is shown here:
-
-[add diagram showing flow]
 
 And that’s it!
