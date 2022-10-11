@@ -37,10 +37,7 @@ To import a DCC signed JFF Open Badge into your wallet, open the [playground](pl
 
 ![](request_credential.jpg)
 
-TODO:  WANT TO EXPLAIN WHAT WALLETS NEED TO DO TO INTERACT WITH THE CHAPI.IO PLAYGROUND
-
-TODO: LIKELY HAVE TO ADD new endpoint /credentials/issue TO sign-and-verify, that copies /issue/credentials
-but hardcodes the verification method directly into the endpoint so it doesn't have to be passed.
+TODO:  link to CHAPI docs that explain how wallets interact with playground
 
 ## Integrating with the Learner Credential Wallet
 
@@ -54,7 +51,7 @@ Make sure the end user understands that they must click the deep link while on t
 
 ### Overall Flow
 
-![](integration/wallet-server-flow.png)
+![](wallet-server-flow.png)
 
 ### Deep Link
 
