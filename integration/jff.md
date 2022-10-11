@@ -52,6 +52,10 @@ Make sure the end user understands that they must click the deep link while on t
 
 [Install the DCC LCW from here - Apple and Android](https://lcw.app) 
 
+### Overall Flow
+
+![](integration/wallet-server-flow.png)
+
 ### Deep Link
 
 The deep link must start with either:
@@ -72,7 +76,6 @@ The wallet will add the challenge value to a DID Auth Verifiable Presentation th
 - <b><i>vc_request_url={your_issuer_url}</i></b>
 
 This is your endpoint from which the wallet will request the credential.  This is called /exchange/{exchangeId} in the VC-API spec.  So, an example might be: https://myissuer.org/exchange/8989844, but it is of course entirely up to you how your url is named since the wallet simply takes it as-is and invokes it, passing in a DID Auth with the wallet holder’s DID, and with the challenge described below.  Note that the 'exchangeId' can be anything you like, but is intended to identify the specific instance of the credential being requested.
-
 
 TODO: would be great to make the example above a working deep link that opens the LCW which then hits the instance of sign-and-verify that we now have running for the JFF Plugfest (Plugfest 1), returning a signed credential.
 
