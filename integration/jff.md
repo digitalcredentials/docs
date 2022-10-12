@@ -46,7 +46,7 @@ For JFF 2, the Learner Credential Wallet (LCW) will be invoked with a deep link 
 `org.dcconsortium://request?auth_type=bearer&issuer=jff&challenge=90u09j04&vc_request_url=http://issuer.myserver.org/exchange/8989844`
 
 To install the DCC Learner Credential Wallet, **from an iOS or Android device**:
-- Visit [https://lcw.app](lcw.app), which has links to install the app from the Apple App Store and Google Play Store.
+- Visit [lcw.app](https://lcw.app/), which has links to install the app from the Apple App Store and Google Play Store.
 - Setup the Learner Credential Wallet by selecting ‘Quick Setup (Recommended)’ and creating a passphrase to secure the wallet.
 - Select the deep link from a web page.
 
