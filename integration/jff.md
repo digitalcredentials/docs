@@ -16,11 +16,11 @@ More details about the second round of the JFF Plugfest:
 
 ## Integrating with the DCC Issuer (sign-and-verify)
 
-[sign-and-verify](https://github.com/digitalcredentials/sign-and-verify) is a NodeJS server for issuing verifiable credentials, implementing a subset of the [VC-API specificaiton](https://w3c-ccg.github.io/vc-api).
+[sign-and-verify](https://github.com/digitalcredentials/sign-and-verify) is a NodeJS server for issuing verifiable credentials, implementing a subset of the [VC-API specification](https://w3c-ccg.github.io/vc-api).
 
-To enable easier integration with JFF partner wallets, the DCC sign-and-verify issuer will be registered with the [chapi.io playground](playground.chapi.io)
+To enable easier integration with JFF partner wallets, the DCC sign-and-verify issuer will be registered with the [chapi.io playground](playground.chapi.io](https://playground.chapi.io/issuer)
 
-To import a DCC signed JFF Open Badge into your wallet, open the [playground](playground.chapi.io), and:
+To import a DCC signed JFF Open Badge into your wallet, open the [playground](https://playground.chapi.io](https://playground.chapi.io/issuer), and:
 
 1. From the options screen:
 
