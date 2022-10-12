@@ -75,7 +75,7 @@ The wallet will add the challenge value to a DID Auth Verifiable Presentation th
 This is your endpoint from which the wallet will request the credential.  This is called /exchange/{exchangeId} in the VC-API spec.  So, an example might be: https://myissuer.org/exchange/8989844, but it is of course entirely up to you how your url is named since the wallet simply takes it as-is and invokes it, passing in a DID Auth with the wallet holder’s DID, and with the challenge described below.  Note that the 'exchangeId' can be anything you like, but is intended to identify the specific instance of the credential being requested.
 
 
-When invoked with this deeplink, the wallet will send a standard DID Auth VP to’ vc_request_url’ containing:
+When invoked with this deeplink, the wallet will send a standard DID Auth VP to ’vc_request_url’ containing:
 
  - the holder DID to which to issue the credential
  - the 'challenge' that had been orginally passed in on the deep link.
