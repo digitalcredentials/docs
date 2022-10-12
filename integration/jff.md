@@ -39,13 +39,13 @@ To import a DCC signed JFF Open Badge into your wallet, open the [playground](ht
 
 Coming soon:  link to CHAPI docs that explain how wallets interact with the playground.
 
-## Integrating with the Learner Credential Wallet
+## Integrating with the DCC Learner Credential Wallet
 
 For JFF 2, the Learner Credential Wallet (LCW) will be invoked with a deep link like this example:
 
 `org.dcconsortium://request?auth_type=bearer&issuer=jff&challenge=90u09j04&vc_request_url=http://issuer.myserver.org/exchange/8989844`
 
-Make sure the end user understands that they must click the deep link while on their phone, from either a web page or an email, and that they must already have the DCC wallet installed.
+Make sure the end user understands that they must click the deep link while on their phone, from either a web page or an email, and that they must already have the DCC Learner Credential Wallet installed.
 
 [Install the DCC LCW from here - Apple and Android](https://lcw.app) 
 
