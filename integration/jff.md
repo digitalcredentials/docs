@@ -4,9 +4,15 @@ A quick guide for JFF partners, who would like to integrate with either the [DCC
 
 ## Table of Contents
 
+- [DCC JFF Plugfest 2 Integration Guide](#dcc-jff-plugfest-2-integration-guide)
   * [JFF Plugfest 2 Overview](#jff-plugfest-2-overview)
-  * [Integrating with the DCC Issuer (sign-and-verify)](#integrating-with-the-dcc-issuer--sign-and-verify-)
-  * [Integrating with the Learner Credential Wallet](#integrating-with-the-learner-credential-wallet)
+  * [Integrating with the DCC Issuer](#integrating-with-the-dcc-issuer)
+  * [Integrating with the DCC Learner Credential Wallet](#integrating-with-the-dcc-learner-credential-wallet)
+    + [Overall Flow](#overall-flow)
+    + [Installing the Wallet](#installing-the-wallet)
+    + [Constructing the Deep Link](#constructing-the-deep-link)
+    + [Sharing the Deep Link](#sharing-the-deep-link)
+
 
 ## JFF Plugfest 2 Overview
 
@@ -14,9 +20,9 @@ More details about the second round of the JFF Plugfest:
 
 [JFF Interoperability Plugfest 2](https://w3c-ccg.github.io/vc-ed/plugfest-2-2022/)
 
-## Integrating with the DCC Issuer (sign-and-verify)
+## Integrating with the DCC Issuer
 
-[sign-and-verify](https://github.com/digitalcredentials/sign-and-verify) is a NodeJS server for issuing verifiable credentials, implementing a subset of the [VC-API specification](https://w3c-ccg.github.io/vc-api).
+The DCC Isssuer is called [sign-and-verify](https://github.com/digitalcredentials/sign-and-verify). It is a NodeJS server for issuing verifiable credentials, implementing a subset of the [VC-API specification](https://w3c-ccg.github.io/vc-api).
 
 To enable easier integration with JFF partner wallets, the DCC sign-and-verify issuer will be registered with the [chapi.io playground](https://playground.chapi.io/issuer)
 
@@ -45,6 +51,8 @@ For JFF 2, the Learner Credential Wallet (LCW) will be invoked with a deep link 
 
 `org.dcconsortium://request?auth_type=bearer&issuer=jff&challenge=90u09j04&vc_request_url=http://issuer.myserver.org/exchange/8989844`
 
+### Installing the Wallet
+
 To install the DCC Learner Credential Wallet, **from an iOS or Android device**:
 - Visit [lcw.app](https://lcw.app/), which has links to install the app from the Apple App Store and Google Play Store.
 - Setup the Learner Credential Wallet by selecting ‘Quick Setup (Recommended)’ and creating a passphrase to secure the wallet.
@@ -54,7 +62,7 @@ To install the DCC Learner Credential Wallet, **from an iOS or Android device**:
 
 ![](wallet-server-flow.png)
 
-### Deep Link
+### Constructing the Deep Link
 
 The deep link must start with either:
 
@@ -102,5 +110,29 @@ Here is an example DID Auth (taken from https://w3c-ccg.github.io/vp-request-spe
 ```
 
 The wallet then expects to receive in return the Verifiable Credential for the holder, with the submitted holder DID included as the subjectId in the returned VC.
+
+### Sharing the Deep Link
+
+NOTE:  the following explanation probably isn't relevant for the JFF plugfest where the sharing will be part of the recorded demonstration of integration, but we include it here if it is of interest.
+
+You can share the deeplink anyway you like, but the two most common approaches are to 
+share it in a web page (say from a course page from which a student wants to collect 
+a verifiable copy of their course completion) or in an email sent out to the student.
+
+If you do want to share the link in an email, you should use an email-friendly variant of the
+deep link that works better with email clients.  The variant simply
+replaces the base uri (`org.dcconsortium://request?` or `dccrequest://request?`) with:
+
+`https://lcw.app/request.html?`
+
+So if your deeplink is:
+
+`org.dcconsortium://request?auth_type=bearer&issuer=jff&challenge=90u09j04&vc_request_url=http://issuer.myserver.org/exchange/8989844`
+
+then your email-friendly link will be:
+
+`https://lcw.app/request.html?auth_type=bearer&issuer=jff&challenge=90u09j04&vc_request_url=http://issuer.myserver.org/exchange/8989844`
+
+The link opens a web page which then redirects to the deeplink.  This slight redirection is needed because some email clients strip out the deeplinks.
 
 And that’s it!
