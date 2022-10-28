@@ -12,6 +12,7 @@ A quick guide for JFF partners, who would like to integrate with either the [DCC
     + [Installing the Wallet](#installing-the-wallet)
     + [Constructing the Deep Link](#constructing-the-deep-link)
     + [Sharing the Deep Link](#sharing-the-deep-link)
+    + [Add your Issuing DID to the DCC Registry](#add-your-issuing-did-to-the-dcc-registry]
 
 
 ## JFF Plugfest 2 Overview
@@ -134,5 +135,13 @@ then your email-friendly link will be:
 `https://lcw.app/request.html?auth_type=bearer&issuer=jff&challenge=90u09j04&vc_request_url=http://issuer.myserver.org/exchange/8989844`
 
 The link opens a web page which then redirects to the deeplink.  This slight redirection is needed because some email clients strip out the deeplinks.
+
+### Add your Issuing DID to the DCC Registry
+
+Finally, you'll need to 'register' your issuing DID with the DCC Community Registry.  The registry is simply a json file in a github repository:
+
+[https://github.com/digitalcredentials/community-registry/registry.json](https://github.com/digitalcredentials/community-registry/blob/main/registry.json)
+
+Add your entry to the registry file, following the examples already there, and submit it as a Pull Request to the repository.
 
 And that’s it!
