@@ -29,20 +29,20 @@ To enable easier integration with JFF partner wallets, the DCC sign-and-verify i
 
 To import a DCC signed JFF Open Badge into your wallet, open the [playground](https://playground.chapi.io), and:
 
-1. From the options screen:
+1. From the options screen (click the little wheel to the top right):
 
-- choose DCC as the issuer (coming soon)
+- choose DCC as the issuer
 - enable DIDAuth
 
-![](choose_DCC_in_chapi.jpg)
+<img width="1031" alt="image" src="https://user-images.githubusercontent.com/547165/199337511-6660eee9-6645-4717-9ca5-72bdd216cbc3.png">
 
 2. Click the 'JFF' Open Badge button to select it as the credential type.
 
-![](choose_OB_in_chapi.jpg)
+<img width="1030" alt="image" src="https://user-images.githubusercontent.com/547165/199337806-bffb7030-bb72-4406-8e3a-0596d5a3521f.png">
 
 3. Click 'Authenticate and Generate VC' to request your credential.  The playground will guide you through the process of choosing your wallet and importing the credential.
 
-![](request_credential.jpg)
+<img width="1030" alt="image" src="https://user-images.githubusercontent.com/547165/199338229-fe0d8329-32c0-41f7-b58a-c27f038f2df2.png">
 
 Coming soon:  link to CHAPI docs that explain how wallets interact with the playground.
 
