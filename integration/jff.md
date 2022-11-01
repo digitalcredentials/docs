@@ -12,7 +12,7 @@ A quick guide for JFF partners, who would like to integrate with either the [DCC
     + [Installing the Wallet](#installing-the-wallet)
     + [Constructing the Deep Link](#constructing-the-deep-link)
     + [Sharing the Deep Link](#sharing-the-deep-link)
-    + [Add your Issuing DID to the DCC Registry](#add-your-issuing-did-to-the-dcc-registry]
+    + [Add your Issuing DID to the DCC Registry](#add-your-issuing-did-to-the-dcc-registry)
 
 
 ## JFF Plugfest 2 Overview
