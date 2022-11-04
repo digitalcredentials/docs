@@ -27,7 +27,7 @@ The DCC Isssuer is called [sign-and-verify](https://github.com/digitalcredential
 
 To enable easier integration with JFF partner wallets, the DCC sign-and-verify issuer will be registered with the [chapi.io playground](https://playground.chapi.io/issuer)
 
-To import a DCC signed JFF Open Badge into your wallet, open the [playground](https://playground.chapi.io), and:
+To import a DCC signed JFF PF2 Open Badge into your wallet, open the [playground](https://playground.chapi.io), and:
 
 1. From the options screen (click the little wheel to the top right):
 
@@ -36,7 +36,7 @@ To import a DCC signed JFF Open Badge into your wallet, open the [playground](ht
 
 <img width="1031" alt="image" src="https://user-images.githubusercontent.com/547165/199337511-6660eee9-6645-4717-9ca5-72bdd216cbc3.png">
 
-2. Click the 'JFF' Open Badge button to select it as the credential type.
+2. Click the 'JFF x vc-edu PF2' button to select it as the credential type.
 
 <img width="1030" alt="image" src="https://user-images.githubusercontent.com/547165/199337806-bffb7030-bb72-4406-8e3a-0596d5a3521f.png">
 
@@ -54,10 +54,19 @@ For JFF 2, the Learner Credential Wallet (LCW) will be invoked with a deep link 
 
 ### Installing the Wallet
 
-To install the DCC Learner Credential Wallet, **from an iOS or Android device**:
-- Visit [lcw.app](https://lcw.app/), which has links to install the app from the Apple App Store and Google Play Store.
+IMPORTANT:  For the JFF PlugFest *DO NOT* use the version of the wallet that is in the Apple App Store or the Google Play Store (or linked from [lcw.app](https://lcw.app/)).
+
+You should instead either:
+
+- build locally from the [LCW github repository](https://github.com/digitalcredentials/learner-credential-wallet)
+
+OR
+- contact us to get a TestFlight account
+
+Once you have a local build running or a TestFlight instance, then:
+
 - Setup the Learner Credential Wallet by selecting ‘Quick Setup (Recommended)’ and creating a passphrase to secure the wallet.
-- Select the deep link from a web page.
+- Select the deep link from a web page on your phone
 
 ### Overall Flow
 
