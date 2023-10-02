@@ -44,7 +44,7 @@
     "name": "Jane Doe"
   },
   "renderMethod": [{
-    "id": "https://example.edu/credentials/BachelorDegree.svg",
+    "id": "https://raw.githubusercontent.com/digitalcredentials/docs/main/credential-render-examples/dcc_example_degree.svg",
     "type": "SvgRenderingTemplate2023",
     "name": "Portrait Mode",
     "css3MediaQuery": "@media (orientation: portrait)",
