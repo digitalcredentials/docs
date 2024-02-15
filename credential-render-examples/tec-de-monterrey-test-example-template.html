@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0; /* Optional: Set a background color */
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 80%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .main-container img {
+            /* Add styles for the image if needed */
+        }
+
+        h2 {
+            margin: 10px 0;
+        }
+
+        .signatures-container {
+            display: flex;
+            justify-content: space-evenly;
+            width: 90%;
+            margin-top: 20px; /* Adjust as needed */
+        }
+
+        .signature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        p {
+            text-align: center;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div>image would go here</div>
+    <p>concede a</p>
+    <h2>{{ credential.subject.name }}</h2>
+    <p>el titulo profesional de</p>
+    <h2>{{ credential.name }}</h2>
+    <p>considerando que ha cumplido con los estudios correspondientes y satisfecho todas los requisitos necesarios.</p>
+    <p>Dado en la ciudad de Monterrey, estado de Nuevo León, el dia</p>
+    <p>{{ credential.awardedDate }}</p>
+    <div class="signatures-container">
+        <div class="signature">sig 1 <p>Rector y Presidente Ejecutivo</p></div>
+        <div class="signature">sig 2 <p>Rector de Profesional y Posgrado</p></div> 
+    </div>
+    <p>Titulo Electronico folio control: {{ credential.evidence[0].narrative }}</p>
+    <p>Sello Autenticocion:</p>
+    <p>{{ credential.evidence[1].narrative }}</p>
+    <p>No. Certifico Autoridad:</p>
+    <p>{{ credential.evidence[2].narrative }}</p>
+</div>
+
+</body>
+</html>
