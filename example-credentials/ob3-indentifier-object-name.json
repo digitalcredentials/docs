@@ -22,7 +22,6 @@
         "name": "A Simply Wonderful Course",
         "credentialSubject": {
           "type": "AchievementSubject",
-            "name": "sam smith",
           "identifier": [{
             "type": "IdentityObject",
             "hashed": false,
