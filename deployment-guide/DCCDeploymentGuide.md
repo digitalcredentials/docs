@@ -5,6 +5,8 @@ Setting up digital credential issuing typically requires integrating into existi
 ## Table of Contents
 
 - [Overview](#overview)
+   - [Simple Signing Demo](#simple-signing-demo)
+   - [Admin Dashboard Demo](#admin-dashboard-demo)
 - [Definitions](#definitions)
    - [Issuer](#issuer)
    - [Holder](#holder)
@@ -49,7 +51,7 @@ We've simplified deployments by publishing the services and coordinators as dock
 
 You can in fact try different configurations of DCC services in about five minutes by installing [Docker](https://docs.docker.com/engine/install/) (if you haven't arleady) and then running - from a terminal - one of the following docker compose configs we've defined:
 
-###### Simple Signing
+###### Simple Signing Demo
 
 Accepts an unsigned verifiable credential, signs and returns it. Try signing a credential with two commands:
 
@@ -126,7 +128,7 @@ Well done you! You've cryptographically signed a credential.
 
 That particular configuration is wired together by our [issuer coordinator](https://github.com/digitalcredentials/issuer-coordinator). The 'wiring' in this case pretty much consists of simply posting the unsigned VC to the signing-service and returning the resulting signed VC. You can see that wiring [here](https://github.com/digitalcredentials/issuer-coordinator/blob/da3fab1b491d847f5dd42d43e0de1a4e8a22bba5/src/app.js#L77-L78)
 
-###### Admin dashboard
+###### Admin Dashboard Demo
 
 Runs two web apps in addition to the wallet exchanger to allow:
 
