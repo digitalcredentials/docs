@@ -67,7 +67,9 @@ dcc-signer-1       | POST /instance/test/credentials/sign 200 60.371 ms - 1699
 
 2. Now open up another terminal window and issue a credential by pasting this at the prompt and hitting return:
 
-<details> <summary>Show code</summary>
+<details> 
+<summary>Show code</summary>
+	
 ```
 curl --location 'http://localhost:4005/instance/test/credentials/issue' \
 --header 'Content-Type: application/json' \
@@ -117,28 +119,26 @@ curl --location 'http://localhost:4005/instance/test/credentials/issue' \
   }
 }'
 ```
+
 </details>
+
 Well done you! You've cryptographically signed a credential.
 
 That particular configuration is wired together by our [issuer coordinator](https://github.com/digitalcredentials/issuer-coordinator). The 'wiring' in this case pretty much consists of simply posting the unsigned VC to the signing-service and returning the resulting signed VC. You can see that wiring [here](https://github.com/digitalcredentials/issuer-coordinator/blob/da3fab1b491d847f5dd42d43e0de1a4e8a22bba5/src/app.js#L77-L78)
 
-###### 
-
-###### Wallet exchange
-
-Accepts an unsigned verifiable credential and returns a deeplink with which the credential can be collected by the LCW:
-
-```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/wallet-exchange-compose.yaml | docker compose -f - up```
-
-That particular configuration is wired together by our [exchange coordinator](https://github.com/digitalcredentials/workflow-coordinator). You can see some of that 'wiring' [here](https://github.com/digitalcredentials/workflow-coordinator/blob/d0510496845f6bb792bf10e835ed995cdc9df586/src/app.js#L102-L201)
-
 ###### Admin dashboard
 
-Runs two web apps in addition to the wallet exchanger to allow uploading credentials through a CSV, creating credential and email templates, notifying recipients of credential availability via email, and directing the recipients to a collection page:
+Runs two web apps in addition to the wallet exchanger to allow:
+
+* uploading credentials through a CSV
+* creating verifiable credential templates
+* creating email templates
+* emailing recipients a link from which to collect a credential
+* a credential collection page
 
 ```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/admin-dashboard-compose.yaml | docker compose -f - up```
 
-Once you've started any of the above apps you can then experiment with the locally running system at [http://localhost:3000](http://localhost:3000)
+Once it has started up, you can experiment with the locally running system at [http://localhost:3000](http://localhost:3000)
 
 The rest of this document explains factors you'll have to consider when choosing and configuring issuing components, followed by a description of the components themselves, some configurations that cover common scenarios, and a guide to setting up your own configuration.
 
