@@ -35,8 +35,6 @@ services:
       - PAYLOAD_PUBLIC_SERVER_URL=http://localhost:3000
     ports:
       - "3000:3000"
-    volumes:
-      - ./services/payload/src:/home/node/app/src
   claim-page:
     image: digitalcredentials/claim-page:test
     container_name: "ad-claim-page"
@@ -53,7 +51,6 @@ services:
       - "6379:6379"
   mongo:
     image: mongo
-    restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
