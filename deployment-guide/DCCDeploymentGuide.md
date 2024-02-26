@@ -45,11 +45,11 @@ Setting up digital credential issuing typically requires integrating into existi
 
 ## Overview
 
-The [Digital Credentials Consortium](https://dcconsortium.org) provides open source software for issuing [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/). Recognizing that every issuer's environement can be different, we've structured the software as a set of composable services where the services are combined and invoked by a 'coordinator' service. We provide a couple of coordinators that should cover most cases, but you can also create your own to 'wire' together services according to need.  All the services and the coordinators are node express apps exposing http APIs, and are intended to run in a Docker compose network on your servers or servers you control. (NOTE: the DCC does not provide hosting - we strongly recommend that you run these services locally so that you control both your own data and the signing itself.)
+The [Digital Credentials Consortium](https://dcconsortium.org) provides open source software for issuing [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/). Recognizing that every issuer's environement can be different, we've structured the software as a set of composable services where the services are combined and invoked by a 'coordinator' service. We provide a couple of coordinators that should cover most cases, but you can also create your own to 'wire' together services according to need.  All the services and the coordinators are node express apps exposing http APIs, and are intended to run in a Docker compose network on your servers or on servers that you control. (NOTE: the DCC does not provide hosting - we strongly recommend that you run these services locally so that you control both your own data and the signing itself.)
 
 We've simplified deployments by publishing the services and coordinators as docker images on Docker Hub, which can be easily run with docker compose, with minimal setup and configuration.
 
-You can in fact try different configurations of DCC services in about five minutes by installing [Docker](https://docs.docker.com/engine/install/) (if you haven't arleady) and then running - from a terminal - one of the following docker compose configs we've defined:
+You can in fact try different configurations of DCC services in about five minutes by installing [Docker](https://docs.docker.com/engine/install/) (if you haven't already) and then running - from a terminal - one of the following docker compose configs we've defined:
 
 ###### Simple Signing Demo
 
@@ -59,7 +59,7 @@ Accepts an unsigned verifiable credential, signs and returns it. Try signing a c
 
 ```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/simple-issuer-compose.yaml | docker compose -f - up```
 
-The issuer should start up and you should see a message like:
+This will download the images from Docker Hub - which might take a couple of minutes depending on your internet connection - and then start up the issuer. You should eventually see a message like:
 
 ```
 dcc-coordinator-1  | {"level":"info","message":"Server started and running on port 4005 with http","timestamp":"2024-02-17T00:26:48.567Z"}
@@ -67,7 +67,7 @@ dcc-signer-1       | Server running on port 4006
 dcc-signer-1       | POST /instance/test/credentials/sign 200 60.371 ms - 1699
 ```
 
-2. Now open up another terminal window and issue a credential by pasting this at the prompt and hitting return:
+2. Once that's started up, open another terminal window and issue a credential by pasting this at the prompt and hitting return:
 
 <details> 
 <summary>Show code</summary>
@@ -124,9 +124,18 @@ curl --location 'http://localhost:4005/instance/test/credentials/issue' \
 
 </details>
 
-Well done you! You've cryptographically signed a credential.
+Well done you! You've cryptographically signed a credential. You can now copy the text of the credential that was returned to you, and import it into the [Learner Credential Wallet](https://lcw.app) or display/verify it at [VerifierPlus](https://verifierplus.org).
 
-That particular configuration is wired together by our [issuer coordinator](https://github.com/digitalcredentials/issuer-coordinator). The 'wiring' in this case pretty much consists of simply posting the unsigned VC to the signing-service and returning the resulting signed VC. You can see that wiring [here](https://github.com/digitalcredentials/issuer-coordinator/blob/da3fab1b491d847f5dd42d43e0de1a4e8a22bba5/src/app.js#L77-L78)
+<details><summary>Explanation</summary>
+
+There is a fair bit going on there, but some points to note:
+
+1. The second step simply posted a preconstructed [Verifiable Credential](https://www.w3.org/TR/vc-data-model/) to the signing service, which added the signature and returned it. So, you can freely fiddle with the credential before posting it; to change the credential name, to whom it is issued, etc.
+2. The credential is signed using a default signing key that we've added to our [Sandbox Registry](https://github.com/digitalcredentials/sandbox-registry). So, when verifying any credentials signed with this key, the verifier (e.g, [VerifierPlus](https://verifierplus.org) will state that the credential was signed with a test key. If you want the verifier to say that the credential was issued by you (or your institution) you'll have to generate your own key and add it to an appropriate registry. More on that is in the [Public Key Authenticity](#public-key-authenticity-registries) section.
+3. This particular configuration is wired together by our [issuer coordinator](https://github.com/digitalcredentials/issuer-coordinator). The 'wiring' in this case pretty much consists of simply posting the unsigned VC to the signing-service and returning the resulting signed VC. You can see that wiring [here](https://github.com/digitalcredentials/issuer-coordinator/blob/da3fab1b491d847f5dd42d43e0de1a4e8a22bba5/src/app.js#L77-L78)
+</details>
+
+
 
 ###### Admin Dashboard Demo
 
@@ -396,17 +405,38 @@ Our main components are:
 
 The learner credential wallet (LCW)
 
-Issuer coordinator
+#### Issuer coordinator
 
-Exchange coordinator
+#### Exchange coordinator
 
-signing-service
+#### signing-service
 
-status-service
+Fundamentally simply takes an unsigned [Verifiable Credential](https://www.w3.org/TR/vc-data-model/), signs it, and returns it.
 
-transaction-service
+#### status-service-github
 
-verifier-service
+#### status-service-mongo
+
+#### transaction-service
+
+Manages the 
+
+#### verifier-service
+
+In the works. It will allow posting credentials for verification, following the [VC-API specification](https://w3c-ccg.github.io/vc-api/)
+
+#### admin-dashboard
+
+This is a set of web pages for managing a collection of credentials. It allows:
+
+* uploading a CSV containing data for a 'batch' of credentials
+* setting up templates for populating a  [Verifiable Credential](https://www.w3.org/TR/vc-data-model/) Credentials Data Model v1.1
+
+Written with the [Payload framework](https://payloadcms.com).
+
+#### Collection Page
+
+This is a simple web page (written with [Astro](https://astro.build)) from which credentials are collected. It is intended to be used with the admin-dashboard. If you aren't using the admin-dashboard, the collection page won't be directly usable, but might help as a guide when designing your own page.
 
 ### Step by step guide
 
