@@ -1,6 +1,6 @@
 # Digital Credentials Consortium Deployment Guide
 
-Setting up digital credential issuing typically requires integrating into existing environments with varying requirements. This guide will help you choose and configure Digital Credentials Consortium issuing components for your requirements.
+Setting up digital credential issuing typically requires integrating into existing environments with varying requirements. This guide will help you choose and configure Digital Credentials Consortium issuing components for your specific requirements.
 
 ## Table of Contents
 
@@ -405,7 +405,7 @@ A disadvantage is that if the phone is lost, it may be inconvenient, difficult, 
 
 #### Web Wallets
 
-Web wallets are wallets that typically store your credentials ...
+Web wallets are wallets that typically store your credentials ... more to come.
 
 ### Verification
 
@@ -454,9 +454,30 @@ Our main components are:
 
 [Github repo](https://github.com/digitalcredentials/issuer-coordinator)
 
+This is our simplest coordinator. It does two things:
+
+* signs credentials
+* allocates a status position for later revocation
+
+The status position allocation is optional.
+
+##### When you'd use it
+
+You'd use this coordinator when you take care of everything else in your local environment, including:
+
+* managing authentication
+* data storage
+* construction of the verifiable credential to be signed
+* exchange with holder or with wallet
+
+Basically, you retrieve the data from your stores, build a VC, and then simply pass the VC into the coordinator,
+which will sign it, optionally allocate a status position, and return it. You then take care of getting the VC to the holder.
+
 #### Exchange coordinator
 
 [Github repo](https://github.com/digitalcredentials/workflow-coordinator)
+
+This is a more complex scenario. 
 
 #### signing-service
 
@@ -466,23 +487,23 @@ Fundamentally simply takes an unsigned [Verifiable Credential](https://www.w3.or
 
 #### status-service-github
 
-[Github repo]([https://git](https://github.com/digitalcredentials/signing-service)
+[Github repo]([https://git](https://github.com/digitalcredentials/signing-service-mongo)
 
 #### status-service-mongo
 
-[Github repo]([https://git](https://github.com/digitalcredentials/signing-service)
+[Github repo]([https://git](https://github.com/digitalcredentials/signing-service-github)
 
 #### transaction-service
 
-Manages the transactions involved in the VC-API exchange between a wallet and the issuer. You'll need this if you want to directly exchange credentials with a wallet like the [Learner Credential Wallet](lcw.app).
-
 [Github repo]([https://git](https://github.com/digitalcredentials/transaction-service)
+
+Manages the transactions involved in the VC-API exchange between a wallet and the issuer. You'll need this if you want to directly exchange credentials with a wallet like the [Learner Credential Wallet](lcw.app).
 
 #### verifier-service
 
-In the works. It will allow posting credentials for verification, following the [VC-API specification](https://w3c-ccg.github.io/vc-api/)
+[Github repo]([https://git](https://github.com/digitalcredentials/verifier-service)
 
-[Github repo]([https://git](https://github.com/digitalcredentials/signing-service)
+In the works. It will allow posting credentials for verification, following the [VC-API specification](https://w3c-ccg.github.io/vc-api/)
 
 #### admin-dashboard
 
