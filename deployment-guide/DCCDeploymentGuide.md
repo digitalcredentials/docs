@@ -530,6 +530,10 @@ To allocate a status position that can later be 'flipped' to revoke the credenti
 
 You might consider using this implementation of the status list, rather than our mongo implementation, if you have a relatively low number of credentials. If you are getting into the thousands of credentials then you could run into rate limiting problems with Github.
 
+This implementation might also be a good choice when first starting out, as relatively simple means to get a status system running, particularly for experimentation or evaluation.
+
+This could also be a good choice for a one-off credentialing project, like say where you wanted to issue certificates to a few hundred conference attendees, and didn't want to have to maintain anything beyoned that issuance. Because the status list is in github, you could just let it live there forever more. In this case you may, of course, not really care about being able to revoke the credentials, but if you did, the github implemenation of the status list could be a good choice.
+
 ###### Advantages
 
 * relatively easy to setup
@@ -543,7 +547,7 @@ You might consider using this implementation of the status list, rather than our
   
 ##### How you'd use it
 
-You can use this by itself to allocate a status position, but you probably want to look at how we use it in a coordinator, as described in the sections above.
+You can use this by itself to allocate a status position, but you probably want to look at how we use it in a coordinator, as described in the sections above. The coordinators effectively take care of calling the status service for you.
 
 #### status-service-mongo
 
@@ -551,9 +555,30 @@ You can use this by itself to allocate a status position, but you probably want 
 
 This is an implementation of the [Bitstring Status List](https://www.w3.org/TR/vc-bitstring-status-list/) specification, using Mongo for storage.
 
-##### When you'd use it
+##### Why you'd use it
+
+To allocate a status position that can later be 'flipped' to revoke the credential.
+
+You might prefer this implementation to the github version if you've got a lot of credentials that would bump up against Github rate limits, or you just don't want to depend on Github.
+
+This implementation might also make sense if you already use Mongo for other things and adding a db incurs little extra cost or maintenance.
+
+Note too that an option is to run a local Mongo instance directly in your docker compose.
+
+###### Advantages
+
+* scalable (and in particular much moreso than our github implementation)
+* can be used with a locally running mongo or a cloud based mongo
+* no dependency on external company (if you run a local mongo instance)
+
+###### Disadvantages
+
+* You are on the hook for keeping your implementation running for the lifetime of the credentials.
+* Extra complexity of running a Mongo instance. A cloud hosted version could help, with could incur hosting charges.
 
 ##### How you'd use it
+
+You can use this by itself to allocate a status position, but you probably want to look at how we use it in a coordinator, as described in the sections above. The coordinators effectively take care of calling the status service for you.
 
 #### transaction-service
 
