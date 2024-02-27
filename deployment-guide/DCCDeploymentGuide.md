@@ -21,7 +21,7 @@ Setting up digital credential issuing typically requires integrating into existi
   - [Verification](#verification)
   - [Credential Display](#credential-display)
 - [DCC Components](#dcc-components)
-  - [Overview](#overview)
+  - [Overview](#services-overview)
   - [Signing Service](#sign-a-credential)
   - [Status Service](#status-service)
     - [Mongo Implemenation](#mongo-implementation)
@@ -441,7 +441,19 @@ Under active development is a method that allows credentials issuers to provide 
 
 ### DCC components and services
 
-The DCC has split out issuance into a number of components that can be assembled and configured to suit the needs of individual projects.
+#### Services Overview
+
+The DCC has split out issuance into a number of components that can be assembled and configured to suit the needs of individual projects. The core of the components are microservices, each microservice running as a nodejs express app, and different services 'wired' together by a 'coordinator', which is another nodejs express app itself. The coordinator and the services it coordinates all run together in a docker compose network, defined by a docker compose file.
+
+The docker compose file is actually the key piece that we anticipate most projects will use, and in many cases a project wanting to run our services could have nothing more than a single docker compose file with all the specific project configuration within the compose file. 
+
+The compose file simply defines the set of services to be used, where each service definition simply points at the relevant image in docker hub.
+
+So you needn't checkout github repositories - just create a docker compose file with your configuration set as environment variables.
+
+##### Services Versioning
+
+We use semver for our versioning. We publish new images to docker hub with semver tags. The semver tags correspond to github tags in the corresponding repository.
 
 Our main components are:
 
