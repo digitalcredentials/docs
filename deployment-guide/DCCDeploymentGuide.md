@@ -389,13 +389,55 @@ This also only works if you have a trustworthy timestamp attached to the credent
 
 ##### Public hash registry
 
-Mention how a public hash registry can detect fraud????
+Mention how a public hash registry can help detect fraud????
 
 ### Wallets
 
+Wallets are applications in which holders store their credentials. For the moment there are two kinds of wallets:
+
+#### App Wallets
+
+These are apps on a device like a mobile phone. The [Learner Credential Wallet](https://lcw.app) is one example.
+
+A significant advantage to app wallets are that the holder more directly controls their credentials because the credentials are stored directly on the phone.
+
+A disadvantage is that if the phone is lost, it may be inconvenient, difficult, or even impossible to replace the lost credentials. Wallets like the [Learner Credential Wallet](https://lcw.app) do provide backup, but at the moment backup is a manual process and may be neglected. Usually - but not always - fresh copies of the credentials can be retrieved from the issuers.
+
+#### Web Wallets
+
+Web wallets are wallets that typically store your credentials ...
+
 ### Verification
 
+Verification of credentials can happen in any number of places:
+
+#### Wallets
+
+Wallets like the [Learner Credential Wallet](https://lcw.app) verify credentials when first adding them and also when displaying them. This verification assures the credential holder that their credentials are valid (and continue to be valid,e.g, they haven't expired).
+
+Wallet verification should not be used to show someone else that your c
+
+#### Web Pages
+
+Web apps like [VerifierPlus](https://verifierplus.org) will verify a verifiable credential that has been uploaded or pasted into a form. Veification pages like this would typically be used by someone to whom a credential has been given as proof of something. A job recruiter, for example, to whom a job candidate has emailed a copy of their degree.
+
+A web verifier like [VerifierPlus](https://verifierplus.org) can also scan a QR (using the phone or laptop camera) for a credential that has been presented from a wallet like the  [Learner Credential Wallet](https://lcw.app).
+
+#### Verification Apps
+
+At some point there might be dedicated apps on phones that can scan a QR (possibly presented to them from the wallet on another phone) and verify authenticity. For the moment, web verifieers like [VerifierPlus](https://verifierplus.org) can do that.
+
+#### Automated Verification
+
+Once verifiable credentials achieve some amount of critical mass, organizations will automatically verify credentials using internal verification code. A site like [ORCID](https://orcid.org) for example would automatically verify any credentials uploaded to an ORCID profile. Similarly, a job recruitment site could verify any uploaded credentials (like a degree).
+
 ### Credential Display
+
+Credential display is for the moment almost always part of either verification or display in a wallet.  The verification application or wallet decides what to show, which is usually some fairly generic set of fields like credential name, issuance date, expiration date, issuer logo, and credential logo. Active work is underway (Spring 2024) to enable customized display using...
+
+#### renderMethod
+
+Under active development is a method that allows credentials issuers to provide a template for rendering their credentials a certain way. The [Learner Credential Wallet](https://lcw.app) has some support (in development) for generating PDFs from HTML templates specified in a renderMethod. 
 
 ### DCC components and services
 
@@ -403,27 +445,44 @@ The DCC has split out issuance into a number of components that can be assembled
 
 Our main components are:
 
-The learner credential wallet (LCW)
+#### Learner credential wallet (LCW)
+
+[Learner Credential Wallet](lcw.app)
+[Github repo](https://github.com/digitalcredentials/learner-credential-wallet)
 
 #### Issuer coordinator
 
+[Github repo](https://github.com/digitalcredentials/issuer-coordinator)
+
 #### Exchange coordinator
 
+[Github repo](https://github.com/digitalcredentials/workflow-coordinator)
+
 #### signing-service
+
+[Github repo]([https://git](https://github.com/digitalcredentials/signing-service)
 
 Fundamentally simply takes an unsigned [Verifiable Credential](https://www.w3.org/TR/vc-data-model/), signs it, and returns it.
 
 #### status-service-github
 
+[Github repo]([https://git](https://github.com/digitalcredentials/signing-service)
+
 #### status-service-mongo
+
+[Github repo]([https://git](https://github.com/digitalcredentials/signing-service)
 
 #### transaction-service
 
-Manages the 
+Manages the transactions involved in the VC-API exchange between a wallet and the issuer. You'll need this if you want to directly exchange credentials with a wallet like the [Learner Credential Wallet](lcw.app).
+
+[Github repo]([https://git](https://github.com/digitalcredentials/transaction-service)
 
 #### verifier-service
 
 In the works. It will allow posting credentials for verification, following the [VC-API specification](https://w3c-ccg.github.io/vc-api/)
+
+[Github repo]([https://git](https://github.com/digitalcredentials/signing-service)
 
 #### admin-dashboard
 
@@ -433,6 +492,8 @@ This is a set of web pages for managing a collection of credentials. It allows:
 * setting up templates for populating a  [Verifiable Credential](https://www.w3.org/TR/vc-data-model/) Credentials Data Model v1.1
 
 Written with the [Payload framework](https://payloadcms.com).
+
+[Github repo]([https://git](https://github.com/digitalcredentials/signing-service)
 
 #### Collection Page
 
