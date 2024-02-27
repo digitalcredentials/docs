@@ -463,7 +463,7 @@ The status position allocation is optional.
 
 ##### When you'd use it
 
-You'd use this coordinator when you take care of everything else in your local environment, including:
+You'd use this coordinator when you handle everything else in your local environment besides signing and status allocation, including:
 
 * managing authentication
 * data storage
@@ -472,6 +472,10 @@ You'd use this coordinator when you take care of everything else in your local e
 
 Basically, you retrieve the data from your stores, build a VC, and then simply pass the VC into the coordinator,
 which will sign it, optionally allocate a status position, and return it. You then take care of getting the VC to the holder.
+
+##### How you'd use it
+
+Simply start up the coordinator in docker compose - as described above in [Simple Signing Demo](#simple-signing-demo) and more thoroughly in the [Github repo](https://github.com/digitalcredentials/issuer-coordinator) for the issuer coordinator. You'll have to set a couple of environment variables for your signing keys and your github or mongo store (if you are using either), but that is pretty much it. Then you can simply post an unsigned verifiable credential to the service endpoint when you need to sign.
 
 #### Exchange coordinator
 
@@ -489,6 +493,7 @@ Fundamentally simply takes an unsigned [Verifiable Credential](https://www.w3.or
 
 [Github repo]([https://git](https://github.com/digitalcredentials/signing-service-mongo)
 
+This is an implementation of 
 #### status-service-mongo
 
 [Github repo]([https://git](https://github.com/digitalcredentials/signing-service-github)
