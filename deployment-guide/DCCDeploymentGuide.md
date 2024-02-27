@@ -374,7 +374,7 @@ An HSM does incur a cost, either for the hardware if you buy one to use in-house
 
 Whether to get an HSM often will depend on how concerned you are about fraud. You may be comfortable simply keeping your 
 
-#### Mitigation
+#### Mitigating Stolen Signing Keys
 
 There are a few things you can do to mitigte the risk of a stolen key:
 
@@ -483,20 +483,65 @@ Simply start up the coordinator in docker compose - as described above in [Simpl
 
 This is a more complex scenario. 
 
+##### When you'd use it
+
+When you want holder's to add your credentials to a wallet, and more specifically so that you can add a 'holder binding' to the credential.
+
+##### How you'd use it
+
 #### signing-service
 
 [Github repo]([https://git](https://github.com/digitalcredentials/signing-service)
 
 Fundamentally simply takes an unsigned [Verifiable Credential](https://www.w3.org/TR/vc-data-model/), signs it, and returns it.
 
+##### Why you'd use it
+
+To sign Verifiable Credentials.
+
+##### How you'd use it
+
+You can use this alone, but if you intend to use it with one of our status services and/or as part of a wallet exchange then you likely want to look at one of our 'coordinators':
+
+* [Exchange coordinator](#workflow-coordinator)
+* [Issuer coordinator](#issuer-coordinator)
+  
 #### status-service-github
 
-[Github repo]([https://git](https://github.com/digitalcredentials/signing-service-mongo)
+[Github repo]([https://git](https://github.com/digitalcredentials/signing-service-github)
 
-This is an implementation of 
+This is an implementation of the [Bitstring Status List](https://www.w3.org/TR/vc-bitstring-status-list/) specification, using Github for storage.
+
+##### Why you'd use it
+
+To allocate a status position that can later be 'flipped' to revoke the credential.
+
+You might consider using this implementation of the status list, rather than our mongo implementation, if you have a relatively low number of credentials. If you are getting into the thousands of credentials then you could run into rate limiting problems with Github.
+
+###### Advantages
+
+* relatively easy to setup
+* no local infrastructure needed
+* the durability of Github (rarely goes down)
+
+###### Disadvantages
+
+* You'll potentinally run into rate limiting with Github if you have a significant number of credentials (thousands)
+* You are dependent on Github
+  
+##### How you'd use it
+
+You can use this by itself to allocate a status position, but you probably want to look at how we use it in a coordinator, as described in the sections above.
+
 #### status-service-mongo
 
 [Github repo]([https://git](https://github.com/digitalcredentials/signing-service-github)
+
+This is an implementation of the [Bitstring Status List](https://www.w3.org/TR/vc-bitstring-status-list/) specification, using Mongo for storage.
+
+##### When you'd use it
+
+##### How you'd use it
 
 #### transaction-service
 
@@ -504,13 +549,23 @@ This is an implementation of
 
 Manages the transactions involved in the VC-API exchange between a wallet and the issuer. You'll need this if you want to directly exchange credentials with a wallet like the [Learner Credential Wallet](lcw.app).
 
+##### When you'd use it
+
+##### How you'd use it
+
 #### verifier-service
 
 [Github repo]([https://git](https://github.com/digitalcredentials/verifier-service)
 
 In the works. It will allow posting credentials for verification, following the [VC-API specification](https://w3c-ccg.github.io/vc-api/)
 
+##### When you'd use it
+
+##### How you'd use it
+
 #### admin-dashboard
+
+[Github repo]([https://git](https://github.com/digitalcredentials/admin-dashboard)
 
 This is a set of web pages for managing a collection of credentials. It allows:
 
@@ -519,11 +574,19 @@ This is a set of web pages for managing a collection of credentials. It allows:
 
 Written with the [Payload framework](https://payloadcms.com).
 
-[Github repo]([https://git](https://github.com/digitalcredentials/signing-service)
+##### When you'd use it
+
+##### How you'd use it
 
 #### Collection Page
 
-This is a simple web page (written with [Astro](https://astro.build)) from which credentials are collected. It is intended to be used with the admin-dashboard. If you aren't using the admin-dashboard, the collection page won't be directly usable, but might help as a guide when designing your own page.
+[Github repo]([https://git](https://github.com/digitalcredentials/admin-dashboard)
+
+This is a simple web page (written with [Astro](https://astro.build)) from which credentials are collected. It is intended to be used with the admin-dashboard. If you aren't using the admin-dashboard, the collection page won't be directly usable, but might help as a guide when designing your own page. You can fairly easily subsitute your own collection page as a separate web app running within the docker compose (or even outside it).
+
+##### When you'd use it
+
+##### How you'd use it
 
 ### Step by step guide
 
