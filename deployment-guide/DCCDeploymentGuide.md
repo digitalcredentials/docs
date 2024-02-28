@@ -584,11 +584,20 @@ You can use this by itself to allocate a status position, but you probably want 
 
 [Github repo]([https://git](https://github.com/digitalcredentials/transaction-service)
 
-Manages the transactions involved in the VC-API exchange between a wallet and the issuer. You'll need this if you want to directly exchange credentials with a wallet like the [Learner Credential Wallet](lcw.app).
+Manages the transactions involved in the VC-API exchange between a wallet and the issuer, specifically:
+
+- stores data associated with a [VC-API exchange](https://w3c-ccg.github.io/vc-api/#initiate-exchange) and generates an exchangeID and transactionID
+- generates and verifies UUID challenges used in [DIDAuthentication Verifiable Presentation Requests](https://w3c-ccg.github.io/vp-request-spec/#did-authentication)
+- verifies [DID Authentication](https://w3c-ccg.github.io/vp-request-spec/#did-authentication) signatures
+- generates both DCC deeplink and [CHAPI}(https://chapi.io) wallet queries
 
 ##### When you'd use it
 
+You'll use this if you want to directly exchange credentials with a wallet like the [Learner Credential Wallet](lcw.app). You will probably always use this with the [Exchange Coordinator](#exchange-coordinator) - or a variant - and so therefore to manage the exchange with a wallet that supports either [VC-API exchange](https://w3c-ccg.github.io/vc-api/#initiate-exchange) and/or [CHAPI}(https://chapi.io) wallet selection.
+
 ##### How you'd use it
+
+Typically as part of a coordinator like the [Exchange Coordinator](#exchange-coordinator), which you can take a look at for an example of usage.
 
 #### verifier-service
 
