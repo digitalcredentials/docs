@@ -173,17 +173,17 @@ Whoever needs to verify a credential that was shared them. A job recruiter verif
 
 Okay, directly into it then - there are a few primary factors that influence deployments:
 
-Data Storage
-Authentication
-Revocation
-Public Key Authenticity
-Private Key Security
-Wallets
+* Data Storage
+* Authentication
+* Revocation
+* Public Key Authenticity
+* Private Key Security
+* Wallets
 
 And a couple of factors that may be outside your control, but should be considered:
 
-Credential Verification
-Credential Display
+* Credential Verification
+* Credential Display
 
 Let's talk about each in turn...
 
@@ -201,7 +201,7 @@ Let's go over the two types of data...
 
 #### Institutional Data 
 
-This is the fundamental authoritative data for your credentials - the [system of record (SOR)](https://en.wikipedia.org/wiki/System_of_record) for your credentials. This will often have been around for decades or even centuries, like say for the list of degrees that a university has issued.
+This is the fundamental authoritative data for your credentials - the [system of record (SOR)](https://en.wikipedia.org/wiki/System_of_record) for your credentials. This may have been around for decades or even centuries, like say for the list of degrees that a university has issued.
 
 Where your institutional data is stored, and maybe more importantly, how you can retrieve that data, will influence the structure of your issuing system. 
 
@@ -284,7 +284,7 @@ This effectively then declares to anyone who later wants to verify the credentia
 So now, when the holder presents the credential to someone else for verification, the verifier can give the holder a challenge (just a random string of some sort, like 'k2kn35l') that the holder can sign with their private key and return to the verifier. The verifier then confirms that the challenge was signed by the private that corresponds to the public key in the creential. 
 The upshot is that the holder thereby confirms that they 'control' the corresponding public key in the credential, and therefore also the credential itself.
 
-NEED A DIAGRAM HERE I THINK
+TODO:  add a diagram
 
 Adding a holder binding makes things a bit safer, kind of like the second factor auth we've all come to use, and can also help with identity theft - if someone has gotten other credentials of mine they might be able to use those to impersonate me, but if they are asked to demonstrate control of those credentials through a holder binding challenge, then impersonation becomes more difficult.
 
