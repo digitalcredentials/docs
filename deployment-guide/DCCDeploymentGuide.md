@@ -45,9 +45,9 @@ Setting up digital credential issuing typically requires integrating into existi
 
 ## Overview
 
-The [Digital Credentials Consortium](https://dcconsortium.org) provides open source software for issuing [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/). Recognizing that every issuer's environement can be different, we've structured the software as a set of composable services where the services are combined and invoked by a 'coordinator' service. We provide a couple of coordinators that should cover most cases, but you can also create your own to 'wire' together services according to need.  All the services and the coordinators are node express apps exposing http APIs, and are intended to run in a Docker compose network on your servers or on servers that you control. (NOTE: the DCC does not provide hosting - we strongly recommend that you run these services locally so that you control both your own data and the signing itself.)
+The [Digital Credentials Consortium](https://dcconsortium.org) provides open source software for issuing [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/). Recognizing that every issuer's environment can be different, we've structured the software as a set of composable services where the services are combined and invoked by a 'coordinator' service. We provide a couple of coordinators that should cover most cases, but you can also create your own to 'wire' together services according to need.  All the services and the coordinators are node express apps exposing http APIs, and are intended to run in a Docker compose network on your servers or on servers that you control. (NOTE: the DCC does not provide hosting - we strongly recommend that you run these services locally so that you control both your own data and the signing itself.)
 
-We've simplified deployments by publishing the services and coordinators as docker images on Docker Hub, which can be easily run with docker compose, with minimal setup and configuration.
+This all sounds quite a bit more complicated than it actually is, and we've simplified deployments by publishing the services and coordinators as docker images on Docker Hub, which can be easily run with docker compose, with minimal setup and configuration.
 
 You can in fact try different configurations of DCC services in about five minutes by installing [Docker](https://docs.docker.com/engine/install/) (if you haven't already) and then running - from a terminal - one of the following docker compose configs we've defined:
 
@@ -130,16 +130,19 @@ Well done you! You've cryptographically signed a credential. You can now copy th
 
 There is a fair bit going on there, but some points to note:
 
-1. The second step simply posted a preconstructed [Verifiable Credential](https://www.w3.org/TR/vc-data-model/) to the signing service, which added the signature and returned it. So, you can freely fiddle with the credential before posting it; to change the credential name, to whom it is issued, etc.
+1. The second step simply posted a preconstructed [Verifiable Credential](https://www.w3.org/TR/vc-data-model/) to the signing service, which added the signature and returned it. You can freely fiddle with the sample credential before posting it; to change the credential name, to whom it is issued, etc.
 2. The credential is signed using a default signing key that we've added to our [Sandbox Registry](https://github.com/digitalcredentials/sandbox-registry). So, when verifying any credentials signed with this key, the verifier (e.g, [VerifierPlus](https://verifierplus.org) will state that the credential was signed with a test key. If you want the verifier to say that the credential was issued by you (or your institution) you'll have to generate your own key and add it to an appropriate registry. More on that is in the [Public Key Authenticity](#public-key-authenticity-registries) section.
 3. This particular configuration is wired together by our [issuer coordinator](https://github.com/digitalcredentials/issuer-coordinator). The 'wiring' in this case pretty much consists of simply posting the unsigned VC to the signing-service and returning the resulting signed VC. You can see that wiring [here](https://github.com/digitalcredentials/issuer-coordinator/blob/da3fab1b491d847f5dd42d43e0de1a4e8a22bba5/src/app.js#L77-L78)
+4. This is probably the simplest example of using DCC services, and this might well be how you end up integrating it into your system. There are often though other factors to consider like revocation and wallets that we talk about in the [Deployment Considerations](#deployment-considerations)section.
 </details>
 
 
 
 ###### Admin Dashboard Demo
 
-Runs two web apps in addition to the wallet exchanger to allow:
+This demo provides a pretty good example of all the parts of a credentialing system. You can in fact effectively run a production version of this demo as a complete standalone issuer. It may well be that you'll want to more directly integrate specific services into your existing systems, but this demo can give you a good sense of where things fit.
+
+This demo runs a docker compose with two web apps in addition to the [wallet exchanger](#exchange-coordinator) to allow:
 
 * uploading credentials through a CSV
 * creating verifiable credential templates
