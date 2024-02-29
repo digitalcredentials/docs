@@ -613,26 +613,55 @@ In the works. It will allow posting credentials for verification, following the 
 
 [Github repo]([https://git](https://github.com/digitalcredentials/admin-dashboard)
 
-This is a set of web pages for managing a collection of credentials. It allows:
+This is a set of web pages backed by a mongo data store for managing a collection of credentials. It allows:
 
 * uploading a CSV containing data for a 'batch' of credentials
-* setting up templates for populating a  [Verifiable Credential](https://www.w3.org/TR/vc-data-model/) Credentials Data Model v1.1
+* setting up templates for populating a  [Verifiable Credential](https://www.w3.org/TR/vc-data-model)
+* setting up templates for populating emails sent to recipients
+* sending emails to recipients in a given batch
+* recipients to collect credentials from a collection page that adds credentials to the [Learner Credential Wallet](https://lcw.app)
 
-Written with the [Payload framework](https://payloadcms.com).
+It is based on the [Payload framework](https://payloadcms.com).
 
 ##### When you'd use it
 
+If you intend to issue your credentials in batches, want automated email notifications sent to recipients, and want to use the [Learner Credential Wallet](https://lcw.app) for credential collection.
+
+If, however, you'd like to integrate more directly into your existing institutional systems, you'd want to look at using the services more directly. You might want to take a look at our [simple signing demo](#simple-signing-demo) to get a sense of how this could work.
+
+###### Advantages
+
+* you can get up and issuing credentials fairly quickly
+* can be used with a locally running mongo or a cloud based mongo
+* UI tools for setting up, reviewing, and running batches and for viewing issuance records
+* Built-in batch mailing to notyify recipients that credentials can be collected
+
+###### Disadvantages
+
+* If you store credential data in an existing institutional store then you'll be creating a second copy in the admin-dashboard's mongo store.
+* Only works with Mongo.
+* Requires manual CSV uploads for every batch
+* Opinionated configuration as far as batch structure, templating, csv upload, email sending, and use of the [Learner Credential Wallet](https://lcw.app)
+
 ##### How you'd use it
+
+A good example of usage is in the  [admin dashboard demo](#admin-dashboard-demo).
 
 #### Collection Page
 
 [Github repo]([https://git](https://github.com/digitalcredentials/admin-dashboard)
 
-This is a simple web page (written with [Astro](https://astro.build)) from which credentials are collected. It is intended to be used with the admin-dashboard. If you aren't using the admin-dashboard, the collection page won't be directly usable, but might help as a guide when designing your own page. You can fairly easily subsitute your own collection page as a separate web app running within the docker compose (or even outside it).
+NOTE: the collection page is part of the same github repo as the admin-dashboard, but is in fact a separate app with its own Docker file, and is meant to run as a separate service, usually within a docker compose.
+
+This is a simple web page (written with [Astro](https://astro.build)) from which credentials are collected. It is intended to be used with the admin-dashboard. If you aren't using the admin-dashboard, the collection page won't be directly usable, but it might help as a guide when designing your own page. You can certainly subsitute your own collection page as a separate web app running within the docker compose (or even outside it).
 
 ##### When you'd use it
 
+This page pretty closely depends on the admin-dashboard, so you'd use this as part of the admin-dashboard, although you could substitute your own page.
+
 ##### How you'd use it
+
+Typical usage would be to include the webapp in a docker compose, like we do in the demo [admin dashboard demo](#admin-dashboard-demo) compose file.
 
 ### Step by step guide
 
