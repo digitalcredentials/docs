@@ -493,13 +493,28 @@ Simply start up the coordinator in docker compose - as described above in [Simpl
 
 [Github repo](https://github.com/digitalcredentials/workflow-coordinator)
 
-This is a more complex scenario. 
+This is a more complex scenario. The exchange coordinator wires together three services:
+
+* [signing-service](#signing-service)
+* [status-service-github](#status-service-github)
+* [transaction-service](#transaction-service
+
+So where it differs from the [issuer-coordinator](#issuer-coordinator) is that it uses the transaction-service to manage an exchange with a wallet. The exchange is based on the [VC-API spec](https://w3c-ccg.github.io/vc-api/#exchange-examples) and specifically uses a [DIDAuthentication Verifiable Presentation Request](https://w3c-ccg.github.io/vp-request-spec/#did-authentication) in which the issuer asks the wallet for a DID belonging to a holder, along with proof that the holder owns that DID. The wallet supplies the proof by signing - using the private key associated with the holder DID - a 'challenge' that the issuer gives the wallet.
+
+Once the issuer has got the holder's DID the issuer adds that DID to the VC, signs it and returns it. The VC is now 'bound' to the holder in the sense that the holder can subsequently prove they own the credential by signing challenges with the private key for the holder DID that was included in the VC.
 
 ##### When you'd use it
 
-When you want holder's to add your credentials to a wallet, and more specifically so that you can add a 'holder binding' to the credential.
+When you want holders to add your credentials to a wallet like [Learner Credential Wallet](https://lcw.app), and more specifically so that you can add a 'holder binding' to the credential.
 
 ##### How you'd use it
+
+The exchange coordinator is meant to be integrated into an existing environment. One approach is to spin it up in a docker compose like this [one (TODO - add docker compose)](#exchange-compose-demo), and then from your own system, post populated but unsigned VCs to the /exchange endpoint which will return a deeplink that you can then give to the credential recipient, either by emailing it to them, or presenting it directly to them on a screen either as a link (if they are on their phone) or as a QR (if they are on a laptop) that they can scan from their phone. The rest of the exchange with the wallet is taken care of by the exchange coordinator.
+
+So in summary, to use the exchange coordinator, you:
+
+* Pass it an unsigned (but otherwise complete) Verifiable Credential
+* The coordinator replies with a deeplink that you can give to the student to collect the credential
 
 #### signing-service
 
