@@ -140,7 +140,7 @@ There is a fair bit going on there, but some points to note:
 
 ###### Admin Dashboard Demo
 
-This demo provides a pretty good example of all the parts of a credentialing system. You can in fact effectively run a production version of this demo as a complete standalone issuer. It may well be that you'll want to more directly integrate specific services into your existing systems, but this demo can give you a good sense of where things fit.
+This demo provides a pretty good example of all the parts of a credentialing system. You can in fact effectively run a production version of this demo as a complete standalone issuer. It may well be that you'll end up wanting to more directly integrate specific services into your existing systems, but this demo can give you a good sense of how things fit together.
 
 This demo runs a docker compose with two web apps in addition to the [wallet exchanger](#exchange-coordinator) to allow:
 
@@ -204,17 +204,17 @@ Let's go over the two types of data...
 
 #### Institutional Data 
 
-This is the fundamental authoritative data for your credentials - the [system of record (SOR)](https://en.wikipedia.org/wiki/System_of_record) for your credentials. This may have been around for decades or even centuries, like say for the list of degrees that a university has issued.
+This is the fundamental authoritative data for your credentials - the [system of record (SOR)](https://en.wikipedia.org/wiki/System_of_record) for your credentials. This may have been around for decades or even centuries (albeit in paper form), like say for the list of degrees that a university has issued.
 
 Where your institutional data is stored, and maybe more importantly, how you can retrieve that data, will influence the structure of your issuing system. 
 
-Let's talk about two ways you might access that data...
+Let's talk about two ways you might access that data when you want to issue a credential...
 
 ##### Direct pull
 
 If you can pull student records from the existing system 'on demand' - say when a student logs in to a credential collection page and requests something like a transcript - then you could instantaneously and automatically construct and return credentials on-the-fly.
 
-A direct pull system ***might*** be more complex to setup (although often not), but the medium and long term benefits can be significant. Essentially, after having setup the system, credential holders (students/alumni) can simply download a copy of their credential whenever they like. Which also means that replacement of lost credentials is no longer a complicated issue requiring human mediated requests and lookups - the student/alumni can now simply login to get an immediate replacment, directly and automatically issued from the instutiotnal data.  Same goes for name changes - if someone changes their name (for example if they get married) the name change can be handled by the normal institutional process for a name change, which will end up changing the underlying institutional record. And once that is done the student/alumni then just logs back in and get a fresh copy, pulled from the update underlying data.
+A direct pull system ***might*** be more complex to setup (although often not), but the medium and long term benefits can be significant. Essentially, after having setup the system, credential holders (students/alumni) can simply download a copy of their credential whenever they like. Which also means that replacement of lost credentials is no longer a complicated issue requiring human mediated requests and lookups - the student/alumni can now simply login to get an immediate replacment, directly and automatically issued from the institutional data.  Same goes for name changes - if someone changes their name (for example if they get married) the name change can be handled by the normal institutional process for a name change, which will end up changing the underlying institutional record. And once that is done the student/alumni then just logs back in and get a fresh copy, pulled from the update underlying data.
 
 ##### Standalone system
 
@@ -226,11 +226,11 @@ A standalone system can be an easy way to get started with digital credentials, 
 
 Three significant downsides to a standalone system are:
 
-1. If the credential data is already stored in some other place (e.g, campus PeopleSoft) then storing a second copy in your standalone system means that you now have two copies of the same data, which can easily get out of sync: the case, say, where someone changes their name in the main campus system, but there isn't an automatic change in your standalone system.
+1. **Data duplication** If the credential data is already stored in some other place (e.g, campus PeopleSoft) then storing a second copy in your standalone system means that you now have two copies of the same data, which can easily get out of sync: the case, say, where someone changes their name in the main campus system, but there isn't an automatic change in your standalone system. Maintaining a second copy also introduces extra complexity and maintenance.
 
-2. Adding new data to the standalone system is likely to be a manual process, which can become very complicated. If you are pulling the data out of an institutional store and then uploading it as CSV to the standalone system, you'll typically have to have various checks to confirm the data was properly pulled and added. Problems with character encoding, changed data structures, and so on can be a real hassle.
+2. **Brittle data conversion** Adding new data to the standalone system is likely to be a manual process, which can become very complicated. If you are pulling the data out of an institutional store and then uploading it as CSV to the standalone system, you'll typically have to have various checks to confirm the data was properly pulled and added. Problems with character encoding, changed data structures, and so on can be a real hassle.
 
-3. The data in your institutional store most likely has fairly rigorous security and checks to make sure that there are no:
+3. **Security** The data in your institutional store most likely has fairly rigorous security and checks to make sure that there are no:
 a) data breaches where private data is stolen
 b) fake data isn't added to the system.
 By creating a second copy you are creating another target for hackers, and another opportunity for introducing fraudulent records, and your second copy will very likely not have the same degree of security as your primary store.
@@ -245,7 +245,7 @@ A reaonsable compromise can be to store minimal details about issuance in a sepa
 
 ### Authentication
 
-Here we talk about authenticating the holder of the credentials, so for example, an alumni of a university or college who earned a degree or a certificate.
+Here we are talking about authenticating the holder of the credentials, so for example, an alumni of a university or college who earned a degree or a certificate.
 
 There are again two parts to this:
 
@@ -280,7 +280,7 @@ The obvious check is against the holder's name. If the name on the credential ma
 
 There is, though, another way we can enable a holder to prove that the credential belongs to them. We can use what is called a 'holder binding'.
 
-The way this works is that when we issue a credential to holder, we usually have already authenticated the holder somehow (as described in the prior section [Authenticating at collection time}(#authenticating-at-collection-time)) and so as part of that authenticated session, we can ask the holder to give us a public key (or a [DID](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjO_qriw62EAxU5AjQIHcDVBWkQFnoECAcQAQ&url=https%3A%2F%2Fwww.w3.org%2FTR%2Fdid-core%2F&usg=AOvVaw2lmH5NVEyOOCzXxjwUG8Yh&opi=89978449)) for which the holder has the corresponding private key (which they must keep, not surprisingly, private). We can then add that public key (or DID) to the credential and sign the entire credential.
+The way this works is that when we issue a credential to holder, we usually have already authenticated the holder somehow (as described in the prior section [Authenticating at collection time}(#authenticating-at-collection-time)) and so as part of that authenticated session, we can ask the holder to give us a public key (or a [DID](https://www.w3.org/TR/did-core/)) for which the holder has the corresponding private key (which they must, not surprisingly, keep private). We can then add that public key (or DID) to the credential and sign the entire credential.
 
 This effectively then declares to anyone who later wants to verify the credential that we (the issuer) attest that the public key/DID in the credential does belong to the holder (because we got it from them in some authenticated way).
 
@@ -456,14 +456,7 @@ So you needn't checkout github repositories - just create a docker compose file 
 
 ##### Services Versioning
 
-We use semver for our versioning. We publish new images to docker hub with semver tags. The semver tags correspond to github tags in the corresponding repository.
-
-Our main components are:
-
-#### Learner credential wallet (LCW)
-
-[Learner Credential Wallet](lcw.app)
-[Github repo](https://github.com/digitalcredentials/learner-credential-wallet)
+We use [semantic versioning (semver)](https://semver.org) for our services. We publish new images to docker hub with semver tags that correspond to github tags in the corresponding repository.
 
 #### Issuer coordinator
 
@@ -499,12 +492,14 @@ Simply start up the coordinator in docker compose - as described above in [Simpl
 This is a more complex scenario. The exchange coordinator wires together three services:
 
 * [signing-service](#signing-service)
-* [status-service-github](#status-service-github)
-* [transaction-service](#transaction-service
+* [status-service-github](#status-service-github) OR [status-service-github](#status-service-mongo)
+* [transaction-service](#transaction-service)
 
-So where it differs from the [issuer-coordinator](#issuer-coordinator) is that it uses the transaction-service to manage an exchange with a wallet. The exchange is based on the [VC-API spec](https://w3c-ccg.github.io/vc-api/#exchange-examples) and specifically uses a [DIDAuthentication Verifiable Presentation Request](https://w3c-ccg.github.io/vp-request-spec/#did-authentication) in which the issuer asks the wallet for a DID belonging to a holder, along with proof that the holder owns that DID. The wallet supplies the proof by signing - using the private key associated with the holder DID - a 'challenge' that the issuer gives the wallet.
+NOTE: the status-services are optional and aren't required if you don't intend to revoke credentials.
 
-Once the issuer has got the holder's DID the issuer adds that DID to the VC, signs it and returns it. The VC is now 'bound' to the holder in the sense that the holder can subsequently prove they own the credential by signing challenges with the private key for the holder DID that was included in the VC.
+The exchange coordinator differs from the [issuer-coordinator](#issuer-coordinator) is that it uses the transaction-service to manage an exchange with a wallet. The exchange is based on the [VC-API spec](https://w3c-ccg.github.io/vc-api/#exchange-examples) and specifically uses a [DIDAuthentication Verifiable Presentation Request](https://w3c-ccg.github.io/vp-request-spec/#did-authentication) in which the issuer asks the wallet for a DID belonging to a holder, along with proof that the holder owns that DID. The wallet supplies the proof by signing - using the private key associated with the holder DID - a 'challenge' that the issuer gives the wallet.
+
+Once the issuer has got the holder's DID the issuer adds that DID to the VC, signs it and returns it. The VC is now 'bound' to the holder in the sense that the holder can subsequently prove they own the credential by signing challenges with the private key for the holder DID that was included in the VC. 
 
 ##### When you'd use it
 
@@ -617,16 +612,6 @@ You'll use this if you want to directly exchange credentials with a wallet like 
 
 Typically as part of a coordinator like the [Exchange Coordinator](#exchange-coordinator), which you can take a look at for an example of usage.
 
-#### verifier-service
-
-[Github repo]([https://git](https://github.com/digitalcredentials/verifier-service)
-
-In the works. It will allow posting credentials for verification, following the [VC-API specification](https://w3c-ccg.github.io/vc-api/)
-
-##### When you'd use it
-
-##### How you'd use it
-
 #### admin-dashboard
 
 [Github repo]([https://git](https://github.com/digitalcredentials/admin-dashboard)
@@ -681,9 +666,26 @@ This page pretty closely depends on the admin-dashboard, so you'd use this as pa
 
 Typical usage would be to include the webapp in a docker compose, like we do in the demo [admin dashboard demo](#admin-dashboard-demo) compose file.
 
-### Step by step guide
+#### verifier-service
 
-As a flow chart???
+[Github repo]([https://git](https://github.com/digitalcredentials/verifier-service)
+
+In the works. It will allow posting credentials for verification, following the [VC-API specification](https://w3c-ccg.github.io/vc-api/)
+
+##### When you'd use it
+
+If you need to verify credentials. Maybe, for example, as an extra check during credential issuance to proactively confirm that the issued credential properly verifies.
+
+##### How you'd use it
+
+Run it as a web service, either directly or from docker or docker compose, and POST credentials to it for verification.
+
+### Learner credential wallet (LCW)
+
+[Learner Credential Wallet](lcw.app)
+[Github repo](https://github.com/digitalcredentials/learner-credential-wallet)
+
+### Decision Tree
 
 Do you have an existing datastore with credential data?
 	- Would you like to tie directly into this store so that when recipients collect credentials, the credentials are dynamically generated using data from this store?
