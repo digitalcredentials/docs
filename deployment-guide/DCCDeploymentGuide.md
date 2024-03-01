@@ -341,11 +341,20 @@ Note that a signed credential can't itself point at the registry because then a 
 
 Registries are still in their early days. It has yet to be worked out who will maintain registries, although a likely guess is that entities that already manage membership or accredation will manage the keys for its membership. 
 
-For now the DCC has set of registries to which you can your keys:
+For now the DCC has set of registries to which you can add your DIDs:
 
-[LIST them here]
+* [sandbox registry](https://github.com/digitalcredentials/sandbox-registry)          
+* [dcc pilot registry](https://github.com/digitalcredentials/dcc-pilot-registry)
+* [community registry](https://github.com/digitalcredentials/community-registry)         `
+* [issuer registry](https://github.com/digitalcredentials/issuer-registry)
 
-Submit a pull request with your institutions key an we will review the submission.
+These registries are checked by the [Learner Credential Wallet](lcw.app) and by [VerifierPlus](https://verifierplus.org) to verify the authenticity of the signing key. The wallet and verifier fundamentally just look to see if the DID used to sign a given credential is listed in one of the registries. If it is, they'll say which one. If not, they'll the key isn't known.
+
+Initially you'll want to get your key into the sandbox registry, which means adding it to this file:
+
+```[https://github.com/digitalcredentials/sandbox-registry/blob/main/registry.json](https://github.com/digitalcredentials/sandbox-registry/blob/main/registry.json)```
+
+Follow the pattern in the file to add your DID, and then submit a pull request. If you need help with that let us know.
 
 Note too that if you have your own verifier - say a page on your web site at which your own issued verifiable credentials can be verifier (like say certificates your school has issued) then you will know which are your own public keys - you effectively are maintaining your own registry. You still have to be careful to build that check into your verification though - be sure to check that the public key associated with a credential is in fact one of your own.
 
@@ -383,12 +392,24 @@ There are a few things you can do to mitigte the risk of a stolen key:
 
 ##### Rotate keys frequently
 
-By switching your key you minimize the period in which a stolen key can be used. After the key has been "rotated out" (retired, decommissioned) the key can no longer sign new credentials.
-This will only work, though, if you have a trustworthy timestamp attached to your credentials.
+By switching your key you restrict the period in which a stolen key can be used. After the key has been "rotated out" (retired, decommissioned) the key can no longer sign new credentials.
 
+There are essentially two ways to retire a signing key:
+
+* Register the period during which the key was active. This will only work, though, if you have a trustworthy timestamp attached to your credentials so that you can confirm the credential was signed during that period.
+
+* Revoke the key entirely. Any credentials signed with the key are no longer valid. You could look at this as another way to set an expiry date on the credentials themselves. This can be a reasonable approach if you provide a convenient way for holders to refresh their credentials or retrieve new copies.
+  
+You can read more about key rotation and key revocation in DIDs here:
+
+* [https://www.w3.org/TR/did-core/#verification-method-rotation](https://www.w3.org/TR/did-core/#verification-method-rotation)
+* [https://www.w3.org/TR/did-core/#verification-method-revocation](https://www.w3.org/TR/did-core/#verification-method-revocation)
+ 
 ##### Expire credentials aggressively
 
-This also only works if you have a trustworthy timestamp attached to the credential.
+You can set the [https://www.w3.org/TR/vc-data-model/#expiration-0](expirationDate) property in the verifiable credential itself (NOTE: expirationDate will be replace by [validUntil](https://www.w3.org/TR/vc-data-model-2.0/#validity-period) in version 2 of the Verifiable Credential specification. 
+
+This also only works if you have a trustworthy timestamp attached to the credential. You can, however, also expire credentials, without using a timestamp, by expiring the signing key as described in the prior section on key rotation.
 
 ##### Public hash registry
 
