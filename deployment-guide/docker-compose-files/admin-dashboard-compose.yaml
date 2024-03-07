@@ -8,7 +8,7 @@ services:
     ports:
       - "4005:4005"
   signing:
-    image: digitalcredentials/signing-service:0.1.0
+    image: digitalcredentials/signing-service:0.2.0
     environment:
       - TENANT_SEED_LEF_TEST=z1AeiPT496wWmo9BG2QYXeTusgFSZPNG3T9wNeTtjrQ3rCB
   transactions:
@@ -36,7 +36,7 @@ services:
     ports:
       - "3000:3000"
   claim-page:
-    image: digitalcredentials/claim-page:test
+    image: digitalcredentials/admin-dashboard-claim-page:0.1.0
     container_name: "ad-claim-page"
     depends_on: 
       - payload
