@@ -40,7 +40,7 @@ Setting up digital credential issuing typically requires integrating into existi
   - [Direct Integration](#direct-integration)
   - [Wallet Exchange - Holder Binding](#wallet-exchange)
   - [No Holder Binding](#no-holder-binding)
-
+- [Docker Compose Examples](#docker-compose-examples)
 - [License](#license)
 
 ## Overview
@@ -152,7 +152,7 @@ This demo runs a docker compose with two web apps in addition to the [wallet exc
 
 ```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/admin-dashboard-compose.yaml | docker compose -f - up```
 
-Once it has started up, you can experiment with the locally running system at [http://localhost:3000](http://localhost:3000)
+Once it has started up, you can experiment with the locally running system at [http://localhost:3000](http://localhost:3000) and in particular take a look at our [Admin Dashboard Getting Started Guide](https://github.com/digitalcredentials/admin-dashboard/blob/main/docs/GETTING_STARTED.md)
 
 The rest of this document explains factors you'll have to consider when choosing and configuring issuing components, followed by a description of the components themselves, some configurations that cover common scenarios, and a guide to setting up your own configuration.
 
@@ -723,8 +723,40 @@ Do you want a stand-alone credential management system to which you add data (as
 
 Do you want to notify recipients by email that they can collect a credential?
 
-Do you want credential holders to be able to dynamically collect credentials from their institutional accounts?
-
 Do you want login enforced when credentials are collected, or can they be collected using a token sent out in an email?
 
+### Docker Compose Examples
+
+We've put together examples of docker compose files for various configurations. These are all meant to be examples that you'll likely customize, but they should be pretty close to what you'll deploy in the end.
+
+#### Simple Issuer
+
+This is the same compose file described in the [Simple Signing Demo](#simple-signing-demo) at the start of this guide. It simply runs an issuer that takes an unsigned verifiable credential, signs it, and returns it. See the [Simple Signing Demo](#simple-signing-demo) for an example of how you'd use it.
+
+[simple-issuer-compose.yml](docker-compose-files/simple-issuer-compose.yaml)
+
+With docker installed and running, start up the issuer with this one-liner:
+
+```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/simple-issuer-compose.yaml | docker compose -f - up```
+
+#### Local dashboard
+
+This will run the [Admin Dashboard](https://github.com/digitalcredentials/admin-dashboard) and all supporting services locally on localhost (e.g., on your laptop).
+
+[dashboard-dns-compose.yaml](docker-compose-files/dashboard-dns-compose.yaml)
+
+
+```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/admin-dashboard-compose.yaml | docker compose -f - up```
+
+Once it has started up, you can experiment with the locally running system at [http://localhost:3000](http://localhost:3000) and in particular take a look at our [Admin Dashboard Getting Started Guide](https://github.com/digitalcredentials/admin-dashboard/blob/main/docs/GETTING_STARTED.md)
+
+#### Dashboard with DNS
+
+This will run the [Admin Dashboard](https://github.com/digitalcredentials/admin-dashboard) and all supporting services on an instance that's got a domain name. You simply supply the domain name as an environment variable when running docker compose, and the compose file will take care of configuring and running nginx including generating and maintaining a certificate.
+
+[dashboard-dns-compose.yaml](docker-compose-files/dashboard-dns-compose.yaml)
+
+You can run it like so, subsituting your domain name for the value of the HOST environment variable:
+
+```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/dashboard-dns-compose.yaml | HOST=myhost.org docker compose -f - up```
 
