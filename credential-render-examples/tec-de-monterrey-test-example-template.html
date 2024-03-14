@@ -63,11 +63,11 @@
         <div class="signature">sig 1 <p>Rector y Presidente Ejecutivo</p></div>
         <div class="signature">sig 2 <p>Rector de Profesional y Posgrado</p></div> 
     </div>
-    <p>Titulo Electronico folio control: {{ credential.evidence[0].narrative }}</p>
+    <p>Titulo Electronico folio control: {{ credential.evidence.[0].narrative }}</p>
     <p>Sello Autenticocion:</p>
-    <p>{{ credential.evidence[1].narrative }}</p>
+    <p>{{ credential.evidence.[1].narrative }}</p>
     <p>No. Certifico Autoridad:</p>
-    <p>{{ credential.evidence[2].narrative }}</p>
+    <p>{{ credential.evidence.[2].narrative }}</p>
 </div>
 
 </body>
