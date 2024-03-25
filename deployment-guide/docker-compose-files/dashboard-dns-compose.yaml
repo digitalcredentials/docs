@@ -16,7 +16,7 @@ services:
   transactions:
     image: digitalcredentials/transaction-service:0.1.1
   payload:
-    image: digitalcredentials/dashboard:0.1.0
+    image: digitalcredentials/dashboard:0.1.1
     depends_on: 
       - coordinator
       - redis
@@ -41,7 +41,7 @@ services:
     ports:
       - "3000:3000"
   claim-page:
-    image: digitalcredentials/admin-dashboard-claim-page:0.1.0
+    image: digitalcredentials/admin-dashboard-claim-page:1.0.0
     environment:
       - VIRTUAL_HOST=${HOST}
       - VIRTUAL_PATH=/claim
