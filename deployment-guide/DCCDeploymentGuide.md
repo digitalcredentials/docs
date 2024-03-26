@@ -729,7 +729,7 @@ Run it as a web service, either directly or from docker or docker compose, and P
 [Learner Credential Wallet](lcw.app)
 [Github repo](https://github.com/digitalcredentials/learner-credential-wallet)
 
-### How to get started
+## How to get started
 
 If you are fairly new to digital credentialing, you might want to start with the two hands-on demos we describe up in the [Overview](#overview) section. Both demos will help you understand how we typically manage a credentialing deployment using a docker compose file that 'wires' together a few services using a 'coordinaotr'. 
 
@@ -746,42 +746,62 @@ Trying both demos should altogether take likely less than 30 minutes.
 
 From here your choices will essentially depend on how you'd like to tie into your existing system.
 
+### Scenarios
+
 #### Do you want to issue just a very few 'one-time' credentials?
 
-##### Without revocation
-
-You could essentially just use the demo setup we've provided, constructing your own verifiable credentials and simply posting them to the signing service to get back the signed credential.
+You could essentially just use the simple issuer demo compose we've provided, constructing your own verifiable credentials (which are fundamentally just text files) and simply post them to the signing service to get back the signed credential. You could run it fairly easily on your laptop.
 
 You'd additionally have to:
 
 - generate and set your own keypair as described in the signing-service (TODO: add link)
-- register the public key part of your keypair with a registry like the DCC registry
+- register the public key part of your keypair with a registry like the DCC registry (TODO: add link)
 
-##### With revocation
+Altogether expect to spend anywhere from a half hour to a few hours depending on how deeply you'd like to dig into things.
 
-If you want to be able to revoke the credentials, you'll need to enable the status service, which is described in the signing-service. You'll also have to choose between the github and mongo implementations of the status service.
+#### Do you want to be able to revoke your issued credentials?
 
-The github implementation is fairly easy to setup and can mean less ongoing maintenance. The downside is github rate limits access so if you've got a lot of credentials this implementation won't be feasible.
+If you want to be able to revoke the credentials, you'll need to enable the status service, as described in the [signing-service](TODO: add link here). You'll also have to choose between the github and mongo implementations of the status service.
+
+The github implementation is fairly easy to setup and can mean less ongoing maintenance. The major downside is that github has rate limits, so if you've got a lot of credentials this implementation might not be feasible. Another downside is that you may not be comfortable depending on Github in the long term.
 
 The mongo implementation requires a mongo setup. You can use a cloud based mongo service (like MongoCloud), a local Mongo setup, or even a mongo image running as a service within your docker compose. [TODO add this compose option]
 
-#### Do you want and independent credentialing system that will manage emailing and collection for you?
+#### Do you want to control how your credential appears in a wallet or when verified?
 
-Would you like to tie directly into this store so that when recipients collect credentials, the credentials are dynamically generated using data from this store?
+Verifiers and wallets for the moment are configured to show just a few basic fields like the name of the credential, name of the issuer, name of the recipient, date of issue, date of expiry, issuer logo, small credential image, and maybe a description and criteria. They are typically displayed the same way for all credentials.
 
-Do you want to issue credentials to the DCC Learner Credential Wallet?
+There will likely come a time when wallets recognize certain types of credentials and can display them appropriately, like an undergraduate degree or a course credential.
 
-Do you want to add a holder binding to your credentials. (A holder binding allows the holder to later prove they 'control' the credentials, in some sense like having a password)
+You may, though, want to control the display of your credential now, or may have specific requirements - you may, for example, want your university degree to look identical to the paper diploma.
 
-Do you want to be able to revoke your credentials?
-	- Are you comfortable using github to manage credential status?
-	- Would you prefer to use your own mongo instance to manage credential status?
+A relatively new spec called the [vc-render-method](https://w3c-ccg.github.io/vc-render-method/) provides a way to define how you'd like the data in your VC presented, or 'rendered'. This could be visually, audibly, or haptically (as touch). 
 
-Do you want a stand-alone credential management system to which you add data (as a CSV) for credentials that can be collected by the recipients?
+The DCC for example has just released (March 2024) a version of the DCC [Learner Credential Wallet](lcw.app) that provides an option to generate a PDF for a credential if the credential includes a render method that specifies an HTML template where the template includes 'slots' into which the data of the credential (e.g. recipient's name) can be inserted at display time. Using the generated HTML, the LCW then generates a PDF for export and sharing.
 
-Do you want to notify recipients by email that they can collect a credential?
+Rendering is relatively new, so you'd likely want to talk to us about your needs.
 
-Do you want login enforced when credentials are collected, or can they be collected using a token sent out in an email?
+#### Do you want a standard data structure for your credential?
+
+You may be issuing credentials with a fairly standard data model, like a university degree or a college diploma. And you likely want to ensure your credential is compatible, or interoperable, with credentials issued by other institutions. 
+
+The DCC is working with the community towards defining standard data models for certain credentials, in particular the degree or diploma. We expect to soon have another microservice to provide data 'templating' for certain kinds of credentials. In this case you would simply pass in the 'raw' data for a credential (issuer name, holder name, date of issue, etc.) and get back in return a populated verifiable credential with a standard data model for the given credential 'type'.
+
+Until templating is available, please get in touch if you've got a credential that you feel is common enough to benefit from a shared template.
+
+#### Do you want an independent credentialing system that will manage emailing and collection for you?
+
+#### Would you like to tie directly into your institutional store so that when recipients collect credentials, the credentials are dynamically generated using data from this store?
+
+#### Do you want to issue credentials to the DCC Learner Credential Wallet?
+
+#### Do you want to add a holder binding to your credentials. (A holder binding allows the holder to later prove they 'control' the credentials, in some sense like having a password)
+
+#### Do you want to notify recipients by email that they can collect a credential?
+
+#### Do you want to use your existing IdP when credentials are collected?
+
+#### Do you want to allow collection via a token sent in an email?
 
 ### Docker Compose Examples
 
