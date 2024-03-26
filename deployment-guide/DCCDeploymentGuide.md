@@ -789,15 +789,48 @@ The DCC is working with the community towards defining standard data models for 
 
 Until templating is available, please get in touch if you've got a credential that you feel is common enough to benefit from a shared template.
 
-#### Do you want an independent credentialing system that will manage emailing and collection for you?
+#### Do you want a complete independent credentialing system to which you upload data for credentials?
+
+This is our [Admin Dashboard](https://github.com/digitalcredentials/admin-dashboard) which provides CSV upload of data, generation of VCs using templates, email notification to recipients, wallet integrated collection, and revocation.
+
+Some of the reasons you'd use this system:
+
+- to keep your digital credentialing separate from other systems
+- you have a fairly simple batch of credentials you'd like to issue and don't want a lot of setup
+- experimentation
+- just want to get up and running quickly
 
 #### Would you like to tie directly into your institutional store so that when recipients collect credentials, the credentials are dynamically generated using data from this store?
 
+In this scenario, you want a more integrated solution to streamline processes and reduce duplication. You've got a few choices in this case, but fundamentally, you'll run either the issuer-coordinator or the exchange-coordinator alongside your other systems, and then at collection time (when a recipient comes to collect a credential) you'll simply POST (as an http call) the data to one of the two coordinators. 
+
+The issuer-coordinator will simply return a signed credential, with a revocation status allocated if requested, and you'll pass that on to the recipient. You'll handle all authentication around the request (for example using your institutional IdP) as well as the UI (i.e, the page from which the student collects the credential).
+
+The exchange-coordinator will return a link that you can provide to the student, from which the student can collect their credential. It is up to you to provide the UI for the collection page. Again, you'll handle authentication of that page.
+
 #### Do you want to issue credentials to the DCC Learner Credential Wallet?
 
-#### Do you want to add a holder binding to your credentials. (A holder binding allows the holder to later prove they 'control' the credentials, in some sense like having a password)
+In this case you can again use either the issuer-coordinator or the exchange-coordinator but the interaction with the wallet varies from one to the other.  
+
+With the issuer-coordinator, the recipient will have to themselves 'import' the credential into the wallet either by copy/pasting the JSON text of the credential, or by scannning a QR encoding of that same JSON text (where you would create the QR), or by downloading the credential from a link if you opt to provide a hosted link for the credential.
+
+The exchange-coordinator on the other hand manages the exchange with the wallet. When you post the data for a credential to the coordinator, it returns a link that you give to the student. When the student clicks the link (or scans it as a QR) it opens the Learner Credential Wallet and takes care of the rest of the exchange between the wallet and the coordinator. The end result of clicking the link is that the student's credential is added to their wallet. The exchange-coordinator therefore provides a simpler and more intuitive experience for the student.
+
+#### Do you want to add a holder binding to your credentials. (A holder binding allows the holder to later prove they 'control' the credentials, in some sense like having a password).
+
+If so, you'll want the exchange-coordinator which manages this binding. Note that the admin-dashboard uses the exchange-coordinator and so provides this binding.
 
 #### Do you want to notify recipients by email that they can collect a credential?
+
+If you opt to use the DCC admin dashboard then emailing is managed for you. You will need an email service like sendGrid or even your existing institutional email system, but you need only give the dashboard the login and password for that.
+
+If you don't use the dashboard then you'll have to take care of constructing, populating, and sending the emails. 
+
+There are a few ways you can email the student including:
+
+* Send them the fully constructed verifiable credential. They'd then have to 'import' it into their wallet if they did want to keep it in a wallet, but they could also 
+
+* Send them a link from which they can dowload the credential.
 
 #### Do you want to use your existing IdP when credentials are collected?
 
