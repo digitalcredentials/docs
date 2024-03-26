@@ -729,12 +729,45 @@ Run it as a web service, either directly or from docker or docker compose, and P
 [Learner Credential Wallet](lcw.app)
 [Github repo](https://github.com/digitalcredentials/learner-credential-wallet)
 
-### Decision Tree
+### How to get started
 
-In progress...
+If you are fairly new to digital credentialing, you might want to start with the two hands-on demos we describe up in the [Overview](#overview) section. Both demos will help you understand how we typically manage a credentialing deployment using a docker compose file that 'wires' together a few services using a 'coordinaotr'. 
 
-Do you have an existing datastore with credential data?
-	- Would you like to tie directly into this store so that when recipients collect credentials, the credentials are dynamically generated using data from this store?
+The [Simple Signing Demo](#simple-signing-demo) will give you a good sense of what a Verifiable Credential is, what the signature looks like, and how you can use our signing service.
+
+The [Admin Dashboard Demo](#admin-dashboard-demo) will give you a sense of:
+
+* what the data that goes into a credential typically looks like
+* how a credential recipient can collect a credential from an email and wallet
+* one way you might batch your issuances (with a CSV upload)
+* how you can manage revocation of credentials
+
+Trying both demos should altogether take likely less than 30 minutes.
+
+From here your choices will essentially depend on how you'd like to tie into your existing system.
+
+#### Do you want to issue just a very few 'one-time' credentials?
+
+##### Without revocation
+
+You could essentially just use the demo setup we've provided, constructing your own verifiable credentials and simply posting them to the signing service to get back the signed credential.
+
+You'd additionally have to:
+
+- generate and set your own keypair as described in the signing-service (TODO: add link)
+- register the public key part of your keypair with a registry like the DCC registry
+
+##### With revocation
+
+If you want to be able to revoke the credentials, you'll need to enable the status service, which is described in the signing-service. You'll also have to choose between the github and mongo implementations of the status service.
+
+The github implementation is fairly easy to setup and can mean less ongoing maintenance. The downside is github rate limits access so if you've got a lot of credentials this implementation won't be feasible.
+
+The mongo implementation requires a mongo setup. You can use a cloud based mongo service (like MongoCloud), a local Mongo setup, or even a mongo image running as a service within your docker compose. [TODO add this compose option]
+
+#### Do you want and independent credentialing system that will manage emailing and collection for you?
+
+Would you like to tie directly into this store so that when recipients collect credentials, the credentials are dynamically generated using data from this store?
 
 Do you want to issue credentials to the DCC Learner Credential Wallet?
 
