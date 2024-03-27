@@ -1,0 +1,95 @@
+version: '3.5'
+
+services:
+  coordinator:
+    image: digitalcredentials/workflow-coordinator:0.1.0
+    environment:
+      - ENABLE_STATUS_SERVICE=false
+      - PUBLIC_EXCHANGE_HOST=https://${HOST}/api
+      - TENANT_TOKEN_LEF_TEST=UNPROTECTED
+    ports:
+      - "4005:4005"
+  signing:
+    image: digitalcredentials/signing-service:0.2.0
+    environment:
+      - TENANT_SEED_LEF_TEST=z1AeiPT496wWmo9BG2QYXeTusgFSZPNG3T9wNeTtjrQ3rCB
+  transactions:
+    image: digitalcredentials/transaction-service:0.1.1
+  payload:
+    image: digitalcredentials/dashboard:0.1.1
+    depends_on: 
+      - coordinator
+      - redis
+      - mongo
+    environment:
+      - COORDINATOR_URL=http://coordinator:4005
+      - REDIS_URL=redis
+      - REDIS_PORT=6379
+      - MONGODB_URI=mongodb://root:example@mongo:27017/
+      - PAYLOAD_SECRET=aaaaaaaaaaaaaaaaaaaaaaaa
+      - TENANT_NAME=lef_test
+      - SMTP_HOST=somehost
+      - SMTP_USER=somename
+      - SMTP_PASS=somepass
+      - EMAIL_FROM=Digital Credentials Consortium <someone@mit.edu>
+      - CLAIM_PAGE_URL=https://${HOST}/claim
+      - PAYLOAD_PUBLIC_SERVER_URL=https://${HOST}
+      - VIRTUAL_HOST=${HOST}
+      - VIRTUAL_PATH=/
+      - VIRTUAL_PORT=3000
+      - LETSENCRYPT_HOST=${HOST}
+    ports:
+      - "3000:3000"
+  claim-page:
+    image: digitalcredentials/admin-dashboard-claim-page:1.0.0
+    environment:
+      - VIRTUAL_HOST=${HOST}
+      - VIRTUAL_PATH=/claim
+      - VIRTUAL_DEST=/
+      - VIRTUAL_PORT=8080
+      - PUBLIC_PAYLOAD_URL=https://${HOST}/api
+      - LETSENCRYPT_HOST=${HOST}
+    depends_on: 
+      - payload
+    ports:
+      - "8080:8080"
+  redis:
+    image: redis:alpine
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes: 
+      - mongo_data:/data/db
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+  nginx-proxy-acme:
+    image: nginxproxy/acme-companion
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - acme:/etc/acme.sh
+    environment:
+      - DEFAULT_EMAIL=chartraj@mit.edu
+volumes:
+  transactions:
+  mongo_data:
+  vhost:
+  html:
+  certs:
+  acme:

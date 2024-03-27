@@ -1,0 +1,61 @@
+services:
+  coordinator:
+    image: digitalcredentials/workflow-coordinator:0.1.0
+    environment:
+      - ENABLE_STATUS_SERVICE=false
+      - PUBLIC_EXCHANGE_HOST=http://localhost:3000/api 
+      - TENANT_TOKEN_LEF_TEST=UNPROTECTED
+    ports:
+      - "4005:4005"
+  signing:
+    image: digitalcredentials/signing-service:0.2.0
+    environment:
+      - TENANT_SEED_LEF_TEST=z1AeiPT496wWmo9BG2QYXeTusgFSZPNG3T9wNeTtjrQ3rCB
+  transactions:
+    image: digitalcredentials/transaction-service:0.1.1
+  payload:
+    image: digitalcredentials/dashboard:0.1.1
+    container_name: "ad-payload"
+    depends_on: 
+      - coordinator
+      - redis
+      - mongo
+    environment:
+      - COORDINATOR_URL=http://coordinator:4005
+      - REDIS_URL=redis
+      - REDIS_PORT=6379
+      - MONGODB_URI=mongodb://root:example@mongo:27017/
+      - PAYLOAD_SECRET=aaaaaaaaaaaaaaaaaaaaaaaa
+      - TENANT_NAME=lef_test
+      - SMTP_HOST=somehost
+      - SMTP_USER=somename
+      - SMTP_PASS=somepass
+      - EMAIL_FROM=Digital Credentials Consortium <someone@mit.edu>
+      - CLAIM_PAGE_URL=http://localhost:8080/claim
+      - PAYLOAD_PUBLIC_SERVER_URL=http://localhost:3000
+    ports:
+      - "3000:3000"
+  claim-page:
+    image: digitalcredentials/admin-dashboard-claim-page:1.0.0
+    container_name: "ad-claim-page"
+    depends_on: 
+      - payload
+    ports:
+      - "8080:8080"
+  redis:
+    image: redis:alpine
+    container_name: ad-redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD:-yes}
+    ports:
+      - "6379:6379"
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes: 
+      - mongo_data:/data/db
+volumes:
+  transactions:
+  mongo_data:
