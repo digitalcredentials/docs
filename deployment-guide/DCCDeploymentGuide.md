@@ -4,44 +4,103 @@ Setting up digital credential issuing typically requires integrating into existi
 
 ## Table of Contents
 
-- [Overview](#overview)
-   - [Simple Signing Demo](#simple-signing-demo)
-   - [Admin Dashboard Demo](#admin-dashboard-demo)
-- [Definitions](#definitions)
-   - [Issuer](#issuer)
-   - [Holder](#holder)
-   - [Verifier](#verifier)
-- [Deployment Considerations](#deployment-considerations)
-  - [Data Storage](#storage)
-  - [Authentication](#tenants)
-  - [Revocation](#revocation)
-  - [Public Key Authenticity](#public-key-authenticity-registries)
-  - [Private Key Security](#private-key-security)
-  - [Wallets](#didweb)
-  - [Verification](#verification)
-  - [Credential Display](#credential-display)
-- [DCC Components](#dcc-components)
-  - [Overview](#services-overview)
-  - [Signing Service](#sign-a-credential)
-  - [Status Service](#status-service)
-    - [Mongo Implemenation](#mongo-implementation)
-    - [Github Implemenation](#mongo-implementation)
-  - [Transaction Service](#transaction-service)
-  - [Issuer Coordinator](#issuer-coordinator)
-  - [Exchange Coordinator](#exchange-coordinator)
-  - [Admin Dashboard](#admin-dashboard)
-  - [Credential Collection Page](#credential-collection-page)
-  - [Logging](#logging)
-  - [Error Handling](#error-handling)
-  - [Learner Credential Wallet](#learner-credential-wallet)
-- [Decision Tree Guide](#decision-tree-guide)
-- [Scenarios](#scenarios)
-  - [Standalone System with CSV](#standalone-system-with-csv)
-  - [Direct Integration](#direct-integration)
-  - [Wallet Exchange - Holder Binding](#wallet-exchange)
-  - [No Holder Binding](#no-holder-binding)
-- [Docker Compose Examples](#docker-compose-examples)
-- [License](#license)
+- [Digital Credentials Consortium Deployment Guide](#digital-credentials-consortium-deployment-guide)
+  * [Table of Contents](#table-of-contents)
+  * [Overview](#overview)
+          + [Simple Signing Demo](#simple-signing-demo)
+          + [Admin Dashboard Demo](#admin-dashboard-demo)
+  * [Definitions](#definitions)
+    + [Issuer](#issuer)
+    + [Holder](#holder)
+    + [Verifier](#verifier)
+  * [Deployment Considerations](#deployment-considerations)
+    + [Data Storage](#data-storage)
+      - [Institutional Data](#institutional-data)
+        * [Direct pull](#direct-pull)
+        * [Standalone system](#standalone-system)
+      - [Issuance Log](#issuance-log)
+    + [Authentication](#authentication)
+        * [Authenticating at collection time](#authenticating-at-collection-time)
+          + [Existing Identity Provide (IdP)](#existing-identity-provide--idp-)
+          + [Email Verification](#email-verification)
+          + [Identify Proofing](#identify-proofing)
+        * [Authenticating when presenting credentials (holder binding)](#authenticating-when-presenting-credentials--holder-binding-)
+    + [Revocation](#revocation)
+    + [Public Key Authenticity - Registries and Certificates](#public-key-authenticity---registries-and-certificates)
+      - [Registry](#registry)
+      - [Certificates](#certificates)
+    + [Private Key Security](#private-key-security)
+      - [Environment variable](#environment-variable)
+      - [In-memory](#in-memory)
+      - [Hardware Security Module](#hardware-security-module)
+      - [Mitigating Stolen Signing Keys](#mitigating-stolen-signing-keys)
+        * [Rotate keys frequently](#rotate-keys-frequently)
+        * [Expire credentials aggressively](#expire-credentials-aggressively)
+        * [Public hash registry](#public-hash-registry)
+    + [Wallets](#wallets)
+      - [App Wallets](#app-wallets)
+      - [Web Wallets](#web-wallets)
+    + [Verification](#verification)
+      - [Wallets](#wallets-1)
+      - [Web Pages](#web-pages)
+      - [Verification Apps](#verification-apps)
+      - [Automated Verification](#automated-verification)
+    + [Credential Display](#credential-display)
+      - [renderMethod](#rendermethod)
+    + [DCC components and services](#dcc-components-and-services)
+      - [Services Overview](#services-overview)
+        * [Services Versioning](#services-versioning)
+      - [Issuer coordinator](#issuer-coordinator)
+        * [When you'd use it](#when-you-d-use-it)
+        * [How you'd use it](#how-you-d-use-it)
+      - [Exchange coordinator](#exchange-coordinator)
+        * [When you'd use it](#when-you-d-use-it-1)
+        * [How you'd use it](#how-you-d-use-it-1)
+      - [signing-service](#signing-service)
+        * [Why you'd use it](#why-you-d-use-it)
+        * [How you'd use it](#how-you-d-use-it-2)
+      - [status-service-github](#status-service-github)
+        * [Why you'd use it](#why-you-d-use-it-1)
+          + [Advantages](#advantages)
+          + [Disadvantages](#disadvantages)
+        * [How you'd use it](#how-you-d-use-it-3)
+      - [status-service-mongo](#status-service-mongo)
+        * [Why you'd use it](#why-you-d-use-it-2)
+          + [Advantages](#advantages-1)
+          + [Disadvantages](#disadvantages-1)
+        * [How you'd use it](#how-you-d-use-it-4)
+      - [transaction-service](#transaction-service)
+        * [When you'd use it](#when-you-d-use-it-2)
+        * [How you'd use it](#how-you-d-use-it-5)
+      - [admin-dashboard](#admin-dashboard)
+        * [When you'd use it](#when-you-d-use-it-3)
+          + [Advantages](#advantages-2)
+          + [Disadvantages](#disadvantages-2)
+        * [How you'd use it](#how-you-d-use-it-6)
+      - [Collection Page](#collection-page)
+        * [When you'd use it](#when-you-d-use-it-4)
+        * [How you'd use it](#how-you-d-use-it-7)
+      - [verifier-service](#verifier-service)
+        * [When you'd use it](#when-you-d-use-it-5)
+        * [How you'd use it](#how-you-d-use-it-8)
+    + [Learner credential wallet (LCW)](#learner-credential-wallet--lcw-)
+  * [How to get started](#how-to-get-started)
+    + [Scenarios](#scenarios)
+      - [Do you want to issue just a very few 'one-time' credentials?](#do-you-want-to-issue-just-a-very-few--one-time--credentials-)
+      - [Do you want to be able to revoke your issued credentials?](#do-you-want-to-be-able-to-revoke-your-issued-credentials-)
+      - [Do you want to control how your credential appears in a wallet or when verified?](#do-you-want-to-control-how-your-credential-appears-in-a-wallet-or-when-verified-)
+      - [Do you want a standard data structure for your credential?](#do-you-want-a-standard-data-structure-for-your-credential-)
+      - [Do you want a complete independent credentialing system to which you upload data for credentials?](#do-you-want-a-complete-independent-credentialing-system-to-which-you-upload-data-for-credentials-)
+      - [Would you like to tie directly into your institutional store so that when recipients collect credentials, the credentials are dynamically generated using data from this store?](#would-you-like-to-tie-directly-into-your-institutional-store-so-that-when-recipients-collect-credentials--the-credentials-are-dynamically-generated-using-data-from-this-store-)
+      - [Do you want to issue credentials to the DCC Learner Credential Wallet?](#do-you-want-to-issue-credentials-to-the-dcc-learner-credential-wallet-)
+      - [Do you want to add a holder binding to your credentials. (A holder binding allows the holder to later prove they 'control' the credentials, in some sense like having a password).](#do-you-want-to-add-a-holder-binding-to-your-credentials--a-holder-binding-allows-the-holder-to-later-prove-they--control--the-credentials--in-some-sense-like-having-a-password-)
+      - [Do you want to notify recipients by email that they can collect a credential?](#do-you-want-to-notify-recipients-by-email-that-they-can-collect-a-credential-)
+      - [Do you want to use your existing IdP when credentials are collected?](#do-you-want-to-use-your-existing-idp-when-credentials-are-collected-)
+      - [Do you want to allow collection via a token sent in an email?](#do-you-want-to-allow-collection-via-a-token-sent-in-an-email-)
+    + [Docker Compose Examples](#docker-compose-examples)
+      - [Simple Issuer](#simple-issuer)
+      - [Local dashboard](#local-dashboard)
+      - [Dashboard with DNS](#dashboard-with-dns)
 
 ## Overview
 
@@ -57,7 +116,7 @@ Accepts an unsigned verifiable credential, signs and returns it. Try signing a c
 
 1. Start up the docker compose by pasting this into a terminal prompt and hitting return:
 
-```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/simple-issuer-compose.yaml | docker compose -f - up```
+```curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/simple-issuer-compose.yaml | docker compose -f - up```
 
 This will download the images from Docker Hub - which might take a couple of minutes depending on your internet connection - and then starts up the issuer. You should eventually see a message like:
 
@@ -148,7 +207,7 @@ This demo runs a docker compose with two web apps in addition to the [wallet exc
 * emailing recipients a link from which to collect a credential
 * a credential collection page
 
-```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/admin-dashboard-compose.yaml | docker compose -f - up```
+```curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/admin-dashboard-compose.yaml | docker compose -f - up```
 
 Once it has started up, you can experiment with the locally running system at [http://localhost:3000](http://localhost:3000) and in particular take a look at our [Admin Dashboard Getting Started Guide](https://github.com/digitalcredentials/admin-dashboard/blob/main/docs/GETTING_STARTED.md)
 
@@ -863,7 +922,7 @@ This is the same compose file described in the [Simple Signing Demo](#simple-sig
 
 With docker installed and running, start up the issuer with this one-liner:
 
-```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/simple-issuer-compose.yaml | docker compose -f - up```
+```curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/simple-issuer-compose.yaml | docker compose -f - up```
 
 #### Local dashboard
 
@@ -872,7 +931,7 @@ This will run the [Admin Dashboard](https://github.com/digitalcredentials/admin-
 [dashboard-dns-compose.yaml](docker-compose-files/dashboard-dns-compose.yaml)
 
 
-```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/admin-dashboard-compose.yaml | docker compose -f - up```
+```curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/admin-dashboard-compose.yaml | docker compose -f - up```
 
 Once it has started up, you can experiment with the locally running system at [http://localhost:3000](http://localhost:3000) and in particular take a look at our [Admin Dashboard Getting Started Guide](https://github.com/digitalcredentials/admin-dashboard/blob/main/docs/GETTING_STARTED.md)
 
