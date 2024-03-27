@@ -822,19 +822,34 @@ If so, you'll want the exchange-coordinator which manages this binding. Note tha
 
 #### Do you want to notify recipients by email that they can collect a credential?
 
-If you opt to use the DCC admin dashboard then emailing is managed for you. You will need an email service like sendGrid or even your existing institutional email system, but you need only give the dashboard the login and password for that.
+If you opt to use the DCC admin dashboard then emailing is handled for you. You still need an email service like sendGrid or even your existing institutional email system, but you need only give the dashboard the login and password for that, after which the dashboard takes care of sending the emails.
 
 If you don't use the dashboard then you'll have to take care of constructing, populating, and sending the emails. 
 
 There are a few ways you can email the student including:
 
-* Send them the fully constructed verifiable credential. They'd then have to 'import' it into their wallet if they did want to keep it in a wallet, but they could also 
+* Email them the fully constructed verifiable credential. They'd then have to 'import' it into their wallet if they did want to keep it in a wallet, but they could also just keep it as a file on their computer since it is just a text file.
 
-* Send them a link from which they can dowload the credential.
+* Email them a link from which they can dowload the credential. This of course requires that you host the credential at a url, which also usually requires that you get consent from the recipient to host it. Depending on how you'd like to go, you could protect the link by associating a token with it (as a request parameter in the link), but this then requires that you build handling into your server to check the token. 
+
+* You could also potentially protect the link by putting it behind your campus authentication system, but sometimes the recipient of the credential is no longer a student, but rather now an alumni, and might not have an account. Additionally, if login is required, it complicates import into a wallet like the LCW because although the LCW can directly import a credential from a URL, it can't accommodate an authentication process as part of that retrieval of the link.
 
 #### Do you want to use your existing IdP when credentials are collected?
 
+You may want recipients to authenticate with your IdP when collecting a credential.
+
+If so, you'll likely want to create a web page from which recipients collect their credentials, and secure that page behind your IdP. Once the recipient has authenticated, you can then display various options on your collection page:
+
+- the text of the credential itself to allow copy/paste (note this likely won't be intuitive for recipients)
+- a link that will download the credential (a bit more intuitive, but still not ideal)
+- A QR for that link so the student can scan the QR from a wallet if they aren't on their phone. (better)
+- a 'deeplink' that will open the Learner Credential Wallet and initiate an exchange with the exchange-coordinator
+
+If you opt for the deeplink, you'll need to look at the exchange-coordinator service, described earlier.
+
 #### Do you want to allow collection via a token sent in an email?
+
+This is pretty much what the DCC Admin Dashboard does. If you'd like to do it on your own, you can take advantage of the exchange-coordinator (described earlier) which will generate a link for you that contains a token. You can then email the link to the recipient.
 
 ### Docker Compose Examples
 
