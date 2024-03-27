@@ -7,8 +7,8 @@ Setting up digital credential issuing typically requires integrating into existi
 - [Digital Credentials Consortium Deployment Guide](#digital-credentials-consortium-deployment-guide)
   * [Table of Contents](#table-of-contents)
   * [Overview](#overview)
-          + [Simple Signing Demo](#simple-signing-demo)
-          + [Admin Dashboard Demo](#admin-dashboard-demo)
+    + [Simple Signing Demo](#simple-signing-demo)
+    + [Admin Dashboard Demo](#admin-dashboard-demo)
   * [Definitions](#definitions)
     + [Issuer](#issuer)
     + [Holder](#holder)
@@ -910,11 +910,11 @@ If you opt for the deeplink, you'll need to look at the exchange-coordinator ser
 
 This is pretty much what the DCC Admin Dashboard does. If you'd like to do it on your own, you can take advantage of the exchange-coordinator (described earlier) which will generate a link for you that contains a token. You can then email the link to the recipient.
 
-### Docker Compose Examples
+## Docker Compose Examples
 
 We've put together examples of docker compose files for various configurations. These are all meant to be examples that you'll likely customize, but they should be pretty close to what you'll deploy in the end.
 
-#### Simple Issuer
+### Simple Issuer
 
 This is the same compose file described in the [Simple Signing Demo](#simple-signing-demo) at the start of this guide. It simply runs an issuer that takes an unsigned verifiable credential, signs it, and returns it. See the [Simple Signing Demo](#simple-signing-demo) for an example of how you'd use it.
 
@@ -924,7 +924,7 @@ With docker installed and running, start up the issuer with this one-liner:
 
 ```curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/simple-issuer-compose.yaml | docker compose -f - up```
 
-#### Local dashboard
+### Local dashboard
 
 This will run the [Admin Dashboard](https://github.com/digitalcredentials/admin-dashboard) and all supporting services locally on localhost (e.g., on your laptop).
 
@@ -935,7 +935,7 @@ This will run the [Admin Dashboard](https://github.com/digitalcredentials/admin-
 
 Once it has started up, you can experiment with the locally running system at [http://localhost:3000](http://localhost:3000) and in particular take a look at our [Admin Dashboard Getting Started Guide](https://github.com/digitalcredentials/admin-dashboard/blob/main/docs/GETTING_STARTED.md)
 
-#### Dashboard with DNS
+### Dashboard with DNS
 
 This will run the [Admin Dashboard](https://github.com/digitalcredentials/admin-dashboard) and all supporting services on an instance that's got a domain name. You simply supply the domain name as an environment variable when running docker compose, and the compose file will take care of configuring and running nginx including generating and maintaining a certificate.
 
