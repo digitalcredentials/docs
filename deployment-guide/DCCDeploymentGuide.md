@@ -619,7 +619,7 @@ So in summary, to use the exchange coordinator, you:
 
 #### signing-service
 
-[Github repo]([https://git](https://github.com/digitalcredentials/signing-service)
+[signing-service github repo](https://github.com/digitalcredentials/signing-service)
 
 Fundamentally simply takes an unsigned [Verifiable Credential](https://www.w3.org/TR/vc-data-model/), signs it, and returns it.
 
@@ -636,7 +636,7 @@ You can use this alone, but if you intend to use it with one of our status servi
   
 #### status-service-github
 
-[Github repo]([https://git](https://github.com/digitalcredentials/signing-service-github)
+[status-service github repo](https://github.com/digitalcredentials/signing-service-github)
 
 This is an implementation of the [Bitstring Status List](https://www.w3.org/TR/vc-bitstring-status-list/) specification, using Github for storage.
 
@@ -667,7 +667,7 @@ You can use this by itself to allocate a status position, but you probably want 
 
 #### status-service-mongo
 
-[Github repo]([https://git](https://github.com/digitalcredentials/signing-service-github)
+[Github repo](https://github.com/digitalcredentials/signing-service-github)
 
 This is an implementation of the [Bitstring Status List](https://www.w3.org/TR/vc-bitstring-status-list/) specification, using Mongo for storage.
 
@@ -698,7 +698,7 @@ You can use this by itself to allocate a status position, but you probably want 
 
 #### transaction-service
 
-[Github repo]([https://git](https://github.com/digitalcredentials/transaction-service)
+[Github repo](https://github.com/digitalcredentials/transaction-service)
 
 Manages the transactions involved in the VC-API exchange between a wallet and the issuer, specifically:
 
@@ -717,7 +717,7 @@ Typically as part of a coordinator like the [Exchange Coordinator](#exchange-coo
 
 #### admin-dashboard
 
-[Github repo]([https://git](https://github.com/digitalcredentials/admin-dashboard)
+[Github repo](https://github.com/digitalcredentials/admin-dashboard)
 
 This is a set of web pages backed by a mongo data store for managing a collection of credentials. It allows:
 
@@ -755,7 +755,7 @@ A good example of usage is in the  [admin dashboard demo](#admin-dashboard-demo)
 
 #### Collection Page
 
-[Github repo]([https://git](https://github.com/digitalcredentials/admin-dashboard)
+[Github repo](https://github.com/digitalcredentials/admin-dashboard)
 
 NOTE: the collection page is part of the same github repo as the admin-dashboard, but is in fact a separate app with its own Docker file, and is meant to run as a separate service, usually within a docker compose.
 
@@ -771,7 +771,7 @@ Typical usage would be to include the webapp in a docker compose, like we do in 
 
 #### verifier-service
 
-[Github repo]([https://git](https://github.com/digitalcredentials/verifier-service)
+[Github repo](https://github.com/digitalcredentials/verifier-service)
 
 In the works. It will allow posting credentials for verification, following the [VC-API specification](https://w3c-ccg.github.io/vc-api/)
 
