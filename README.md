@@ -22,7 +22,7 @@ We are committed to open standards and encourage all to contribute through the [
 
 ## Overview of Components
 
-For additional context, the [DCC whitepaper](https://digitalcredentials.mit.edu/wp-content/uploads/2020/02/white-paper-building-digital-credential-infrastructure-future.pdf) outlines our approach and high-level architecture. 
+For additional context, the [DCC whitepaper]((https://wiki.dcconsortium.org/app/page/1EN-emRW0Rc5Rrw9KcKkKBnEtEa8YqR-y?p=1h1VJHHv2zSe0n9Ltg-KQevSuqWbGcExy) outlines our approach and high-level architecture. 
 
 Overview of the Digital Credentials Consortium components:
 
