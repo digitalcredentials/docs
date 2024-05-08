@@ -18,7 +18,7 @@
 
 The [Digital Credentials Consortium](https://digitalcredentials.mit.edu/) was founded by leading universities with expertise in the design of verifiable digital credentials. Together, we are designing an infrastructure for digital credentials of academic achievement.
 
-We are committed to open standards and encourage all to contribute through the [W3C VC-EDU task force](https://w3c-ccg.github.io/vc-ed/). For more details on how to implement our technologies and for non-technical information, check out our [Knowledge Base](https://wiki.dcconsortium.org)
+We are committed to open standards and encourage all to contribute through the [W3C VC-EDU task force](https://w3c-ccg.github.io/vc-ed/). For more details on how to implement our technologies and for non-technical information, check out our [Knowledge Base](https://wiki.dcconsortium.org).
 
 ## Overview of Components
 
