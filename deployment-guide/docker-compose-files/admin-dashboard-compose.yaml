@@ -1,6 +1,8 @@
+name: dashboard
 services:
   coordinator:
     image: digitalcredentials/workflow-coordinator:0.1.0
+    container_name: "ad-coordinator"
     environment:
       - ENABLE_STATUS_SERVICE=false
       - PUBLIC_EXCHANGE_HOST=http://localhost:3000/api 
@@ -9,10 +11,12 @@ services:
       - "4005:4005"
   signing:
     image: digitalcredentials/signing-service:0.2.0
+    container_name: "ad-signing"
     environment:
       - TENANT_SEED_LEF_TEST=z1AeiPT496wWmo9BG2QYXeTusgFSZPNG3T9wNeTtjrQ3rCB
   transactions:
     image: digitalcredentials/transaction-service:0.1.1
+    container_name: "ad-transactions"
   payload:
     image: digitalcredentials/dashboard:0.1.1
     container_name: "ad-payload"
@@ -51,6 +55,7 @@ services:
       - "6379:6379"
   mongo:
     image: mongo
+    container_name: "ad-mongo"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
