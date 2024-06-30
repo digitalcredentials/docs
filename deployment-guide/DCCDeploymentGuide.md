@@ -943,5 +943,5 @@ This will run the [Admin Dashboard](https://github.com/digitalcredentials/admin-
 
 You can run it like so, subsituting your domain name for the value of the HOST environment variable:
 
-```curl https://raw.githubusercontent.com/digitalcredentials/docs/jc-compose-files/deployment-guide/docker-compose-files/dashboard-dns-compose.yaml | HOST=myhost.org docker compose -f - up```
+```curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/dashboard-dns-compose.yaml | HOST=myhost.org docker compose -f - up```
 
