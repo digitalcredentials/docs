@@ -123,7 +123,6 @@ This will download the images from Docker Hub - which might take a couple of min
 ```
 dcc-coordinator-1  | {"level":"info","message":"Server started and running on port 4005 with http","timestamp":"2024-02-17T00:26:48.567Z"}
 dcc-signer-1       | Server running on port 4006
-dcc-signer-1       | POST /instance/test/credentials/sign 200 60.371 ms - 1699
 ```
 
 2. Once that's started up, open another terminal window and issue a credential by pasting this at the prompt and hitting return:
@@ -132,7 +131,7 @@ dcc-signer-1       | POST /instance/test/credentials/sign 200 60.371 ms - 1699
 <summary>Show code</summary>
 	
 ```
-curl --location 'http://localhost:4005/instance/test/credentials/issue' \
+curl --location 'http://localhost:4005/instance/testing/credentials/issue' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "@context": [
