@@ -1,7 +1,7 @@
 name: dashboard
 services:
   coordinator:
-    image: digitalcredentials/workflow-coordinator:0.1.0
+    image: digitalcredentials/workflow-coordinator:1.0.0
     container_name: "ad-coordinator"
     environment:
       - ENABLE_STATUS_SERVICE=false
@@ -10,15 +10,15 @@ services:
     ports:
       - "4005:4005"
   signing:
-    image: digitalcredentials/signing-service:0.2.0
+    image: digitalcredentials/signing-service:1.0.0
     container_name: "ad-signing"
     environment:
       - TENANT_SEED_LEF_TEST=z1AeiPT496wWmo9BG2QYXeTusgFSZPNG3T9wNeTtjrQ3rCB
   transactions:
-    image: digitalcredentials/transaction-service:0.1.1
+    image: digitalcredentials/transaction-service:0.2.0
     container_name: "ad-transactions"
   payload:
-    image: digitalcredentials/dashboard:0.1.1
+    image: digitalcredentials/dcc-admin-dashboard:1.0.0
     container_name: "ad-payload"
     depends_on: 
       - coordinator
@@ -40,7 +40,7 @@ services:
     ports:
       - "3000:3000"
   claim-page:
-    image: digitalcredentials/admin-dashboard-claim-page:1.0.0
+    image: digitalcredentials/admin-dashboard-claim-page:1.1.0
     container_name: "ad-claim-page"
     depends_on: 
       - payload
