@@ -101,6 +101,7 @@ Setting up digital credential issuing typically requires integrating into existi
       - [Simple Issuer](#simple-issuer)
       - [Local dashboard](#local-dashboard)
       - [Dashboard with DNS](#dashboard-with-dns)
+      - [Full Dashboard Example](#full-dashboard-example)
 
 ## Overview
 
@@ -944,3 +945,10 @@ You can run it like so, subsituting your domain name for the value of the HOST e
 
 ```curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/dashboard-dns-compose.yaml | HOST=myhost.org docker compose -f - up```
 
+### Full Dashboard Example
+
+This is likely closest to what most people who want to use the admin dashboard will need. Pretty much the same as the prior but configured to use the [Mongo Status Service](https://github.com/digitalcredentials/status-service-db) to manage credential status (revocation) and SMTP to email credential recipients with a link to collect their credential:
+
+[dashboard-status-compose.yaml](docker-compose-files/dashboard-status-compose.yaml)
+
+NOTE: You will have to add your mongo connection string and your SMTP configuration, which is better described in the [Admin Dashboard Getting Started](https://github.com/digitalcredentials/dcc-admin-dashboard/blob/main/docs/GETTING_STARTED.md) page.
