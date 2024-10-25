@@ -116,7 +116,9 @@ Accepts an unsigned verifiable credential, signs and returns it. Try signing a c
 
 1. Start up the docker compose by pasting this into a terminal prompt and hitting return:
 
-```curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/simple-issuer-compose.yaml | docker compose -f - up```
+```sh
+curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/simple-issuer-compose.yaml | docker compose -f - up
+```
 
 This will download the images from Docker Hub - which might take a couple of minutes depending on your internet connection - and then starts up the issuer. You should eventually see a message like:
 
@@ -207,7 +209,9 @@ This demo runs a docker compose with two web apps in addition to the [wallet exc
 * emailing recipients a link from which to collect a credential
 * a credential collection page
 
-```curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/admin-dashboard-compose.yaml | docker compose -f - up```
+```sh 
+curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/admin-dashboard-compose.yaml | docker compose -f - up
+```
 
 Once it has started up, you can experiment with the locally running system at [http://localhost:3000](http://localhost:3000) and in particular take a look at our [Admin Dashboard Getting Started Guide](https://github.com/digitalcredentials/admin-dashboard/blob/main/docs/GETTING_STARTED.md)
 
