@@ -1,7 +1,7 @@
 name: dashboard
 services:
   coordinator:
-    image: digitalcredentials/workflow-coordinator:1.0.0
+    image: digitalcredentials/workflow-coordinator:1.0.1
     container_name: "ad-coordinator"
     environment:
       - ENABLE_STATUS_SERVICE=false
@@ -18,7 +18,7 @@ services:
     image: digitalcredentials/transaction-service:0.2.0
     container_name: "ad-transactions"
   payload:
-    image: digitalcredentials/dcc-admin-dashboard:1.0.0
+    image: digitalcredentials/dcc-admin-dashboard:1.0.1
     container_name: "ad-payload"
     depends_on: 
       - coordinator
