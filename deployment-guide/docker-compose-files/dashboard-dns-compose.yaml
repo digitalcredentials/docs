@@ -15,7 +15,7 @@ services:
     environment:
       - TENANT_SEED_LEF_TEST=z1AeiPT496wWmo9BG2QYXeTusgFSZPNG3T9wNeTtjrQ3rCB
   transactions:
-    image: digitalcredentials/transaction-service:0.2.0
+    image: digitalcredentials/transaction-service:0.3.0
     container_name: "ad-transactions"
   payload:
     image: digitalcredentials/dcc-admin-dashboard:1.0.1
