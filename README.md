@@ -18,11 +18,11 @@
 
 The [Digital Credentials Consortium](https://digitalcredentials.mit.edu/) was founded by leading universities with expertise in the design of verifiable digital credentials. Together, we are designing an infrastructure for digital credentials of academic achievement.
 
-We are committed to open standards and encourage all to contribute through the [W3C VC-EDU task force](https://w3c-ccg.github.io/vc-ed/).
+We are committed to open standards and encourage all to contribute through the [W3C VC-EDU task force](https://w3c-ccg.github.io/vc-ed/). For more details on how to implement our technologies and for non-technical information, check out our [Knowledge Base](https://wiki.dcconsortium.org).
 
 ## Overview of Components
 
-For additional context, the [DCC whitepaper](https://digitalcredentials.mit.edu/wp-content/uploads/2020/02/white-paper-building-digital-credential-infrastructure-future.pdf) outlines our approach and high-level architecture. 
+For additional context, the [DCC whitepaper](https://wiki.dcconsortium.org/app/page/1EN-emRW0Rc5Rrw9KcKkKBnEtEa8YqR-y?p=1h1VJHHv2zSe0n9Ltg-KQevSuqWbGcExy) outlines our approach and high-level architecture. 
 
 Overview of the Digital Credentials Consortium components:
 
@@ -30,7 +30,6 @@ Overview of the Digital Credentials Consortium components:
 
 DCC uses the [Verifiable Credentials Data Model](https://w3c.github.io/vc-data-model/) with linked data. 
 - [Authoring guide](authoring/README.md) - authoring DCC credentials
-- [Online credential editing tool](https://digitalcredentials.github.io/playground/) - experimental
 - [Modeling Educational Verifiable Credentials](https://w3c-ccg.github.io/vc-ed-models/) 
   - see similar standards incubation efforts at the [W3C VC-EDU task force](https://w3c-ccg.github.io/vc-ed/)
 
