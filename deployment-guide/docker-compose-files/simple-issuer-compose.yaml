@@ -5,4 +5,4 @@ services:
     ports:
       - "4005:4005"
   signer:
-    image: digitalcredentials/signing-service:1.0.0
+    image: digitalcredentials/signing-service:1.2.0
