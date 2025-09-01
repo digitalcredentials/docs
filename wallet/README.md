@@ -19,15 +19,24 @@ Same as above; you should be able to paste a deep link into the 'Add Credential'
 screen textbox, or scan a QR code containing a deep link _while inside the
 wallet app_.
 
+**Dev note:** See `/app/screens/AddScreen/AddScreen.tsx > addCredentialsFrom()`
+for how deep links are handled.
+
 ### Scanning an Interaction URL (While In Wallet)
 
 Not currently supported, see issue https://github.com/openwallet-foundation-labs/learner-credential-wallet/issues/764
+
+**Dev note:** Support for this would have to be added to
+`/app/screens/AddScreen/AddScreen.tsx > onReadQRCode()`
 
 ### Pasting Raw VC or VP JSON Into Wallet Textbox
 
 On the 'Add Credential' screen, you can paste the full JSON representation
 of a VC that you've copied into your clipboard (such as from a website with VC
 examples).
+
+**Dev note:** See `/app/screens/AddScreen/AddScreen.tsx > addCredentialsFrom()`
+for how deep links are handled.
 
 ### Scanning Raw VC/VP JSON QR Code (While In Wallet)
 
@@ -36,19 +45,31 @@ While inside the wallet, you can use the 'Scan QR Code' button on the 'Add
 Credential' screen to read a QR code that contains (as text) the raw JSON
 of a VC or a VP.
 
+**Dev note:** See `/app/screens/AddScreen/AddScreen.tsx > onReadQRCode()`
+which calls `/app/lib/decode.ts > credentialsFrom`
+
 ### Pasting a URL to a Statically Hosted VC/VP
 
 If a VC or VP is hosted on some website (like github pages or Google Drive),
 you can just copy and paste the URL to it into the textbox on the 'Add Credential'
 screen.
 
-NOTE: May need the require the use of a CORS proxy (double check on this).
+**Dev note:** See `/app/screens/AddScreen/AddScreen.tsx > addCredentialsFrom()`
+which calls `/app/lib/decode.ts > credentialsFrom`
+
+TODO: Add the ability to fetch URLs through a CORS proxy.
 
 ### Scanning a URL to a Statically Hosted VC/VP (While In Wallet)
 
 Same as above, but instead of copying and pasting, you can use the 'Scan QR Code'
 button from inside the wallet, and it will fetch and store the VC on the other
 end. (Same deal, re CORS proxy)
+
+**Dev note:** See `/app/screens/AddScreen/AddScreen.tsx > onReadQRCode()`
+which calls `/app/lib/decode.ts > credentialsFrom`
+
+TODO: This does mean that scanning a deep link (while inside the wallet)
+is not currently supported.
 
 ### Upload VC from File
 
@@ -57,6 +78,9 @@ screen and clicking on 'Add from file' button.
 Note that this includes both files stored locally on the device, but also
 many mobile OSs also add other file storage services (like Google Drive, Dropbox,
 etc) to this screen.
+
+**Dev note:** See `/app/screens/AddScreen/AddScreen.tsx > addFromFile()`
+for more details.
 
 ### Restore VCs from Backup
 
