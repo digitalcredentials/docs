@@ -2,9 +2,9 @@
 
 ## Table of Contents
 
-* [Getting credentials into the wallet](#getting-credentials-into-the-wallet)
+* [Getting Credentials Into the Wallet](#getting-credentials-into-the-wallet)
 
-## Getting credentials into the wallet
+## Getting Credentials Into the Wallet
 
 ### Opening a Deep Link / Universal App Link (From Outside)
 
@@ -18,6 +18,10 @@ in a chat app, or scanning a URL QR code with the general mobile camera.
 Same as above; you should be able to paste a deep link into the 'Add Credential'
 screen textbox, or scan a QR code containing a deep link _while inside the
 wallet app_.
+
+### Scanning an Interaction URL (While In Wallet)
+
+Not currently supported, see issue https://github.com/openwallet-foundation-labs/learner-credential-wallet/issues/764
 
 ### Pasting Raw VC or VP JSON Into Wallet Textbox
 
@@ -60,4 +64,15 @@ If you have a previous wallet backup (from the Settings > Backup Wallet screen),
 if you go to Settings > Restore wallet, any VCs from that backup (that don't
 already exist in your wallet) are also added.
 
+### Receive a Share Intent from Another App
+
+NOTE: We used to support this in previous LCW versions, but it was disabled
+due to extra complexity, and no apps were sharing VCs at the time.
+
+for iOS, see:
+* ShareKit and App Extensions https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/index.html
+* App Intents https://developer.apple.com/documentation/appintents/
+
+for Android, see:
+* Sharesheet docs https://developer.android.com/training/sharing/send
 
