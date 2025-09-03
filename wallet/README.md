@@ -13,6 +13,19 @@ from the outside (while they're not in the wallet app itself), but instead
 are clicking on a link in a mobile web browser, opening a link pasted to them
 in a chat app, or scanning a URL QR code with the general mobile camera.
 
+**Dev note:**
+The custom protocols for deep links as well as universal app links are configured
+in `app.conf.js`: 
+
+* in the `LinkConfig.schemes` constant
+* but also in `expo.ios.associatedDomains` and `CFBundleURLSchemes`
+* also in `expo.android.intentFilters`
+
+see https://docs.expo.dev/linking/into-your-app/
+and https://docs.expo.dev/linking/overview/#universal-linking
+
+The actual link router is set up in `/app/lib/deepLink.ts > deepLinkConfigFor()`
+
 ### Pasting a Deep Link (While In Wallet)
 
 Same as above; you should be able to paste a deep link into the 'Add Credential'
@@ -100,3 +113,24 @@ for iOS, see:
 for Android, see:
 * Sharesheet docs https://developer.android.com/training/sharing/send
 
+## Example Requests
+
+### Request a VC
+
+```
+https://lcw.app/request?request=%7B%22credentialRequestOrigin%22:%22https://interop-alliance.github.io/wallet-to-webapp-demo%22,%22protocols%22:%7B%22vcapi%22:%22https://verifierplus.org/api/exchanges/42cb7245-a732-409f-8182-1db416a793f7%22%7D%7D
+```
+
+```json
+{
+  "credentialRequestOrigin": "https://interop-alliance.github.io/wallet-to-webapp-demo",
+  "protocols": {
+    "vcapi": "https://verifierplus.org/api/exchanges/42cb7245-a732-409f-8182-1db416a793f7"
+  }
+}
+```
+
+leads to: Exchange Credentials Request popup.
+"An organization would like to exchange credentials with you."
+
+Select credentials, wallet POSTS a VP to the interact endpoint.
