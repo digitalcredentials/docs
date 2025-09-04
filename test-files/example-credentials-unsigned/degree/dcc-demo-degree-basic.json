@@ -1,0 +1,41 @@
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.1.json"
+  ],
+  "type": [
+    "VerifiableCredential",
+    "OpenBadgeCredential"
+  ],
+  "name": "{{ earnerName }} - {{ degreeType }} in {{ subject }}",  
+  "issuer": {
+    "url": "https://digitalcredentials.mit.edu/",
+    "type": "Profile",
+    "name": "DCC Demo University",
+    "image": {
+      "id": "https://github.com/digitalcredentials/test-files/assets/206059/3f3e1476-fd1e-4c8f-a560-5cfb4017bbc3",
+      "type": "Image"
+    }
+  },
+  "credentialSubject": {
+    "type": [
+      "AchievementSubject"
+    ],
+    "name": "{{ earnerName }}",
+    "achievement": {
+      "type": [
+        "Achievement"
+      ],
+      "achievementType": "BachelorDegree",
+      "name": "{{ degreeType }} in {{ subject }}",
+      "fieldOfStudy": "I{{ subject }}",
+      "criteria": {
+        "type": "Criteria",
+        "narrative": "{{ earnerName }} has fulfilled the requirements to earn this {{ degreeType }} in {{ subject }}"
+      },
+      "description": "DCC Demo University {{ degreeType }} in {{ subject }}",
+      
+      
+    }
+  }
+}

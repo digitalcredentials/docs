@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffffff; /* Optional: Set a background color */
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 80%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .main-container img {
+            /* Add styles for the image if needed */
+        }
+
+        h2 {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .signatures-container {
+            display: flex;
+            justify-content: space-evenly;
+            width: 90%;
+            margin-top: 20px; /* Adjust as needed */
+        }
+
+        .signature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        p {
+            text-align: center;
+            margin: 10px 0;
+        }
+		
+		.wrap {
+			width: 80% !important;
+            display: block;
+			overflow-wrap: break-word;
+		}
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div><img src="https://github.com/digitalcredentials/test-files/assets/206059/b8eac313-ca72-43c3-a0ed-6ffca54733cc" width="600" height="171" alt=""/></div>
+    <p>concede a</p>
+    <h2>{{ credential.credentialSubject.name }}</h2>
+    <p>el titulo profesional de</p>
+    <h2>{{ credential.name }}</h2>
+    <p>considerando que ha cumplido con los estudios correspondientes y satisfecho todas los requisitos necesarios.</p>
+    <p>Dado en la ciudad de Monterrey, estado de Nuevo León, el dia</p>
+    <p>{{ credential.awardedDatePretty }}</p>
+    <div class="signatures-container"> 
+    <img src="https://github.com/digitalcredentials/test-files/assets/206059/6acd3f0a-a774-4170-a93a-6079dc543125" width="500" height="124" alt=""/> </div>
+    <p>Titulo Electrónico folio control: {{ credential.evidence.[0].narrative }}</p>
+    <p>Sello Autenticoción:</p>
+    <p>{{ credential.evidence.[1].narrative }}</p>
+    <p>No. Certifico Autoridad: {{ credential.evidence.[2].narrative }}</p>
+    <p>Sello Título:</p>
+     <p>{{ credential.evidence.[3].narrative }}</p>
+    <p>Fecha Autenticación: {{ credential.evidence.[4].narrative }}</p>
+    <p>Folio Digital: {{ credential.evidence.[5].narrative }}</p>
+</div>
+</body>
+</html>

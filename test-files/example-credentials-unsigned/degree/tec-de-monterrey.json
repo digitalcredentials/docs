@@ -1,0 +1,77 @@
+{
+  "name": "Título Profesional e21.02",
+  "type": [
+    "VerifiableCredential",
+    "OpenBadgeCredential"
+  ],
+  "id": "urn:uuid:951b475e-b795-43bc-ba8f-a2d01efd2eb1",
+  "issuer": {
+    "id":"did:key:z6MkhVTX9BF3NGYX6cc7jWpbNnR7cAjH8LUffabZP8Qu4ysC",
+    "url": "https://tec.mx/es",
+    "type": "Profile",
+    "name": "Instituto Tecnológico y de Estudios superiores de Monterrey",
+    "image": {
+      "id": "https://coursereport-production.imgix.net/uploads/school/logo/490/original/logo-tecnolo-cc-81gico-monterrey-boot-camp-20.jpg",
+      "type": "Image"
+    }
+  },
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.1.json"
+  ],
+  "issuanceDate": "2020-12-16T00:00:00Z",
+  "credentialSubject": {
+    "type": [
+      "AchievementSubject"
+    ],
+    "name": "Adolfo Daniel Javier Alberto Giese-Caballero Benavides",
+    "achievement": {
+      "type": [
+        "Achievement"
+      ],
+      "id": "urn:uuid:7d9f1061-81b4-48d5-b6eb-6524c4074146",
+      "name": "Título Profesional",
+      "criteria": {
+        "type": "Criteria",
+        "narrative": "Javier Alberto Giese Ruiz has fulfilled the requirements to earn this degree. -- do we want to include other criteria here?"
+      },
+      "description": "Description content here?",
+      "fieldOfStudy": "Ingeniero en Sistemas Electrónicos",
+      "achievementType": "BachelorDegree"
+    }
+  },
+  "evidence": [
+    {
+      "type":"Evidence",
+      "name": "Título Electrónico Folio Control",
+      "narrative": "M-A00500923-5"     
+    },
+    {
+      "type":"Evidence",
+      "name": "Sello Autenticación",
+      "narrative": "RzWvSLK1vpxOltu/71LeuuoxC6lDJ0vEocVHjUjItgSj+GH50KophCABW3ZqPEVhIxEJ1dQAPS3TsNz+UepJu6EK4B2Y36+Z+D3j4bRCmBkdA/IQVd97Sp7itv9XUsgNIZicMEfrufhkrPCVvS7aOJ+nicISpU86lnZwAAU27HSw+5ca2hZ1OQ6an0bvd8/cPgsclldHUWsiSUsPESyoCeurd1nT03LoEwX4WrgQT6xSY+2HixOgGPWiR7mQV5tIlnNZvhT1BsGCMwr7XsL3Pbdgo2QCMYx1cRDatMWydjyMdRvgU/mAaHwdncxv1nAORfxruIFgr9W2Gjvi4OOyAQ=="     
+    },
+    {
+      "type":"Evidence",
+      "name": "No. Certificado Autoridad",
+      "narrative": "00001000000123456789"    
+    },
+    {
+      "type":"Evidence",
+      "name": "Sello Titulo",
+      "narrative": "Hjru5ABq7bOaDK5khME3A163xwNx2uHhX/3gRZ+0MM80i0Eok2v+7SbBhGGZ8ZDxDFrY6kusMXYWvw7rZidv9ZiBjJfp9YIYqixmvSEFtUfBhN/MZOF/tP7zhGRNPELu31GKE2jIyN7jAZB30xf7XOlZoIBuxPsiUljGcqaCStzdofOpJiN+NqvlzMs/LMYwny7OrIE5w65lPHbuocMl1nqlMGwfWioSbnHu8x52DQWa65VMEiknLTfMerZJ06ly7q/mI8tDpKgIAuhVY6WwN9c/8qrbGGZ2qqDCZmyiB75bjWQBIwMBXTV4QnfSnIy1tPbTra43utMkkb+ZhaFbUQ=="    
+    },
+    {
+      "type":"Evidence",
+      "name": "Fecha Autenticacion",
+      "narrative": "1/27/2020 17:22:22"    
+    },
+    {
+      "type":"Evidence",
+      "name": "Folio Digital",
+      "narrative": "701a5cf8-67va-4452-abc8-c18b1bb94be1"    
+    }
+  ]
+}
+
+

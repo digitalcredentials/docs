@@ -1,0 +1,46 @@
+{
+    "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.2.json",
+        {
+          "renderMethod": "urn:uuid:b2ab3546-228a-47a8-b97a-9a5646007c53",
+          "css3MediaQuery": "urn:uuid:c4c53282-e8e2-4914-83d8-566e25d2f899",
+          "digestMultibase": "urn:uuid:caef1a4e-67b8-4dfc-9881-2b51da7edc1b"
+        }
+    ],
+    "id": "urn:uuid:951b475e-b795-43bc-ba8f-a2d01efd2eb1",
+    "type": [
+        "VerifiableCredential",
+        "OpenBadgeCredential"
+    ],
+    "issuer": {
+        "id": "did:key:z6MkhVTX9BF3NGYX6cc7jWpbNnR7cAjH8LUffabZP8Qu4ysC",
+        "type": "Profile",
+        "name": "Test Tec de Monterrey",
+        "url": "https://tec.mx/es",
+        "image": {
+            "id": "https://coursereport-production.imgix.net/uploads/school/logo/490/original/logo-tecnolo-cc-81gico-monterrey-boot-camp-20.jpg",
+            "type": "Image"
+        }
+    },
+    "issuanceDate": "2023-10-23T00:00:00Z",
+    "name": "renderMethod Rocks",
+        "credentialSubject": {
+        "type": "AchievementSubject",
+        "achievement": {
+            "id": "urn:uuid:8341e81f-ae8a-410f-ab5e-a107d0a1496e",
+            "type": "Achievement",
+            "criteria": {
+                "narrative": "It is an achievement to use render method!"
+            },
+            "description": "Credential to test renderMethod",
+            "name": "renderMethod Rocks"
+        }
+    },
+    "renderMethod": [{
+        "id": "https://raw.githubusercontent.com/digitalcredentials/test-files/main/svg-templates/tec-de-monterrey-sample-1.svg",
+        "type": "SvgRenderingTemplate2023",
+        "name": "PDF Display",
+        "css3MediaQuery": "@media (orientation: portrait)"
+    }]
+}
