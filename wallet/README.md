@@ -134,3 +134,38 @@ leads to: Exchange Credentials Request popup.
 "An organization would like to exchange credentials with you."
 
 Select credentials, wallet POSTS a VP to the interact endpoint.
+
+## Testing
+
+### 1) Test Legacy Credential Request flow (DCC Admin Dashboard Issuing)
+
+Make sure the [Legacy Credential Request flow](https://github.com/digitalcredentials/docs/blob/main/request/credential_request.md),
+that is, picking up credentials via the DCC issuer's Admin Dashboard is working.
+
+https://badging.dcconsortium.org/lcw-experience-badge
+
+Example legacy deep link:
+
+```
+https://lcw.app/request.html?issuer=issuer.example.com&auth_type=bearer&challenge=7f4a278e...&vc_request_url=https://issuer.dcconsortium.org/exchange/7bad4b...
+```
+
+Test in both modes (they result in slightly different code paths in the app):
+
+* "cold start" - LCW is closed (not running in the background), and you click on
+  the 'Add to LCW' button on the pickup page or scan the QR code.
+* "warm start" - same as above, but LCW is running in the background
+
+### 2) Test Legacy Credential Request Link by pasting it into 'Add Credential' Textbox
+
+Similar to the previous item, but you're going to paste the legacy deep link
+directly into the 'Add Credential' screen's text box.
+To get the link - go to the LCW Experience Badge pickup page (from your email),
+click on the 'Add to LCW' button, and then copy the redirected request,
+looks like this:
+
+```
+dccrequest://request?issuer=issuer.example.com&auth_type=bearer&challenge=7f4a278e...&vc_request_url=https://issuer.dcconsortium.org/exchange/7bad4bee...
+```
+Open the app manually, and paste that URL into the 'Add Credential' screen textbox.
+
