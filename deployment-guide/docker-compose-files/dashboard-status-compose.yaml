@@ -29,6 +29,7 @@ services:
       - CRED_STATUS_SERVICE=mongodb
       - CRED_STATUS_DB_URL=mongodb+srv://your-mongo-user:your-mongo-password@cluster0.8s9a0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       - CRED_STATUS_DID_SEED=z1AeiPT496wWmo9BG2QYXeTusgFSZPNG3T9wNeTtjrQ3rCB
+      - ENABLE_HTTPS_FOR_DEV=false
     ports:
       - "4008:4008"
   payload:
