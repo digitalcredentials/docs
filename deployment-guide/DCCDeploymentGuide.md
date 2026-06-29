@@ -273,9 +273,9 @@ Let's talk about two ways you might access that data when you want to issue a cr
 
 If you can pull student records from the existing system 'on demand' - say when a student logs in to a credential collection page and requests something like a transcript - then you could instantly and automatically construct and return credentials on-the-fly.
 
-A direct pull system ***might*** be more complex to setup (although often not), but the medium and long term benefits can be significant. Essentially, after having setup the system, credential holders (students/alumni) can simply download a copy of their credential whenever they like. Which also means that replacement of lost credentials is no longer a complicated issue requiring human mediated requests and lookups - the student/alumni can now simply login to get an immediate replacment, directly and automatically issued from the institutional data.  
+A direct pull system ***might*** be more complex to setup (although often not), but the medium and long term benefits can be significant. Essentially, after having setup the system, credential holders (students/alumni) can simply download a copy of their credential whenever they like. Which also means that replacement of lost credentials is no longer a complicated issue requiring human mediated requests and lookups - the student/alumni can now simply login to get an immediate replacement, directly and automatically issued from the institutional data.  
 
-Same goes for name changes - if someone changes their name (for example if they get married) the name change can be handled by the normal institutional process for a name change, which will end up changing the underlying institutional record. And once that is done the student/alumni then just logs back in and get a fresh copy, pulled from the update underlying data.
+Same goes for name changes - if someone changes their name (for example if they get married) the name change can be handled by the normal institutional process for a name change, which will end up changing the underlying institutional record. And once that is done the student/alumni then just logs back in and gets a fresh copy, pulled from the updated underlying data.
 
 ##### Standalone system
 
@@ -289,7 +289,7 @@ Three significant downsides to a standalone system are:
 
 1. **Data duplication** If the credential data is already stored in some other place (e.g, campus PeopleSoft) then storing a second copy in your standalone system means that you now have two copies of the same data, which can easily get out of sync; for example, the case where someone changes their name in the main campus system, but there isn't an automatic change in your standalone system. Maintaining a second copy also introduces extra complexity and maintenance.
 
-2. **Brittle data conversion** Adding new data to the standalone system is likely to be a manual process, which can become suprisingly complicated. If you are pulling the data out of an institutional store and then uploading it as CSV to the standalone system, you'll typically have to have various checks to confirm the data was properly pulled and added. Problems with character encoding, changed data structures, and so on can completely scuttle a project.
+2. **Brittle data conversion** Adding new data to the standalone system is likely to be a manual process, which can become surprisingly complicated. If you are pulling the data out of an institutional store and then uploading it as CSV to the standalone system, you'll typically have to have various checks to confirm the data was properly pulled and added. Problems with character encoding, changed data structures, and so on can completely scuttle a project.
 
 3. **Security** The data in your institutional store most likely has fairly rigorous security and checks to make sure that there are no:
 a) data breaches where private data is stolen
@@ -303,7 +303,7 @@ You'll most likely want to keep a record of the credentials you've issued, wheth
 
 You could store this data in your existing institutional store - and this might often be the best choice given that your institutional store likely has robust security - but sometimes changing the structures of your institutional store can be difficult both operationally and politically.
 
-A reaonsable compromise can be to store minimal details about issuance in a completely separate database. Ideally you'd store pseudo-anonymous data from which full data can later be recovered as needed. For example, for each issuance you could potentially record some new unique id (like a UUID) along with the date of issuance and some identifier from your institutional store from which you could later pull the data needed to fully identify the record issued. The point here is that if your issuance log were compromised, you'd not directly expose private information.
+A reasonable compromise can be to store minimal details about issuance in a completely separate database. Ideally you'd store pseudo-anonymous data from which full data can later be recovered as needed. For example, for each issuance you could potentially record some new unique id (like a UUID) along with the date of issuance and some identifier from your institutional store from which you could later pull the data needed to fully identify the record issued. The point here is that if your issuance log were compromised, you'd not directly expose private information.
 
 ### Authentication
 
@@ -326,13 +326,13 @@ If, however, you don't have an existing IdP, or say a student's campus account i
 
 ###### Email Verification
 
-One alternative is to have a credential request page at which the holder can ask that an email be sent to a given email address. If your system finds a match for that email address in your student records then the system emails out a link from which the holder can collect the credential. This works much like the password recovery systems that email a password reset link to the email address on record for a given account. In both cases, the links sent out contain a token that when submitted (by clicking the link) effectively confirms that it is the student collecting the credential - because only they would have receieved the email with the link/token.
+One alternative is to have a credential request page at which the holder can ask that an email be sent to a given email address. If your system finds a match for that email address in your student records then the system emails out a link from which the holder can collect the credential. This works much like the password recovery systems that email a password reset link to the email address on record for a given account. In both cases, the links sent out contain a token that when submitted (by clicking the link) effectively confirms that it is the student collecting the credential - because only they would have received the email with the link/token.
 
 ###### Identify Proofing
 
 If you don't have a current email address on file for the holder, you'll likely then need to verify their identity in some other way.  This could be a web page that asks for a combination of details only they would know - say their student number, the year they graduated, the residence in which they lived, the name of the instructor they had for a given course, etc. If this isn't viable, or doesn't fit with institutional policy, you may need to verify their identity in-person or over the phone.
 
-In either case, after verifying identity, the credential could be directly sent to the recipient, or possibly better, they can add their email address to the system, and then go back to an email verification page to collect their credential. The advantage to collecting their email adress is that the next time they collect another credential or a replacement for the same credential, they can simply use their email address without having to go through the proofing step again.
+In either case, after verifying identity, the credential could be directly sent to the recipient, or possibly better, they can add their email address to the system, and then go back to an email verification page to collect their credential. The advantage to collecting their email address is that the next time they collect another credential or a replacement for the same credential, they can simply use their email address without having to go through the proofing step again.
 
 ##### Authenticating when presenting credentials (holder binding)
 
@@ -351,14 +351,14 @@ The way the holder binding works is that when we issue a credential to holder, w
 
 This effectively then declares to anyone who later wants to verify the credential that we (the issuer) attest that the public key/DID in the credential does belong to the holder (because we got it from them in some authenticated way).
 
-So now, when the holder presents the credential to someone else for verification, the verifier can give the holder (really, their wallet) a challenge (just a random string of some sort, like 'k2kn35l') that the holder (really, their wallet) can sign with their private key and return to the verifier. The verifier's software then confirms that the challenge was signed by the private that corresponds to the public key in the creential. 
+So now, when the holder presents the credential to someone else for verification, the verifier can give the holder (really, their wallet) a challenge (just a random string of some sort, like 'k2kn35l') that the holder (really, their wallet) can sign with their private key and return to the verifier. The verifier's software then confirms that the challenge was signed by the private that corresponds to the public key in the credential. 
 The upshot is that the holder thereby confirms that they 'control' the corresponding public key in the credential, and therefore also the credential itself.
 
 TODO:  add a diagram
 
 Adding a holder binding makes things a bit safer, kind of like the second factor auth we've all come to use, and can also help with identity theft - if someone has gotten other credentials of mine they might be able to use those to impersonate me, but if they are asked to demonstrate control of those credentials through a holder binding challenge, then impersonation becomes more difficult.
 
-Another advantage to a holder binding is that they can used to prove control of a credential without having to provide corroborating evidence like a driver's licence. This might be useful when a credential is used in some automated way - say as a credential authorizing us to operate a 3-D printer in a library. In that case the printer can't as easily ask us for a driver's licence or send us an email, but could automatically issue us a challenge (via our wallet) which the wallet can sign on our behalf using our private key. 
+Another advantage to a holder binding is that they can be used to prove control of a credential without having to provide corroborating evidence like a driver's licence. This might be useful when a credential is used in some automated way - say as a credential authorizing us to operate a 3-D printer in a library. In that case the printer can't as easily ask us for a driver's licence or send us an email, but could automatically issue us a challenge (via our wallet) which the wallet can sign on our behalf using our private key. 
 
 It can be tricky to collect the public key from a holder before issuing them a credential, but fortunately, the DCC provides an 'exchange' service that you can incorporate into your issuance. The DCC exchange service works with the Learner Credential Wallet and together the two take care of:
 
@@ -372,7 +372,7 @@ An example of how to use this is in our [Exchange Coordinator](https://github.co
 
 ### Revocation
 
-You may want to revoke credentials for a number of reasons - mistakes, changes to entitlement, revoked priviliges, name changes, and so on. You may also, of course, not be concerned about revocation, say for certificates of attendance.
+You may want to revoke credentials for a number of reasons - mistakes, changes to entitlement, revoked privileges, name changes, and so on. You may also, of course, not be concerned about revocation, say for certificates of attendance.
 
 With a conventional centralized system, credentials are verified by calling back to a central system or database to confirm that the credential is legitimate, and in this case the central system can tell us at that moment that the credential is valid, or no longer valid (it has been revoked).
 
@@ -386,13 +386,13 @@ The DCC advocates using a subtle variation to a simple list called a [Bitstring 
 
 ```00000000100000010100```
 
-Each character position in that string is assigned to a single credential when the credential is issued. If the character at that position is a zero then the credential is active (hasn't been revoked). If the charcter is a one then the credential has been revoked.
+Each character position in that string is assigned to a single credential when the credential is issued. If the character at that position is a zero then the credential is active (hasn't been revoked). If the character is a one then the credential has been revoked.
 
-So a verifier checking a credential has to download the right bitsting and then check the position in the string that has been allocated to the credential being checked.
+So a verifier checking a credential has to download the right bitstring and then check the position in the string that has been allocated to the credential being checked.
 
-A major advantage to the bistring status list is size - with only a single bit for each credential and with the advantages of compression, a very large list can compress down to a very small size.
+A major advantage to the bitstring status list is size - with only a single bit for each credential and with the advantages of compression, a very large list can compress down to a very small size.
 
-The DCC provides two implemenations of a bistring - one that stores the bitstring in github and one that stores the bistring in a mongo db. Both implementations are packaged as a microservice that can be wired into a credential flow. We talk more about this service later.
+The DCC provides two implementations of a bitstring - one that stores the bitstring in github and one that stores the bitstring in a mongo db. Both implementations are packaged as a microservice that can be wired into a credential flow. We talk more about this service later.
 
 ### Public Key Authenticity - Registries and Certificates
 
@@ -409,13 +409,13 @@ The answer is that a verifier must have some trustworthy way of knowing which pu
 
 Oxford would add the public key part of their keypair to a well known registry - which is fundamentally just a list of public keys. The verifier would check the registry to confirm that the public key associated with a given credential was in the registry.
 
-The registry of course has to be very carefully managed so that fake keys can't be added. Any new submissions or changes must be carefully vetted. These lists are public, though, and so subject to public scrutiny. It is not hard to imagine then that each institution would regularly confirm that only it's own legitimage keys are registered in its name. Nevertheless, we do have to be careful about adding new keys.
+The registry of course has to be very carefully managed so that fake keys can't be added. Any new submissions or changes must be carefully vetted. These lists are public, though, and so subject to public scrutiny. It is not hard to imagine then that each institution would regularly confirm that only its own legitimate keys are registered in its name. Nevertheless, we do have to be careful about adding new keys.
 
-Note that a signed credential can't itself point at the registry because then a fake credential could simply point at a fake registry. The verifier has to know which registires are legitimate - independently of anything in the credential.
+Note that a signed credential can't itself point at the registry because then a fake credential could simply point at a fake registry. The verifier has to know which registries are legitimate - independently of anything in the credential.
 
-Registries are still in their early days. It has yet to be worked out who will maintain registries, although a likely guess is that entities that already manage membership or accredation will manage the keys for its membership. 
+Registries are still in their early days. It has yet to be worked out who will maintain registries, although a likely guess is that entities that already manage membership or accreditation will manage the keys for its membership. 
 
-For now the DCC has set of registries to which you can add your DIDs:
+For now the DCC has a set of registries to which you can add your DIDs:
 
 * [sandbox registry](https://github.com/digitalcredentials/sandbox-registry)          
 * [dcc pilot registry](https://github.com/digitalcredentials/dcc-pilot-registry)
@@ -430,13 +430,13 @@ Initially you'll want to get your key into the sandbox registry, which means add
 
 Follow the pattern in the file to add your DID, and then submit a pull request. If you need help with that let us know.
 
-Note too that if you have your own verifier - say a page on your web site at which your own issued verifiable credentials can be verifier (like say certificates your school has issued) then you will know which are your own public keys - you effectively are maintaining your own registry. You still have to be careful to build that check into your verification though - be sure to check that the public key associated with a credential is in fact one of your own.
+Note too that if you have your own verifier - say a page on your website at which your own issued verifiable credentials can be verified (like say certificates your school has issued) then you will know which are your own public keys - you effectively are maintaining your own registry. You still have to be careful to build that check into your verification though - be sure to check that the public key associated with a credential is in fact one of your own.
 
 We've talked about public keys here, but more likely is that you'll use a [Decentralized Identifier (DID)](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjTnLn24LeEAxU1C3kGHSTVAngQFnoECBMQAQ&url=https%3A%2F%2Fwww.w3.org%2FTR%2Fdid-core%2F&usg=AOvVaw2lmH5NVEyOOCzXxjwUG8Yh&opi=89978449) to manage your issuing keys, and at the moment, likely a did:web DID, which helps manage key rotation. The upshot is simply that the verifier confirms that a given DID is in the registry, rather than the public key. The verifier still, though, has to confirm that the given DID also manages the actual public key involved.
 
 #### Certificates
 
-An alternative to a registry is for an overarching central authority to provide certificates (which can themselves be Verifiable Credentials) to issuers where the certificates assert that a given issuer is authorized to issue credentials using a given key or DID. When the issuer then issues a credential, it includes the authorizing certificate in the issued credential, or points to where it can be found. In this case the verifier will now have to confirm that the authorizing certificate is valid (and hasn't itself been reovked). 
+An alternative to a registry is for an overarching central authority to provide certificates (which can themselves be Verifiable Credentials) to issuers where the certificates assert that a given issuer is authorized to issue credentials using a given key or DID. When the issuer then issues a credential, it includes the authorizing certificate in the issued credential, or points to where it can be found. In this case the verifier will now have to confirm that the authorizing certificate is valid (and hasn't itself been revoked). 
 
 For the moment, the DCC is using registries rather than authorizing certificates.
 
@@ -468,7 +468,7 @@ Whether or not to get an HSM often will depend on how concerned you are about ke
 
 #### Mitigating Stolen Signing Keys
 
-There are a few things you can do to mitigte the risk of a stolen key:
+There are a few things you can do to mitigate the risk of a stolen key:
 
 ##### Rotate keys frequently
 
@@ -487,7 +487,7 @@ You can read more about how DIDs manage key rotation and key revocation here:
  
 ##### Expire credentials aggressively
 
-You can set the [https://www.w3.org/TR/vc-data-model/#expiration-0](expirationDate) property in the verifiable credential itself (NOTE: expirationDate will be replace by [validUntil](https://www.w3.org/TR/vc-data-model-2.0/#validity-period) in version 2 of the Verifiable Credential specification. 
+You can set the [https://www.w3.org/TR/vc-data-model/#expiration-0](expirationDate) property in the verifiable credential itself (NOTE: expirationDate will be replaced by [validUntil](https://www.w3.org/TR/vc-data-model-2.0/#validity-period) in version 2 of the Verifiable Credential specification. 
 
 This also only works if you have a trustworthy timestamp attached to the credential. You can, however, also expire credentials, without using a timestamp, by expiring the signing key as described in the prior section on key rotation.
 
@@ -523,13 +523,13 @@ Wallet verification should not be used to show someone else that your c
 
 #### Web Pages
 
-Web apps like [VerifierPlus](https://verifierplus.org) will verify a verifiable credential that has been uploaded or pasted into a form. Veification pages like this would typically be used by someone to whom a credential has been given as proof of something. A job recruiter, for example, to whom a job candidate has emailed a copy of their degree.
+Web apps like [VerifierPlus](https://verifierplus.org) will verify a verifiable credential that has been uploaded or pasted into a form. Verification pages like this would typically be used by someone to whom a credential has been given as proof of something. A job recruiter, for example, to whom a job candidate has emailed a copy of their degree.
 
 A web verifier like [VerifierPlus](https://verifierplus.org) can also scan a QR (using the phone or laptop camera) for a credential that has been presented from a wallet like the  [Learner Credential Wallet](https://lcw.app).
 
 #### Verification Apps
 
-At some point there might be dedicated apps on phones that can scan a QR (possibly presented to them from the wallet on another phone) and verify authenticity. For the moment, web verifieers like [VerifierPlus](https://verifierplus.org) can do that.
+At some point there might be dedicated apps on phones that can scan a QR (possibly presented to them from the wallet on another phone) and verify authenticity. For the moment, web verifiers like [VerifierPlus](https://verifierplus.org) can do that.
 
 #### Automated Verification
 
@@ -648,7 +648,7 @@ You might consider using this implementation of the status list, rather than our
 
 This implementation might also be a good choice when first starting out, as relatively simple means to get a status system running, particularly for experimentation or evaluation.
 
-This could also be a good choice for a one-off credentialing project, like say where you wanted to issue certificates to a few hundred conference attendees, and didn't want to have to maintain anything beyoned that issuance. Because the status list is in github, you could just let it live there forever more. In this case you may, of course, not really care about being able to revoke the credentials, but if you did, the github implemenation of the status list could be a good choice.
+This could also be a good choice for a one-off credentialing project, like say where you wanted to issue certificates to a few hundred conference attendees, and didn't want to have to maintain anything beyond that issuance. Because the status list is in github, you could just let it live there forever more. In this case you may, of course, not really care about being able to revoke the credentials, but if you did, the github implemenation of the status list could be a good choice.
 
 ###### Advantages
 
@@ -658,7 +658,7 @@ This could also be a good choice for a one-off credentialing project, like say w
 
 ###### Disadvantages
 
-* You'll potentinally run into rate limiting with Github if you have a significant number of credentials (thousands)
+* You'll potentially run into rate limiting with Github if you have a significant number of credentials (thousands)
 * You are dependent on Github
   
 ##### How you'd use it
@@ -740,7 +740,7 @@ If, however, you'd like to integrate more directly into your existing institutio
 * you can get up and issuing credentials fairly quickly
 * can be used with a locally running mongo or a cloud based mongo
 * UI tools for setting up, reviewing, and running batches and for viewing issuance records
-* Built-in batch mailing to notyify recipients that credentials can be collected
+* Built-in batch mailing to notify recipients that credentials can be collected
 
 ###### Disadvantages
 
@@ -759,7 +759,7 @@ A good example of usage is in the  [admin dashboard demo](#admin-dashboard-demo)
 
 NOTE: the collection page is part of the same github repo as the admin-dashboard, but is in fact a separate app with its own Docker file, and is meant to run as a separate service, usually within a docker compose.
 
-This is a simple web page (written with [Astro](https://astro.build)) from which credentials are collected. It is intended to be used with the admin-dashboard. If you aren't using the admin-dashboard, the collection page won't be directly usable, but it might help as a guide when designing your own page. You can certainly subsitute your own collection page as a separate web app running within the docker compose (or even outside it).
+This is a simple web page (written with [Astro](https://astro.build)) from which credentials are collected. It is intended to be used with the admin-dashboard. If you aren't using the admin-dashboard, the collection page won't be directly usable, but it might help as a guide when designing your own page. You can certainly substitute your own collection page as a separate web app running within the docker compose (or even outside it).
 
 ##### When you'd use it
 
@@ -871,7 +871,7 @@ The exchange-coordinator will return a link that you can provide to the student,
 
 In this case you can again use either the issuer-coordinator or the exchange-coordinator but the interaction with the wallet varies from one to the other.  
 
-With the issuer-coordinator, the recipient will have to themselves 'import' the credential into the wallet either by copy/pasting the JSON text of the credential, or by scannning a QR encoding of that same JSON text (where you would create the QR), or by downloading the credential from a link if you opt to provide a hosted link for the credential.
+With the issuer-coordinator, the recipient will have to themselves 'import' the credential into the wallet either by copy/pasting the JSON text of the credential, or by scanning a QR encoding of that same JSON text (where you would create the QR), or by downloading the credential from a link if you opt to provide a hosted link for the credential.
 
 The exchange-coordinator on the other hand manages the exchange with the wallet. When you post the data for a credential to the coordinator, it returns a link that you give to the student. When the student clicks the link (or scans it as a QR) it opens the Learner Credential Wallet and takes care of the rest of the exchange between the wallet and the coordinator. The end result of clicking the link is that the student's credential is added to their wallet. The exchange-coordinator therefore provides a simpler and more intuitive experience for the student.
 
@@ -889,7 +889,7 @@ There are a few ways you can email the student including:
 
 * Email them the fully constructed verifiable credential. They'd then have to 'import' it into their wallet if they did want to keep it in a wallet, but they could also just keep it as a file on their computer since it is just a text file.
 
-* Email them a link from which they can dowload the credential. This of course requires that you host the credential at a url, which also usually requires that you get consent from the recipient to host it. Depending on how you'd like to go, you could protect the link by associating a token with it (as a request parameter in the link), but this then requires that you build handling into your server to check the token. 
+* Email them a link from which they can download the credential. This of course requires that you host the credential at a url, which also usually requires that you get consent from the recipient to host it. Depending on how you'd like to go, you could protect the link by associating a token with it (as a request parameter in the link), but this then requires that you build handling into your server to check the token. 
 
 * You could also potentially protect the link by putting it behind your campus authentication system, but sometimes the recipient of the credential is no longer a student, but rather now an alumni, and might not have an account. Additionally, if login is required, it complicates import into a wallet like the LCW because although the LCW can directly import a credential from a URL, it can't accommodate an authentication process as part of that retrieval of the link.
 
@@ -941,7 +941,7 @@ This will run the [Admin Dashboard](https://github.com/digitalcredentials/admin-
 
 [dashboard-dns-compose.yaml](docker-compose-files/dashboard-dns-compose.yaml)
 
-You can run it like so, subsituting your domain name for the value of the HOST environment variable:
+You can run it like so, substituting your domain name for the value of the HOST environment variable:
 
 ```curl https://raw.githubusercontent.com/digitalcredentials/docs/main/deployment-guide/docker-compose-files/dashboard-dns-compose.yaml | HOST=myhost.org docker compose -f - up```
 
